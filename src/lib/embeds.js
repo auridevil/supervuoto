@@ -50,4 +50,19 @@ export function getEmbedUrl(entry) {
   }
 }
 
+export const PLATFORM_HEIGHTS = {
+  youtube: 352,
+  soundcloud: 166,
+  mixcloud: 120,
+};
+
+// "2026-01-13" -> "2026.01.13 // cycle 13" (cycle = day of year)
+export function formatVoidDate(dateString) {
+  const [year, month, day] = dateString.split('-').map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  const startOfYear = Date.UTC(year, 0, 1);
+  const dayOfYear = Math.floor((date.getTime() - startOfYear) / 86400000) + 1;
+  return `${dateString.replace(/-/g, '.')} // cycle ${dayOfYear}`;
+}
+
 export default getEmbedUrl;

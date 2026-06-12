@@ -1,10 +1,15 @@
 import mixtapes from './data/mixtapes.json';
+import Ticker from './components/Ticker.jsx';
 import Header from './components/Header.jsx';
-import MixtapeGrid from './components/MixtapeGrid.jsx';
+import Featured from './components/Featured.jsx';
+import Statement from './components/Statement.jsx';
+import ArchiveList from './components/ArchiveList.jsx';
 import About from './components/About.jsx';
 import Footer from './components/Footer.jsx';
 
 export default function App() {
+  const [latest, ...rest] = mixtapes;
+
   return (
     <div className="app">
       <div className="starfield" aria-hidden="true">
@@ -12,8 +17,11 @@ export default function App() {
         <div className="stars stars-2" />
         <div className="stars stars-3" />
       </div>
+      <Ticker latest={latest} />
       <Header />
-      <MixtapeGrid entries={mixtapes} />
+      <Featured entry={latest} />
+      <Statement />
+      <ArchiveList entries={rest} />
       <About />
       <Footer />
     </div>
