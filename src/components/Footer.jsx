@@ -1,3 +1,5 @@
+import { InstagramIcon } from './Icons.jsx';
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -12,6 +14,15 @@ export default function Footer() {
       >
         FEED THE VOID ⟶ donate
       </a>
+      <div className="footer-links">
+        <a
+          href="https://www.instagram.com/supervuoto_/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <InstagramIcon /> instagram ∴ @supervuoto_
+        </a>
+      </div>
       <div className="footer-sigil">✦ ⊘ ✦</div>
       <p>© {year} supervuoto — broadcast from nowhere</p>
     </footer>

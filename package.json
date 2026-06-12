@@ -3,10 +3,11 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "homepage": "https://supervuoto.org",
   "scripts": {
     "parse": "node scripts/parse-mixtapes.mjs",
     "dev": "npm run parse && vite",
-    "build": "npm run parse && vite build",
+    "build": "npm run parse && vite build && node scripts/generate-mix-pages.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

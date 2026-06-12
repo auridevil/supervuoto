@@ -1,9 +1,16 @@
-import { getEmbedUrl, PLATFORM_HEIGHTS, formatVoidDate } from '../lib/embeds.js';
+import { formatVoidDate } from '../lib/embeds.js';
+import Player from './Player.jsx';
+import {
+  CategoryBadge,
+  ArtistLine,
+  ArtistCredits,
+  Cover,
+  TagList,
+  Tracklist,
+} from './EntryBits.jsx';
 
 export default function Featured({ entry }) {
   if (!entry) return null;
-  const embedUrl = getEmbedUrl(entry);
-  const height = Math.max(PLATFORM_HEIGHTS[entry.platform] ?? 166, 240);
   const paragraphs = (entry.description || '')
     .split('\n\n')
     .map((p) => p.trim())
@@ -14,43 +21,32 @@ export default function Featured({ entry }) {
       <div className="section-head">
         <h2 className="section-title">latest transmission →</h2>
         <p className="section-desc">
-          L’ultimo segnale intercettato dal super-vuoto. Volume alto, luci spente.
+          The newest signal intercepted from the super-void. Volume up, lights
+          off, third eye open.
         </p>
       </div>
-      <article className="featured-inner">
-        {embedUrl && (
-          <div className="featured-embed">
-            <iframe
-              src={embedUrl}
-              title={entry.title}
-              loading="lazy"
-              allow="autoplay; encrypted-media"
-              width="100%"
-              height={height}
-              frameBorder="0"
-            />
-          </div>
-        )}
+      <article className="featured-inner" id={entry.id}>
+        <div className="featured-player">
+          <Player entry={entry} minHeight={240} squareArt />
+        </div>
         <div className="featured-meta">
-          <time className="meta-date" dateTime={entry.date}>
-            {formatVoidDate(entry.date)}
-          </time>
+          <div className="meta-row">
+            <CategoryBadge category={entry.category} />
+            <time className="meta-date" dateTime={entry.date}>
+              {formatVoidDate(entry.date)}
+            </time>
+          </div>
           <h3 className="featured-title">{entry.title}</h3>
-          <span className="meta-platform">▸ {entry.platform.toUpperCase()}</span>
+          <ArtistLine artists={entry.artists} />
           {paragraphs.map((text, i) => (
             <p className="featured-description" key={i}>
               {text}
             </p>
           ))}
-          {entry.tags && entry.tags.length > 0 && (
-            <ul className="tag-list">
-              {entry.tags.map((tag) => (
-                <li className="tag" key={tag}>
-                  #{tag}
-                </li>
-              ))}
-            </ul>
-          )}
+          <Tracklist tracklists={entry.tracklists} />
+          <TagList tags={entry.tags} />
+          <Cover cover={entry.cover} title={entry.title} />
+          <ArtistCredits artists={entry.artists} />
         </div>
       </article>
     </section>

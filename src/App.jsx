@@ -1,10 +1,12 @@
 import mixtapes from './data/mixtapes.json';
 import Ticker from './components/Ticker.jsx';
 import Header from './components/Header.jsx';
+import OnAir from './components/OnAir.jsx';
 import Featured from './components/Featured.jsx';
 import Statement from './components/Statement.jsx';
 import ArchiveList from './components/ArchiveList.jsx';
 import About from './components/About.jsx';
+import JoinCta from './components/JoinCta.jsx';
 import Footer from './components/Footer.jsx';
 
 export default function App() {
@@ -19,10 +21,12 @@ export default function App() {
       </div>
       <Ticker latest={latest} />
       <Header />
+      <OnAir />
       <Featured entry={latest} />
       <Statement />
       <ArchiveList entries={rest} />
       <About />
+      <JoinCta />
       <Footer />
     </div>
   );

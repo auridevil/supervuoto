@@ -1,62 +1,94 @@
-import { useState } from 'react';
-import { getEmbedUrl, PLATFORM_HEIGHTS, formatVoidDate } from '../lib/embeds.js';
+import { useEffect, useRef, useState } from 'react';
+import { formatVoidDate } from '../lib/embeds.js';
+import Player from './Player.jsx';
+import {
+  CategoryBadge,
+  ArtistLine,
+  ArtistCredits,
+  Cover,
+  TagList,
+  Tracklist,
+} from './EntryBits.jsx';
+
+const currentHash = () =>
+  typeof window === 'undefined' ? '' : window.location.hash.slice(1);
 
 function ArchiveRow({ entry }) {
-  const [open, setOpen] = useState(false);
-  const embedUrl = getEmbedUrl(entry);
-  const height = PLATFORM_HEIGHTS[entry.platform] ?? 166;
+  // Each mix is a hard link: opening a row puts #<id> in the URL, and
+  // landing on (or navigating to) #<id> opens and scrolls to the row.
+  const [open, setOpen] = useState(() => currentHash() === entry.id);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      if (currentHash() === entry.id) {
+        setOpen(true);
+        ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+    if (currentHash() === entry.id) {
+      ref.current?.scrollIntoView({ block: 'start' });
+    }
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, [entry.id]);
+
+  const toggle = () => {
+    setOpen((o) => {
+      const next = !o;
+      if (next) {
+        window.history.pushState(null, '', `#${entry.id}`);
+      } else if (currentHash() === entry.id) {
+        window.history.pushState(
+          null,
+          '',
+          window.location.pathname + window.location.search
+        );
+      }
+      return next;
+    });
+  };
+
   const paragraphs = (entry.description || '')
     .split('\n\n')
     .map((p) => p.trim())
     .filter(Boolean);
 
   return (
-    <li className="archive-row">
+    <li className="archive-row" id={entry.id} ref={ref}>
       <button
         type="button"
         className="row-head"
         aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
+        onClick={toggle}
       >
         <time className="row-date" dateTime={entry.date}>
           {entry.date.replace(/-/g, '.')}
         </time>
         <span className="row-title">{entry.title}</span>
-        <span className="row-platform">{entry.platform}</span>
+        <span className="row-category">
+          <CategoryBadge category={entry.category} />
+        </span>
         <span className="row-toggle">{open ? '↘' : '→'}</span>
       </button>
       {open && (
         <div className="row-body">
-          {embedUrl && (
-            <div className="card-embed">
-              <iframe
-                src={embedUrl}
-                title={entry.title}
-                loading="lazy"
-                allow="autoplay; encrypted-media"
-                width="100%"
-                height={height}
-                frameBorder="0"
-              />
-            </div>
-          )}
-          <time className="meta-date" dateTime={entry.date}>
-            {formatVoidDate(entry.date)}
-          </time>
+          <Player entry={entry} />
+          <div className="meta-row">
+            <time className="meta-date" dateTime={entry.date}>
+              {formatVoidDate(entry.date)}
+            </time>
+          </div>
+          <ArtistLine artists={entry.artists} />
           {paragraphs.map((text, i) => (
             <p className="row-description" key={i}>
               {text}
             </p>
           ))}
-          {entry.tags && entry.tags.length > 0 && (
-            <ul className="tag-list">
-              {entry.tags.map((tag) => (
-                <li className="tag" key={tag}>
-                  #{tag}
-                </li>
-              ))}
-            </ul>
-          )}
+          <Tracklist tracklists={entry.tracklists} />
+          <TagList tags={entry.tags} />
+          <Cover cover={entry.cover} title={entry.title} />
+          <ArtistCredits artists={entry.artists} />
         </div>
       )}
     </li>
@@ -64,17 +96,39 @@ function ArchiveRow({ entry }) {
 }
 
 export default function ArchiveList({ entries }) {
+  const [filter, setFilter] = useState('all');
   if (!entries || entries.length === 0) return null;
+
+  const categories = [...new Set(entries.map((e) => e.category))];
+  const visible =
+    filter === 'all' ? entries : entries.filter((e) => e.category === filter);
+
   return (
     <section className="archive">
       <div className="section-head">
         <h2 className="section-title">archive →</h2>
         <p className="section-desc">
-          Ogni trasmissione resta nel vuoto. Apri una riga per ascoltare.
+          Every transmission remains in the void. Open a row to listen — some
+          signals travel on more than one channel.
         </p>
       </div>
+      {categories.length > 1 && (
+        <div className="category-filter">
+          {['all', ...categories].map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              className={'filter-chip' + (filter === cat ? ' is-active' : '')}
+              data-category={cat}
+              onClick={() => setFilter(cat)}
+            >
+              {cat === 'all' ? 'all frequencies' : cat}
+            </button>
+          ))}
+        </div>
+      )}
       <ul className="archive-list">
-        {entries.map((entry) => (
+        {visible.map((entry) => (
           <ArchiveRow entry={entry} key={entry.id} />
         ))}
       </ul>
