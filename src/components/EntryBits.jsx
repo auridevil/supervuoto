@@ -1,6 +1,6 @@
 // Small shared pieces of an entry: category badge, artist line, cover figure.
 
-import { InstagramIcon, SoundcloudIcon } from './Icons.jsx';
+import { InstagramIcon, SoundcloudIcon, MixcloudIcon } from './Icons.jsx';
 
 // Square preview image for an entry (archive rows, cards). Falls back to a
 // category-tinted sigil when no artwork/cover could be resolved.
@@ -77,6 +77,16 @@ export function ArtistCredits({ artists }) {
               rel="noreferrer"
             >
               <SoundcloudIcon /> soundcloud ↗
+            </a>
+          )}
+          {artist.mixcloud && (
+            <a
+              className="artist-link"
+              href={artist.mixcloud}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <MixcloudIcon /> mixcloud ↗
             </a>
           )}
           {artist.from && <span className="credit-from">from {artist.from}</span>}

@@ -57,6 +57,7 @@ const FIELD_NAMES = [
   'artist',
   'artist-instagram',
   'artist-soundcloud',
+  'artist-mixcloud',
   'artist-from',
   'youtube',
   'soundcloud',
@@ -133,6 +134,7 @@ function parse(markdown) {
             name: value,
             instagram: null,
             soundcloud: null,
+            mixcloud: null,
             from: null,
           });
         continue;
@@ -140,6 +142,7 @@ function parse(markdown) {
       if (
         name === 'artist-instagram' ||
         name === 'artist-soundcloud' ||
+        name === 'artist-mixcloud' ||
         name === 'artist-from'
       ) {
         const last = current.artists[current.artists.length - 1];
@@ -152,7 +155,8 @@ function parse(markdown) {
         if (name === 'artist-from') {
           if (value) last.from = value;
         } else if (isUrl(value)) {
-          last[name === 'artist-instagram' ? 'instagram' : 'soundcloud'] = value;
+          const key = name.slice('artist-'.length); // instagram | soundcloud | mixcloud
+          last[key] = value;
         }
         continue;
       }
