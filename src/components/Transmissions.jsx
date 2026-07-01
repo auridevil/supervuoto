@@ -11,13 +11,13 @@ import {
   Tracklist,
 } from './EntryBits.jsx';
 
-const artistNames = (artists) =>
-  (artists || []).map((a) => a.name).join(' vs ');
-
 const currentHash = () =>
   typeof window === 'undefined' ? '' : window.location.hash.slice(1);
 
-function ArchiveRow({ entry }) {
+const artistNames = (artists) =>
+  (artists || []).map((a) => a.name).join(' vs ');
+
+function TransmissionRow({ entry }) {
   // Each mix is a hard link: opening a row puts #<id> in the URL, and
   // landing on (or navigating to) #<id> opens and scrolls to the row.
   const [open, setOpen] = useState(() => currentHash() === entry.id);
@@ -87,7 +87,7 @@ function ArchiveRow({ entry }) {
       </button>
       {open && (
         <div className="row-body">
-          <Player entry={entry} />
+          <Player entry={entry} minHeight={240} squareArt />
           <div className="meta-row">
             <time className="meta-date" dateTime={entry.date}>
               {formatVoidDate(entry.date)}
@@ -109,7 +109,7 @@ function ArchiveRow({ entry }) {
   );
 }
 
-export default function ArchiveList({ entries }) {
+export default function Transmissions({ entries }) {
   const [filter, setFilter] = useState('all');
   if (!entries || entries.length === 0) return null;
 
@@ -118,12 +118,12 @@ export default function ArchiveList({ entries }) {
     filter === 'all' ? entries : entries.filter((e) => e.category === filter);
 
   return (
-    <section className="archive">
+    <section className="archive" id="transmissions">
       <div className="section-head">
-        <h2 className="section-title">archive →</h2>
+        <h2 className="section-title">transmissions →</h2>
         <p className="section-desc">
-          Every transmission remains in the void. Open a row to listen — some
-          signals travel on more than one channel.
+          Every signal, newest first. Open one to listen — some travel on more
+          than one channel.
         </p>
       </div>
       {categories.length > 1 && (
@@ -143,7 +143,7 @@ export default function ArchiveList({ entries }) {
       )}
       <ul className="archive-list">
         {visible.map((entry) => (
-          <ArchiveRow entry={entry} key={entry.id} />
+          <TransmissionRow entry={entry} key={entry.id} />
         ))}
       </ul>
     </section>
