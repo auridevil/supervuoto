@@ -65,6 +65,9 @@ at build time, or the site card as fallback). These pages instantly redirect
 to `/#<id>`. **Share the `https://supervuoto.org/mix/<id>/` URLs on socials**
 — the "⎘ share" button under each player copies that URL.
 
+`https://supervuoto.org/collective/` is a hardlink that opens the "collective"
+participants modal (it redirects to `/#collective`, which the app detects).
+
 The site-wide card is `public/social-card.png`, generated from
 `scripts/social-card.html` (regeneration instructions inside). The canonical
 domain lives in `package.json` → `homepage` and `src/lib/site.js`.

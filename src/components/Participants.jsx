@@ -25,7 +25,7 @@ function episodesFor(name) {
     });
 }
 
-function Participant({ p, onClose }) {
+function Participant({ p, onNavigate }) {
   const episodes = p.resident ? [] : episodesFor(p.name);
   return (
     <li className="participant">
@@ -54,7 +54,12 @@ function Participant({ p, onClose }) {
       {episodes.length > 0 && (
         <div className="participant-eps">
           {episodes.map((ep) => (
-            <a key={ep.id} className="episode-tag" href={`#${ep.id}`} onClick={onClose}>
+            <a
+              key={ep.id}
+              className="episode-tag"
+              href={`#${ep.id}`}
+              onClick={onNavigate}
+            >
               {ep.label}
             </a>
           ))}
@@ -64,7 +69,7 @@ function Participant({ p, onClose }) {
   );
 }
 
-function Modal({ onClose }) {
+function Modal({ onClose, onNavigate }) {
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') onClose();
@@ -108,7 +113,7 @@ function Modal({ onClose }) {
               <h3 className="participant-group-title">⟢ {group.label}</h3>
               <ul className="participant-list">
                 {members.map((p) => (
-                  <Participant p={p} key={p.name} onClose={onClose} />
+                  <Participant p={p} key={p.name} onNavigate={onNavigate} />
                 ))}
               </ul>
             </div>
@@ -119,8 +124,37 @@ function Modal({ onClose }) {
   );
 }
 
+const HASH = 'collective';
+const isCollectiveHash = () =>
+  typeof window !== 'undefined' && window.location.hash.slice(1) === HASH;
+
 export default function Participants() {
-  const [open, setOpen] = useState(false);
+  // The modal is a hard link: /#collective (and the /collective/ page that
+  // redirects to it) opens it; closing clears the hash.
+  const [open, setOpen] = useState(isCollectiveHash);
+
+  useEffect(() => {
+    const onHashChange = () => setOpen(isCollectiveHash());
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  const openModal = () => {
+    if (!isCollectiveHash()) window.history.pushState(null, '', `#${HASH}`);
+    setOpen(true);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
+    if (isCollectiveHash()) {
+      window.history.pushState(
+        null,
+        '',
+        window.location.pathname + window.location.search
+      );
+    }
+  };
+
   return (
     <section className="collective">
       <div className="section-head">
@@ -129,14 +163,10 @@ export default function Participants() {
           Who transmits from the void — resident and guests.
         </p>
       </div>
-      <button
-        type="button"
-        className="collective-button"
-        onClick={() => setOpen(true)}
-      >
+      <button type="button" className="collective-button" onClick={openModal}>
         who transmits ⟶
       </button>
-      {open && <Modal onClose={() => setOpen(false)} />}
+      {open && <Modal onClose={closeModal} onNavigate={() => setOpen(false)} />}
     </section>
   );
 }

@@ -49,23 +49,18 @@ function pageDescription(entry) {
   return parts.join(' — ');
 }
 
-const mixtapes = JSON.parse(readFileSync(DATA, 'utf8'));
-let generated = 0;
+const OG_TYPE = { music: 'music.song', website: 'website' };
 
-for (const entry of mixtapes) {
-  const image = pageImage(entry);
-  const title = `${entry.title} — supervuoto`;
-  const description = pageDescription(entry);
-  const pageUrl = `${SITE_URL}/mix/${entry.id}/`;
-  const target = `/#${entry.id}`;
-
+// A tiny static page carrying Open Graph tags that redirects humans to the
+// SPA hash target. Written to dist/<dir>/index.html.
+function writeRedirectPage({ dir, title, description, pageUrl, image, target, linkText, ogType = 'website' }) {
   const html = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <title>${escapeHtml(title)}</title>
 <meta name="description" content="${escapeHtml(description)}" />
-<meta property="og:type" content="music.song" />
+<meta property="og:type" content="${OG_TYPE[ogType] || 'website'}" />
 <meta property="og:site_name" content="supervuoto" />
 <meta property="og:title" content="${escapeHtml(title)}" />
 <meta property="og:description" content="${escapeHtml(description)}" />
@@ -81,18 +76,47 @@ for (const entry of mixtapes) {
 <style>body{background:#050208;color:#ece9f7;font-family:monospace;display:grid;place-items:center;min-height:100vh;margin:0}</style>
 </head>
 <body>
-<a href="${escapeHtml(target)}">tuning into ${escapeHtml(entry.title)} →</a>
+<a href="${escapeHtml(target)}">${escapeHtml(linkText)} →</a>
 </body>
 </html>
 `;
+  const outDir = join(DIST, dir);
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html, 'utf8');
+}
 
-  const dir = join(DIST, 'mix', entry.id);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), html, 'utf8');
+const mixtapes = JSON.parse(readFileSync(DATA, 'utf8'));
+let generated = 0;
+
+for (const entry of mixtapes) {
+  const image = pageImage(entry);
+  writeRedirectPage({
+    dir: join('mix', entry.id),
+    title: `${entry.title} — supervuoto`,
+    description: pageDescription(entry),
+    pageUrl: `${SITE_URL}/mix/${entry.id}/`,
+    image,
+    target: `/#${entry.id}`,
+    linkText: `tuning into ${entry.title}`,
+    ogType: 'music',
+  });
   generated += 1;
   console.log(
     `[mix-pages] ${entry.id} ← ${image === DEFAULT_IMAGE ? 'default card' : image.slice(0, 70)}`
   );
 }
+
+// /collective/ — hardlink that opens the collective modal (#collective).
+writeRedirectPage({
+  dir: 'collective',
+  title: 'the collective — supervuoto',
+  description:
+    'The voices behind supervuoto — resident and guest transmitters, and the lens.',
+  pageUrl: `${SITE_URL}/collective/`,
+  image: DEFAULT_IMAGE,
+  target: '/#collective',
+  linkText: 'entering the collective',
+});
+console.log('[mix-pages] generated /collective/ hardlink');
 
 console.log(`[mix-pages] generated ${generated} share page(s) under dist/mix/`);
