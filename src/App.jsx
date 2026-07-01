@@ -2,6 +2,7 @@ import mixtapes from './data/mixtapes.json';
 import Ticker from './components/Ticker.jsx';
 import Header from './components/Header.jsx';
 import OnAir from './components/OnAir.jsx';
+import Shelf from './components/Shelf.jsx';
 import Statement from './components/Statement.jsx';
 import Transmissions from './components/Transmissions.jsx';
 import About from './components/About.jsx';
@@ -22,6 +23,7 @@ export default function App() {
       <Ticker latest={latest} />
       <Header />
       <OnAir />
+      <Shelf entries={mixtapes} />
       <Statement />
       <Transmissions entries={mixtapes} />
       <About />

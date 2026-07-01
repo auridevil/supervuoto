@@ -1500,6 +1500,95 @@ div.cover-credit {
 }
 
 /* ------------------------------------------------------------
+   7b. Shelf — horizontally-scrollable wall of mix covers
+   ------------------------------------------------------------ */
+.shelf {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  border-top: 1px solid var(--hairline-soft);
+}
+
+.shelf-track {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0 1.4rem;
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(167, 139, 250, 0.4) transparent;
+}
+.shelf-track::-webkit-scrollbar {
+  height: 7px;
+}
+.shelf-track::-webkit-scrollbar-track {
+  background: rgba(167, 139, 250, 0.06);
+  border-radius: 4px;
+}
+.shelf-track::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, var(--dim-purple), rgba(103, 232, 249, 0.4));
+  border-radius: 4px;
+}
+
+.shelf-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.shelf-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 13rem;
+  color: inherit;
+}
+
+.shelf-thumb {
+  width: 13rem;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+.shelf-card:hover .shelf-thumb,
+.shelf-card:focus-visible .shelf-thumb {
+  transform: translateY(-6px);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(167, 139, 250, 0.35),
+    0 0 60px rgba(103, 232, 249, 0.12);
+}
+
+.shelf-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+.shelf-card:hover .shelf-title {
+  color: var(--signal-cyan);
+  text-shadow: 0 0 14px rgba(103, 232, 249, 0.35);
+}
+
+.shelf-artists {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  color: rgba(167, 139, 250, 0.7);
+}
+
+.shelf-date {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: rgba(167, 139, 250, 0.5);
+}
+
+/* ------------------------------------------------------------
    10b. The collective — participants section + modal
    ------------------------------------------------------------ */
 .collective {
@@ -1699,6 +1788,10 @@ div.cover-credit {
   }
   .row-body {
     padding-left: 0.5rem;
+  }
+  .shelf-card,
+  .shelf-thumb {
+    width: 10rem;
   }
   .ticker-label {
     padding: 0 0.7rem;
