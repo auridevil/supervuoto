@@ -2,6 +2,28 @@
 
 import { InstagramIcon, SoundcloudIcon } from './Icons.jsx';
 
+// Square preview image for an entry (archive rows, cards). Falls back to a
+// category-tinted sigil when no artwork/cover could be resolved.
+export function Thumb({ entry, className = '' }) {
+  const src = entry.cover?.src || entry.artwork || null;
+  if (src) {
+    return (
+      <span className={'thumb ' + className}>
+        <img src={src} alt={`artwork for ${entry.title}`} loading="lazy" />
+      </span>
+    );
+  }
+  return (
+    <span
+      className={'thumb thumb--empty ' + className}
+      data-category={entry.category}
+      aria-hidden="true"
+    >
+      <span className="thumb-sigil">⊘</span>
+    </span>
+  );
+}
+
 export function CategoryBadge({ category }) {
   if (!category) return null;
   return (

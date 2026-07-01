@@ -6,8 +6,10 @@
   "homepage": "https://supervuoto.org",
   "scripts": {
     "parse": "node scripts/parse-mixtapes.mjs",
-    "dev": "npm run parse && vite",
-    "build": "npm run parse && vite build && node scripts/generate-mix-pages.mjs",
+    "enrich": "node scripts/enrich-artwork.mjs",
+    "data": "npm run parse && npm run enrich",
+    "dev": "npm run data && vite",
+    "build": "npm run data && vite build && node scripts/generate-mix-pages.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

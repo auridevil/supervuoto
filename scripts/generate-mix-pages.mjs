@@ -31,42 +31,11 @@ const escapeHtml = (s) =>
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;');
 
-async function oembedThumbnail(entry) {
-  const endpoints = [];
-  if (entry.links.soundcloud)
-    endpoints.push(
-      `https://soundcloud.com/oembed?format=json&url=${encodeURIComponent(entry.links.soundcloud)}`
-    );
-  if (entry.links.youtube)
-    endpoints.push(
-      `https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(entry.links.youtube)}`
-    );
-  if (entry.links.mixcloud)
-    endpoints.push(
-      `https://app.mixcloud.com/oembed/?format=json&url=${encodeURIComponent(entry.links.mixcloud)}`
-    );
-
-  for (const endpoint of endpoints) {
-    try {
-      const res = await fetch(endpoint, { signal: AbortSignal.timeout(6000) });
-      if (!res.ok) continue;
-      const data = await res.json();
-      const thumb = data.thumbnail_url || data.image;
-      if (thumb) return thumb;
-    } catch {
-      // offline or platform hiccup — fall through to the default card
-    }
-  }
-  return null;
-}
-
-function pageImage(entry, oembedThumb) {
-  if (entry.cover?.src) {
-    return entry.cover.src.startsWith('/')
-      ? SITE_URL + entry.cover.src
-      : entry.cover.src;
-  }
-  return oembedThumb || DEFAULT_IMAGE;
+// Artwork was resolved at the enrich step; just make it absolute for og:image.
+function pageImage(entry) {
+  const art = entry.artwork;
+  if (!art) return DEFAULT_IMAGE;
+  return art.startsWith('/') ? SITE_URL + art : art;
 }
 
 function pageDescription(entry) {
@@ -84,8 +53,7 @@ const mixtapes = JSON.parse(readFileSync(DATA, 'utf8'));
 let generated = 0;
 
 for (const entry of mixtapes) {
-  const thumb = await oembedThumbnail(entry);
-  const image = pageImage(entry, thumb);
+  const image = pageImage(entry);
   const title = `${entry.title} — supervuoto`;
   const description = pageDescription(entry);
   const pageUrl = `${SITE_URL}/mix/${entry.id}/`;

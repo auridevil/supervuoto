@@ -7,8 +7,12 @@ import {
   ArtistCredits,
   Cover,
   TagList,
+  Thumb,
   Tracklist,
 } from './EntryBits.jsx';
+
+const artistNames = (artists) =>
+  (artists || []).map((a) => a.name).join(' vs ');
 
 const currentHash = () =>
   typeof window === 'undefined' ? '' : window.location.hash.slice(1);
@@ -55,18 +59,28 @@ function ArchiveRow({ entry }) {
     .filter(Boolean);
 
   return (
-    <li className="archive-row" id={entry.id} ref={ref}>
+    <li
+      className={'archive-row' + (open ? ' is-open' : '')}
+      id={entry.id}
+      ref={ref}
+    >
       <button
         type="button"
         className="row-head"
         aria-expanded={open}
         onClick={toggle}
       >
-        <time className="row-date" dateTime={entry.date}>
-          {entry.date.replace(/-/g, '.')}
-        </time>
-        <span className="row-title">{entry.title}</span>
-        <span className="row-category">
+        <Thumb entry={entry} className="row-thumb" />
+        <span className="row-main">
+          <span className="row-title">{entry.title}</span>
+          {entry.artists?.length > 0 && (
+            <span className="row-artists">{artistNames(entry.artists)}</span>
+          )}
+        </span>
+        <span className="row-meta">
+          <time className="row-date" dateTime={entry.date}>
+            {entry.date.replace(/-/g, '.')}
+          </time>
           <CategoryBadge category={entry.category} />
         </span>
         <span className="row-toggle">{open ? '↘' : '→'}</span>

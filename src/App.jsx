@@ -6,6 +6,7 @@ import Featured from './components/Featured.jsx';
 import Statement from './components/Statement.jsx';
 import ArchiveList from './components/ArchiveList.jsx';
 import About from './components/About.jsx';
+import Participants from './components/Participants.jsx';
 import JoinCta from './components/JoinCta.jsx';
 import Footer from './components/Footer.jsx';
 
@@ -26,6 +27,7 @@ export default function App() {
       <Statement />
       <ArchiveList entries={rest} />
       <About />
+      <Participants />
       <JoinCta />
       <Footer />
     </div>
