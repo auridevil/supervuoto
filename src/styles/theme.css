@@ -1695,6 +1695,21 @@ div.cover-credit {
   color: rgba(236, 233, 247, 0.7);
 }
 
+.participant-group {
+  margin-bottom: 1.8rem;
+}
+.participant-group:last-child {
+  margin-bottom: 0;
+}
+.participant-group-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: var(--nebula-purple);
+}
+
 .participant-list {
   list-style: none;
   margin: 0;
@@ -1702,6 +1717,32 @@ div.cover-credit {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
+}
+
+.participant-eps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+.episode-tag {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  color: rgba(103, 232, 249, 0.85);
+  border: 1px solid rgba(103, 232, 249, 0.35);
+  border-radius: 999px;
+  background: rgba(103, 232, 249, 0.05);
+  transition: all 0.25s ease;
+}
+.episode-tag:hover {
+  color: var(--void-black);
+  background: var(--signal-cyan);
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(103, 232, 249, 0.5);
 }
 
 .participant {

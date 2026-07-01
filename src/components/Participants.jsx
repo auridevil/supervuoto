@@ -1,6 +1,68 @@
 import { useEffect, useState } from 'react';
+import mixtapes from '../data/mixtapes.json';
 import { PARTICIPANTS } from '../participants.js';
 import { InstagramIcon, SoundcloudIcon, MixcloudIcon } from './Icons.jsx';
+
+const GROUPS = [
+  { kind: 'dj', label: 'transmitters' },
+  { kind: 'lens', label: 'lens' },
+];
+
+// Episodes a participant appears in — as a DJ (artist) or as the cover
+// photographer (cover credit). Derived from the mix data, newest first.
+function episodesFor(name) {
+  const key = name.toLowerCase();
+  return mixtapes
+    .filter(
+      (e) =>
+        (e.artists || []).some((a) => a.name.toLowerCase() === key) ||
+        (e.cover?.credit || '').toLowerCase() === key
+    )
+    .map((e) => {
+      const num = (e.title.match(/episode\s+(\d+)/i) || [])[1];
+      const name = (e.title.split(/BIT\s*-\s*/i)[1] || e.title).trim();
+      return { id: e.id, label: num ? `ep${num} · ${name}` : name };
+    });
+}
+
+function Participant({ p, onClose }) {
+  const episodes = p.resident ? [] : episodesFor(p.name);
+  return (
+    <li className="participant">
+      <div className="participant-head">
+        <span className="participant-name">{p.name}</span>
+        {p.from && <span className="participant-from">from {p.from}</span>}
+      </div>
+      {p.role && <p className="participant-role">{p.role}</p>}
+      <div className="participant-links">
+        {p.instagram && (
+          <a href={p.instagram} target="_blank" rel="noreferrer">
+            <InstagramIcon /> instagram ↗
+          </a>
+        )}
+        {p.soundcloud && (
+          <a href={p.soundcloud} target="_blank" rel="noreferrer">
+            <SoundcloudIcon /> soundcloud ↗
+          </a>
+        )}
+        {p.mixcloud && (
+          <a href={p.mixcloud} target="_blank" rel="noreferrer">
+            <MixcloudIcon /> mixcloud ↗
+          </a>
+        )}
+      </div>
+      {episodes.length > 0 && (
+        <div className="participant-eps">
+          {episodes.map((ep) => (
+            <a key={ep.id} className="episode-tag" href={`#${ep.id}`} onClick={onClose}>
+              {ep.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </li>
+  );
+}
 
 function Modal({ onClose }) {
   useEffect(() => {
@@ -38,34 +100,20 @@ function Modal({ onClose }) {
           Voices that have passed through the super-void. The array is open —
           new signals welcome.
         </p>
-        <ul className="participant-list">
-          {PARTICIPANTS.map((p) => (
-            <li className="participant" key={p.name}>
-              <div className="participant-head">
-                <span className="participant-name">{p.name}</span>
-                {p.from && <span className="participant-from">from {p.from}</span>}
-              </div>
-              {p.role && <p className="participant-role">{p.role}</p>}
-              <div className="participant-links">
-                {p.instagram && (
-                  <a href={p.instagram} target="_blank" rel="noreferrer">
-                    <InstagramIcon /> instagram ↗
-                  </a>
-                )}
-                {p.soundcloud && (
-                  <a href={p.soundcloud} target="_blank" rel="noreferrer">
-                    <SoundcloudIcon /> soundcloud ↗
-                  </a>
-                )}
-                {p.mixcloud && (
-                  <a href={p.mixcloud} target="_blank" rel="noreferrer">
-                    <MixcloudIcon /> mixcloud ↗
-                  </a>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
+        {GROUPS.map((group) => {
+          const members = PARTICIPANTS.filter((p) => p.kind === group.kind);
+          if (members.length === 0) return null;
+          return (
+            <div className="participant-group" key={group.kind}>
+              <h3 className="participant-group-title">⟢ {group.label}</h3>
+              <ul className="participant-list">
+                {members.map((p) => (
+                  <Participant p={p} key={p.name} onClose={onClose} />
+                ))}
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

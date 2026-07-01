@@ -1,9 +1,14 @@
 // The voices behind supervuoto. Add a participant here and they appear in the
-// "collective" modal automatically. Any field except `name` is optional.
+// "collective" modal. `kind` groups them: 'dj' (transmitters) then 'lens'
+// (photographers). `resident: true` marks someone on every episode (no per-
+// episode links shown). Episode links are derived from the mix data by name.
+// Any field except `name` and `kind` is optional.
 export const PARTICIPANTS = [
   {
     name: 'elmozzo',
-    role: 'supervuoto · founder · resident transmitter & lens',
+    kind: 'dj',
+    resident: true,
+    role: 'founder · resident transmitter',
     instagram: 'https://www.instagram.com/supervuoto_/',
     soundcloud: 'https://soundcloud.com/supervuoto',
     mixcloud: null,
@@ -11,7 +16,7 @@ export const PARTICIPANTS = [
   },
   {
     name: 'ophra',
-    role: 'guest transmitter · ep03',
+    kind: 'dj',
     instagram: 'https://www.instagram.com/fra_h.ope.s/',
     soundcloud: null,
     mixcloud: null,
@@ -19,7 +24,7 @@ export const PARTICIPANTS = [
   },
   {
     name: 'lothse',
-    role: 'guest transmitter · ep02',
+    kind: 'dj',
     instagram: 'https://www.instagram.com/puck1e/',
     soundcloud: 'https://soundcloud.com/s4dp0ny',
     mixcloud: 'https://www.mixcloud.com/lhotsehts/',
@@ -27,7 +32,7 @@ export const PARTICIPANTS = [
   },
   {
     name: 'bozzystep',
-    role: 'guest transmitter · ep01',
+    kind: 'dj',
     instagram: 'https://www.instagram.com/samuelebozzy/',
     soundcloud: null,
     mixcloud: null,
@@ -35,7 +40,7 @@ export const PARTICIPANTS = [
   },
   {
     name: 'nntnntnnt_',
-    role: 'cover / lens · ep02',
+    kind: 'lens',
     instagram: 'https://www.instagram.com/nntnntnnt_/',
     soundcloud: null,
     mixcloud: null,
