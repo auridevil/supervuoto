@@ -5,6 +5,56 @@ Fields: date (required), category, artist, artist-instagram, artist-soundcloud,
 youtube / soundcloud / mixcloud (at least one), cover, cover-credit,
 cover-credit-url, tags — then free description paragraphs.
 
+## Supervuoto Episode 03 BIT - Teenage Bass
+
+- date: 2026-06-27
+- category: supervuoto
+- artist: elmozzo
+- artist: ophra
+- artist-instagram: https://www.instagram.com/fra_h.ope.s/
+- soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep03-elmozzo-vs
+- cover: /covers/ep03-teenage-bass.jpg
+- cover-credit: elmozzo
+- cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
+- tags: drum'n'bass
+
+### elmozzo
+
+- Origin Unknown - Valley Of The Shadow
+- Ganja Kru - Super Sharp Shooter
+- Grooverider - Where's Jack the Ripper
+- Dj Zinc - Ska
+- Dj Trace - Body Move
+- Bad Company - Planet Dust
+- Aphrodite - Chinois
+- Dj Zinc - Ready Or Not 2004
+- Dj Hype - Mash Up the Place
+- Aphrodite - Calcutta
+- Chase and Status - Baddadan
+- Sub Focus - Rock It
+- Roni Size - Brown Paper Bag
+
+### ophra
+
+- Kings Of The Rollers - Somebody Else (feat Lydia Plain)
+- Wingz - Sorrow (Original Mix)
+- Moloko - The Flipside (Aphrodite Vocal Mix)
+- DJ Die - Back To Now (Original Mix)
+- Dub Phizix - Never Been (feat Fox)
+- Twisted Individual - Custard
+- DJ Hype - Only One Life (Crystal Clear Remix)
+- Ed Rush - Pacman
+- Nu:Tone & Logistics - Hammerhead
+- London Elektricity - Houston We Have No Problem
+- Furney - Jah Jah Say
+- Arp Xp - Keep Your Head High (feat Maurs)
+- Structured Kaos - Six Million Ways To Die
+- DJ Muffler - Embrace (Album Version)
+- Calibre - Sick Of It All
+- Utah Jazz - We Rise We Fall
+- HLZ - Things Are Not The Same
+- Facing Jinx/Philth - Be Strong
+
 ## Supervuoto Episode 02 BIT - Friend of the Night
 
 - date: 2026-06-22
