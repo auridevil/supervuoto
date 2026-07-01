@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PARTICIPANTS } from '../participants.js';
-import { InstagramIcon, SoundcloudIcon } from './Icons.jsx';
+import { InstagramIcon, SoundcloudIcon, MixcloudIcon } from './Icons.jsx';
 
 function Modal({ onClose }) {
   useEffect(() => {
@@ -55,6 +55,11 @@ function Modal({ onClose }) {
                 {p.soundcloud && (
                   <a href={p.soundcloud} target="_blank" rel="noreferrer">
                     <SoundcloudIcon /> soundcloud ↗
+                  </a>
+                )}
+                {p.mixcloud && (
+                  <a href={p.mixcloud} target="_blank" rel="noreferrer">
+                    <MixcloudIcon /> mixcloud ↗
                   </a>
                 )}
               </div>
