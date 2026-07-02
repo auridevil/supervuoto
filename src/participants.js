@@ -18,7 +18,7 @@ export const PARTICIPANTS = [
     name: 'ophra',
     kind: 'dj',
     instagram: 'https://www.instagram.com/fra_h.ope.s/',
-    soundcloud: null,
+    soundcloud: 'https://soundcloud.com/djophra',
     mixcloud: null,
     from: null,
   },

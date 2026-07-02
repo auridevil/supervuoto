@@ -12,6 +12,7 @@ cover-credit-url, tags — then free description paragraphs.
 - artist: elmozzo
 - artist: ophra
 - artist-instagram: https://www.instagram.com/fra_h.ope.s/
+- artist-soundcloud: https://soundcloud.com/djophra
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep03-elmozzo-vs
 - cover: /covers/ep03-teenage-bass.jpg
 - cover-credit: elmozzo
