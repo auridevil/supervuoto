@@ -39,6 +39,15 @@ export const PARTICIPANTS = [
     from: 'italy',
   },
   {
+    name: 'ilmagofrensis',
+    kind: 'lens',
+    role: 'supervuoto artwork',
+    instagram: 'https://www.instagram.com/ilmagofrensis/',
+    soundcloud: null,
+    mixcloud: null,
+    from: null,
+  },
+  {
     name: 'nntnntnnt_',
     kind: 'lens',
     instagram: 'https://www.instagram.com/nntnntnnt_/',

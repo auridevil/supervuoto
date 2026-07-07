@@ -1404,6 +1404,14 @@ div.cover-credit {
   color: rgba(236, 233, 247, 0.4);
 }
 
+.donate-note {
+  max-width: 34rem;
+  margin: 0 auto 1.6rem;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: rgba(236, 233, 247, 0.62);
+}
+
 .donate-button {
   display: inline-block;
   margin: 0 0 1.75rem;
@@ -1456,6 +1464,18 @@ div.cover-credit {
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: lowercase;
+  color: rgba(167, 139, 250, 0.7);
+}
+
+.footer-credit {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-display);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  color: rgba(236, 233, 247, 0.4);
+}
+.footer-credit a {
   color: rgba(167, 139, 250, 0.7);
 }
 
