@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link id="fontlink" rel="stylesheet" href="" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" />
 <style>
   * { margin: 0; padding: 0; }
   html, body { background: transparent; }
@@ -22,6 +23,16 @@
     stroke: #ece9f7;
     stroke-width: var(--stw, 0px);
     stroke-linejoin: round;
+    paint-order: stroke fill;
+  }
+  .tag {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 30px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    fill: #c9b8ff;
+    stroke: #c9b8ff;
+    stroke-width: 0.8px;
     paint-order: stroke fill;
   }
 </style>
@@ -50,6 +61,7 @@
           <feDropShadow dx="0" dy="0" stdDeviation="9" flood-color="#a78bfa" flood-opacity="0.55"/>
         </filter>
         <path id="urlArc" d="M 140 556 A 388 388 0 0 0 884 556" fill="none"/>
+        <path id="tagArc" d="M 79 468 A 435 435 0 0 1 945 468" fill="none"/>
       </defs>
 
       <circle cx="512" cy="512" r="496" fill="url(#disc)"/>
@@ -72,6 +84,10 @@
       <image href="/art/eye-moon.png" x="222" y="114" width="580" height="580"
              clip-path="url(#eyeclip)"/>
       <circle cx="512" cy="404" r="290" fill="none" stroke="#67e8f9" stroke-width="5" opacity="0.6"/>
+
+      <text class="tag">
+        <textPath href="#tagArc" startOffset="50%" text-anchor="middle">transmissions from the super-void</textPath>
+      </text>
 
       <text class="url" filter="url(#glowCyan)">
         <textPath href="#urlArc" startOffset="50%" text-anchor="middle">supervuoto</textPath>
