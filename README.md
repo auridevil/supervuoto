@@ -96,6 +96,21 @@ GitHub Pages. Nothing built is committed to the repo.
   `<github-user>.github.io`.
 - One-time repo setup: Settings → Pages → Source: "GitHub Actions".
 
+## Stickers / print
+
+`stickers/supervuoto-sticker.png` is a round, print-ready sticker (3072×3072,
+transparent background for die-cut) rendered from `scripts/sticker.html`.
+To regenerate after editing the source:
+
+```sh
+npm run build
+cp scripts/sticker.html dist/sticker.html
+npm run preview &   # serves dist on :4173
+# screenshot http://localhost:4173/sticker.html at 1024×1024 with a
+# transparent background and 3× device scale (any headless-chrome screenshot
+# tool), then remove dist/sticker.html
+```
+
 ## Links to set
 
 - **Donations** — the footer's "FEED THE VOID" button points at a placeholder
