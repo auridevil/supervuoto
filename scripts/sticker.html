@@ -13,12 +13,16 @@
   html, body { background: transparent; }
   #stage { width: 1024px; height: 1024px; }
   .url {
-    font-family: var(--sf, 'Cinzel Decorative', serif);
-    font-weight: var(--sw, 900);
-    font-size: var(--ss, 92px);
-    letter-spacing: var(--sl, 2px);
+    font-family: var(--sf, 'Major Mono Display', monospace);
+    font-weight: var(--sw, 400);
+    font-size: var(--ss, 112px);
+    letter-spacing: var(--sl, 4px);
     text-transform: uppercase;
     fill: #ece9f7;
+    stroke: #ece9f7;
+    stroke-width: var(--stw, 0px);
+    stroke-linejoin: round;
+    paint-order: stroke fill;
   }
 </style>
 </head>
@@ -60,31 +64,31 @@
         <circle cx="512" cy="180" r="1.6" opacity="0.6"/>
       </g>
 
-      <circle cx="512" cy="512" r="472" fill="none" stroke="#a78bfa" stroke-width="2"
-              stroke-dasharray="5 18" opacity="0.5"/>
-      <circle cx="512" cy="512" r="490" fill="none" stroke="url(#ring)" stroke-width="10"
+      <circle cx="512" cy="512" r="470" fill="none" stroke="#a78bfa" stroke-width="3.5"
+              stroke-dasharray="6 18" opacity="0.55"/>
+      <circle cx="512" cy="512" r="488" fill="none" stroke="url(#ring)" stroke-width="14"
               filter="url(#glowRing)"/>
 
       <image href="/art/eye-moon.png" x="222" y="114" width="580" height="580"
              clip-path="url(#eyeclip)"/>
-      <circle cx="512" cy="404" r="290" fill="none" stroke="#67e8f9" stroke-width="3" opacity="0.55"/>
+      <circle cx="512" cy="404" r="290" fill="none" stroke="#67e8f9" stroke-width="5" opacity="0.6"/>
 
       <text class="url" filter="url(#glowCyan)">
-        <textPath href="#urlArc" startOffset="50%" text-anchor="middle">supervuoto.org</textPath>
+        <textPath href="#urlArc" startOffset="50%" text-anchor="middle">supervuoto</textPath>
       </text>
     </svg>
   </div>
 
   <script>
     const FONTS = {
-      cinzel:    { fam: "'Cinzel Decorative', serif", css: 'family=Cinzel+Decorative:wght@700;900', w: 900, s: 88, l: 2 },
-      pirata:    { fam: "'Pirata One', system-ui",   css: 'family=Pirata+One',                      w: 400, s: 104, l: 2 },
-      cormorant: { fam: "'Cormorant Garamond', serif", css: 'family=Cormorant+Garamond:wght@700',   w: 700, s: 108, l: 4 },
-      marcellus: { fam: "'Marcellus SC', serif",     css: 'family=Marcellus+SC',                    w: 400, s: 96, l: 6 },
-      mono:      { fam: "'Major Mono Display', monospace", css: 'family=Major+Mono+Display',         w: 400, s: 104, l: 6 },
+      mono:      { fam: "'Major Mono Display', monospace", css: 'family=Major+Mono+Display',         w: 400, s: 132, l: 4, b: 3.5 },
+      cinzel:    { fam: "'Cinzel Decorative', serif", css: 'family=Cinzel+Decorative:wght@700;900', w: 900, s: 88, l: 2, b: 0 },
+      pirata:    { fam: "'Pirata One', system-ui",   css: 'family=Pirata+One',                      w: 400, s: 104, l: 2, b: 0 },
+      cormorant: { fam: "'Cormorant Garamond', serif", css: 'family=Cormorant+Garamond:wght@700',   w: 700, s: 108, l: 4, b: 0 },
+      marcellus: { fam: "'Marcellus SC', serif",     css: 'family=Marcellus+SC',                    w: 400, s: 96, l: 6, b: 0 },
     };
-    const key = new URLSearchParams(location.search).get('f') || 'cinzel';
-    const f = FONTS[key] || FONTS.cinzel;
+    const key = new URLSearchParams(location.search).get('f') || 'mono';
+    const f = FONTS[key] || FONTS.mono;
     document.getElementById('fontlink').href =
       `https://fonts.googleapis.com/css2?${f.css}&display=swap`;
     const r = document.documentElement.style;
@@ -92,6 +96,7 @@
     r.setProperty('--sw', f.w);
     r.setProperty('--ss', f.s + 'px');
     r.setProperty('--sl', f.l + 'px');
+    r.setProperty('--stw', (f.b || 0) + 'px');
   </script>
 </body>
 </html>
