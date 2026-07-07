@@ -1,16 +1,25 @@
 <!doctype html>
 <!-- supervuoto round sticker source. Rendered to a high-res transparent PNG.
+     Font variant via ?f=cinzel|pirata|cormorant|marcellus|mono  (default cinzel).
      See README (stickers) for the render command. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" />
+<link id="fontlink" rel="stylesheet" href="" />
 <style>
   * { margin: 0; padding: 0; }
   html, body { background: transparent; }
   #stage { width: 1024px; height: 1024px; }
+  .url {
+    font-family: var(--sf, 'Cinzel Decorative', serif);
+    font-weight: var(--sw, 900);
+    font-size: var(--ss, 92px);
+    letter-spacing: var(--sl, 2px);
+    text-transform: uppercase;
+    fill: #ece9f7;
+  }
 </style>
 </head>
 <body>
@@ -36,14 +45,11 @@
         <filter id="glowRing" x="-60%" y="-60%" width="220%" height="220%">
           <feDropShadow dx="0" dy="0" stdDeviation="9" flood-color="#a78bfa" flood-opacity="0.55"/>
         </filter>
-        <!-- text baseline -->
-        <path id="urlArc" d="M 132 560 A 372 372 0 0 0 892 560" fill="none"/>
+        <path id="urlArc" d="M 140 556 A 388 388 0 0 0 884 556" fill="none"/>
       </defs>
 
-      <!-- disc -->
       <circle cx="512" cy="512" r="496" fill="url(#disc)"/>
 
-      <!-- faint stars -->
       <g fill="#ece9f7">
         <circle cx="270" cy="250" r="2.2" opacity="0.9"/>
         <circle cx="760" cy="230" r="1.8" opacity="0.7" fill="#67e8f9"/>
@@ -54,25 +60,38 @@
         <circle cx="512" cy="180" r="1.6" opacity="0.6"/>
       </g>
 
-      <!-- broken orbital ring -->
       <circle cx="512" cy="512" r="472" fill="none" stroke="#a78bfa" stroke-width="2"
               stroke-dasharray="5 18" opacity="0.5"/>
-
-      <!-- glowing accretion rim -->
       <circle cx="512" cy="512" r="490" fill="none" stroke="url(#ring)" stroke-width="10"
               filter="url(#glowRing)"/>
 
-      <!-- the eye -->
       <image href="/art/eye-moon.png" x="222" y="114" width="580" height="580"
              clip-path="url(#eyeclip)"/>
       <circle cx="512" cy="404" r="290" fill="none" stroke="#67e8f9" stroke-width="3" opacity="0.55"/>
 
-      <!-- curved url -->
-      <text font-family="'Major Mono Display', monospace" font-size="104"
-            letter-spacing="6" fill="#ece9f7" filter="url(#glowCyan)">
+      <text class="url" filter="url(#glowCyan)">
         <textPath href="#urlArc" startOffset="50%" text-anchor="middle">supervuoto.org</textPath>
       </text>
     </svg>
   </div>
+
+  <script>
+    const FONTS = {
+      cinzel:    { fam: "'Cinzel Decorative', serif", css: 'family=Cinzel+Decorative:wght@700;900', w: 900, s: 88, l: 2 },
+      pirata:    { fam: "'Pirata One', system-ui",   css: 'family=Pirata+One',                      w: 400, s: 104, l: 2 },
+      cormorant: { fam: "'Cormorant Garamond', serif", css: 'family=Cormorant+Garamond:wght@700',   w: 700, s: 108, l: 4 },
+      marcellus: { fam: "'Marcellus SC', serif",     css: 'family=Marcellus+SC',                    w: 400, s: 96, l: 6 },
+      mono:      { fam: "'Major Mono Display', monospace", css: 'family=Major+Mono+Display',         w: 400, s: 104, l: 6 },
+    };
+    const key = new URLSearchParams(location.search).get('f') || 'cinzel';
+    const f = FONTS[key] || FONTS.cinzel;
+    document.getElementById('fontlink').href =
+      `https://fonts.googleapis.com/css2?${f.css}&display=swap`;
+    const r = document.documentElement.style;
+    r.setProperty('--sf', f.fam);
+    r.setProperty('--sw', f.w);
+    r.setProperty('--ss', f.s + 'px');
+    r.setProperty('--sl', f.l + 'px');
+  </script>
 </body>
 </html>
