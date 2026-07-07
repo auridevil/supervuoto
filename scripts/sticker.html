@@ -28,7 +28,7 @@
           <stop offset="100%" stop-color="#f0abfc"/>
         </linearGradient>
         <clipPath id="eyeclip">
-          <circle cx="512" cy="424" r="212"/>
+          <circle cx="512" cy="404" r="290"/>
         </clipPath>
         <filter id="glowCyan" x="-60%" y="-60%" width="220%" height="220%">
           <feDropShadow dx="0" dy="0" stdDeviation="7" flood-color="#67e8f9" flood-opacity="0.55"/>
@@ -36,9 +36,8 @@
         <filter id="glowRing" x="-60%" y="-60%" width="220%" height="220%">
           <feDropShadow dx="0" dy="0" stdDeviation="9" flood-color="#a78bfa" flood-opacity="0.55"/>
         </filter>
-        <!-- text baselines -->
-        <path id="urlArc" d="M 152 512 A 360 360 0 0 0 872 512" fill="none"/>
-        <path id="tagArc" d="M 172 512 A 340 340 0 0 1 852 512" fill="none"/>
+        <!-- text baseline -->
+        <path id="urlArc" d="M 132 560 A 372 372 0 0 0 892 560" fill="none"/>
       </defs>
 
       <!-- disc -->
@@ -56,28 +55,22 @@
       </g>
 
       <!-- broken orbital ring -->
-      <circle cx="512" cy="512" r="452" fill="none" stroke="#a78bfa" stroke-width="1.5"
-              stroke-dasharray="4 16" opacity="0.45"/>
+      <circle cx="512" cy="512" r="472" fill="none" stroke="#a78bfa" stroke-width="2"
+              stroke-dasharray="5 18" opacity="0.5"/>
 
       <!-- glowing accretion rim -->
-      <circle cx="512" cy="512" r="486" fill="none" stroke="url(#ring)" stroke-width="5"
+      <circle cx="512" cy="512" r="490" fill="none" stroke="url(#ring)" stroke-width="10"
               filter="url(#glowRing)"/>
 
       <!-- the eye -->
-      <image href="/art/eye-moon.png" x="300" y="212" width="424" height="424"
+      <image href="/art/eye-moon.png" x="222" y="114" width="580" height="580"
              clip-path="url(#eyeclip)"/>
-      <circle cx="512" cy="424" r="212" fill="none" stroke="#67e8f9" stroke-width="2" opacity="0.5"/>
+      <circle cx="512" cy="404" r="290" fill="none" stroke="#67e8f9" stroke-width="3" opacity="0.55"/>
 
       <!-- curved url -->
-      <text font-family="'Major Mono Display', monospace" font-size="74"
+      <text font-family="'Major Mono Display', monospace" font-size="104"
             letter-spacing="6" fill="#ece9f7" filter="url(#glowCyan)">
         <textPath href="#urlArc" startOffset="50%" text-anchor="middle">supervuoto.org</textPath>
-      </text>
-
-      <!-- curved tagline -->
-      <text font-family="'Major Mono Display', monospace" font-size="27"
-            letter-spacing="7" fill="#a78bfa" opacity="0.9">
-        <textPath href="#tagArc" startOffset="50%" text-anchor="middle">transmissions from the super-void</textPath>
       </text>
     </svg>
   </div>
