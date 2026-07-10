@@ -56,6 +56,7 @@ cover-credit-url, tags — then free description paragraphs.
 - artist: ophra
 - artist-instagram: https://www.instagram.com/fra_h.ope.s/
 - artist-soundcloud: https://soundcloud.com/djophra
+- wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/ev0ddkp4ypn7mj21b0qy5/Supervuoto-Episodio-3-Elmozzo-VS-Ophra-192k.mp3?rlkey=5jal4episqz5f1omcvsbv7oir&st=6xw568xw&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep03-elmozzo-vs
 - cover: /covers/ep03-teenage-bass.jpg
 - cover-credit: elmozzo
@@ -108,6 +109,7 @@ cover-credit-url, tags — then free description paragraphs.
 - artist-instagram: https://www.instagram.com/puck1e/
 - artist-soundcloud: https://soundcloud.com/s4dp0ny
 - artist-mixcloud: https://www.mixcloud.com/lhotsehts/
+- wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/zs50qsge108j05ripdbsc/Supervuoto-Episodio-2-Elmozzo-VS-Lhotse.mp3?rlkey=l6n0gbv8pqf33bf0tdildkxkw&st=1925qne0&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep-2-friend-of
 - cover: /covers/ep02-friend-of-the-night.jpg
 - cover-credit: nntnntnnt_
@@ -153,6 +155,7 @@ cover-credit-url, tags — then free description paragraphs.
 - artist: bozzystep
 - artist-instagram: https://www.instagram.com/samuelebozzy/
 - artist-from: italy
+- wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/vdmopjr5skuvp6wgjvxkm/Supervuoto-ep1-192.mp3?rlkey=sa07ivkokwqfhrcxs6kvlu6zd&st=k67lfdhz&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep01-legacy-of
 - cover-credit: aurelianoelmozzo
 - cover-credit-url: https://www.instagram.com/aurelianoelmozzo/

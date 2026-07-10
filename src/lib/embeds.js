@@ -2,7 +2,8 @@
 // An entry has `links: { youtube?, soundcloud?, mixcloud? }`.
 // Each platform link resolves to an iframe src for that platform's player.
 
-export const PLATFORM_ORDER = ['wanderer', 'soundcloud', 'mixcloud', 'youtube'];
+// soundcloud is the default player; wanderer is offered as a second tab.
+export const PLATFORM_ORDER = ['soundcloud', 'wanderer', 'mixcloud', 'youtube'];
 
 export const PLATFORM_HEIGHTS = {
   wanderer: 460,
