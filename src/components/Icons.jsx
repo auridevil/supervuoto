@@ -56,7 +56,18 @@ export function YoutubeIcon() {
   );
 }
 
+export function WandererIcon() {
+  return (
+    <Svg fill="none" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="12" cy="12" r="4.4" />
+      <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)" />
+      <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none" />
+    </Svg>
+  );
+}
+
 export const PLATFORM_ICONS = {
+  wanderer: WandererIcon,
   youtube: YoutubeIcon,
   soundcloud: SoundcloudIcon,
   mixcloud: MixcloudIcon,

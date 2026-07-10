@@ -50,7 +50,7 @@ const SOURCE = join(ROOT, 'content', 'mixtapes.md');
 const OUT_DIR = join(ROOT, 'src', 'data');
 const OUT_FILE = join(OUT_DIR, 'mixtapes.json');
 
-const PLATFORMS = ['youtube', 'soundcloud', 'mixcloud'];
+const PLATFORMS = ['wanderer', 'youtube', 'soundcloud', 'mixcloud'];
 const FIELD_NAMES = [
   'date',
   'category',
@@ -59,6 +59,7 @@ const FIELD_NAMES = [
   'artist-soundcloud',
   'artist-mixcloud',
   'artist-from',
+  'wanderer',
   'youtube',
   'soundcloud',
   'mixcloud',

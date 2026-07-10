@@ -5,6 +5,49 @@ Fields: date (required), category, artist, artist-instagram, artist-soundcloud,
 youtube / soundcloud / mixcloud (at least one), cover, cover-credit,
 cover-credit-url, tags — then free description paragraphs.
 
+## Supervuoto Episode 04 BIT - Mutazioni parte uno
+
+- date: 2026-07-10
+- category: supervuoto
+- artist: elmozzo
+- artist: luca seoni
+- artist-instagram: https://www.instagram.com/seoni88/
+- artist-soundcloud: https://soundcloud.com/seoni-61844077
+- wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/0ypzo6o6t1tgzju3ezqxz/Supervuoto-Episodio-4-Elmozzo-VS-Luca-Seoni-1-192k.mp3?rlkey=5cbh1p8z5wl2ow9b9os78a53h&st=flhmlp6t&dl=0
+- soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-04-mutazioni
+- cover: /covers/ep04-mutazioni.jpg
+- cover-credit: leonardo giacone
+- cover-credit-url: https://www.instagram.com/leonardo.giac.one/
+- tags: techno, ambient
+
+### elmozzo
+
+- Taxi Kebab - L3alam Ya7tariq
+- Amon Tobin - Bedtime Stories
+- Jon Hopkins - Neon Pattern Drums
+- Sumiruna - Conexion
+- Merkaba - Deep Waters
+- 95 Fahrenheit - Uranio
+- Ricky Le Roy - Tunnel
+- Merkaba - Solar Ohm
+- Pettra - Bansury
+- Burial - Moth
+- Adama - Deep Circles
+- Elmozzo Supervuoto - Evolution
+- Team Doyobi - E5
+
+### luca seoni
+
+- Luigi Tozzi - Epipelagic
+- Donato Dozzy - Parola
+- Plastikman - Consumed
+- Pink Floyd - On the Run
+- Rainforest Spiritual Enslavement - Refuges from Black Magic
+
+### closing
+
+- inedia - untitled 03
+
 ## Supervuoto Episode 03 BIT - Teenage Bass
 
 - date: 2026-06-27

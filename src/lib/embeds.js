@@ -2,9 +2,10 @@
 // An entry has `links: { youtube?, soundcloud?, mixcloud? }`.
 // Each platform link resolves to an iframe src for that platform's player.
 
-export const PLATFORM_ORDER = ['soundcloud', 'mixcloud', 'youtube'];
+export const PLATFORM_ORDER = ['wanderer', 'soundcloud', 'mixcloud', 'youtube'];
 
 export const PLATFORM_HEIGHTS = {
+  wanderer: 460,
   youtube: 352,
   soundcloud: 166,
   mixcloud: 120,
@@ -37,6 +38,10 @@ export function getEmbedUrlFor(platform, url, { visual = false } = {}) {
   if (!url) return null;
 
   switch (platform) {
+    // supervuoto's own immersive WebGL player — the url is already the embed.
+    case 'wanderer':
+      return url;
+
     case 'youtube': {
       const id = extractYouTubeId(url);
       return id ? `https://www.youtube.com/embed/${id}` : null;

@@ -59,7 +59,8 @@ export default function Player({ entry, minHeight = 0, squareArt = false }) {
             src={src}
             title={`${entry.title} — ${platform}`}
             loading="lazy"
-            allow="autoplay; encrypted-media"
+            allow="autoplay; encrypted-media; fullscreen; gyroscope; accelerometer"
+            allowFullScreen
             width="100%"
             height={square ? undefined : height}
             frameBorder="0"
