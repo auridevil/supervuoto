@@ -111,6 +111,15 @@ npm run preview &   # serves dist on :4173
 # tool), then remove dist/sticker.html
 ```
 
+## Analytics
+
+Privacy-friendly, cookie-free analytics via [GoatCounter](https://www.goatcounter.com/)
+(no consent banner needed). Register a code at goatcounter.com, then make sure
+it matches the two places that reference `supervuoto.goatcounter.com`:
+`index.html` (main snippet + hashchange counter for mix/collective views) and
+`scripts/generate-mix-pages.mjs` (`GOATCOUNTER`, a beacon on the share/redirect
+pages so shared `/mix/<id>/` links register). Dashboard: `https://<code>.goatcounter.com`.
+
 ## Links to set
 
 - **Donations** — the footer's "FEED THE VOID" button points at a placeholder

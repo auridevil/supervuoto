@@ -51,6 +51,9 @@ function pageDescription(entry) {
 
 const OG_TYPE = { music: 'music.song', website: 'website' };
 
+// GoatCounter endpoint — must match the code used in index.html.
+const GOATCOUNTER = 'https://supervuoto.goatcounter.com/count';
+
 // A tiny static page carrying Open Graph tags that redirects humans to the
 // SPA hash target. Written to dist/<dir>/index.html.
 function writeRedirectPage({ dir, title, description, pageUrl, image, target, linkText, ogType = 'website' }) {
@@ -72,7 +75,13 @@ function writeRedirectPage({ dir, title, description, pageUrl, image, target, li
 <meta name="twitter:image" content="${escapeHtml(image)}" />
 <link rel="canonical" href="${escapeHtml(pageUrl)}" />
 <meta http-equiv="refresh" content="0;url=${escapeHtml(target)}" />
-<script>location.replace(${JSON.stringify(target)});</script>
+<script>
+try {
+  fetch(${JSON.stringify(GOATCOUNTER)} + '?p=' + encodeURIComponent(location.pathname),
+        { mode: 'no-cors', keepalive: true });
+} catch (e) {}
+location.replace(${JSON.stringify(target)});
+</script>
 <style>body{background:#050208;color:#ece9f7;font-family:monospace;display:grid;place-items:center;min-height:100vh;margin:0}</style>
 </head>
 <body>

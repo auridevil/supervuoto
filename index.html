@@ -41,5 +41,22 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- analytics: GoatCounter (privacy-friendly, no cookies).
+         OWNER: register the code at https://www.goatcounter.com/ — the code
+         below must match your account subdomain (https://<code>.goatcounter.com). -->
+    <script
+      data-goatcounter="https://supervuoto.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+    ></script>
+    <script>
+      // Count mix/collective opens too (the app uses #hash routes).
+      addEventListener('hashchange', function () {
+        if (window.goatcounter && window.goatcounter.count) {
+          window.goatcounter.count({ path: location.pathname + location.hash });
+        }
+      });
+    </script>
   </body>
 </html>
