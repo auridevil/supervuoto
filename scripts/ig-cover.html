@@ -52,10 +52,10 @@
 
   .word {
     position: absolute;
-    top: 706px; left: 0; right: 0;
-    text-align: center;
-    white-space: nowrap;      /* overflow the edges: first S / last O get clipped */
-    font-size: 150px;
+    top: 690px; left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;      /* JS fits width to 10/9 of frame → S and O cut exactly in half */
+    font-size: 180px;
     letter-spacing: 0;
     text-transform: lowercase;
     color: #ece9f7;
@@ -68,7 +68,7 @@
   /* 4:5 portrait (1080x1350) */
   #stage.portrait { height: 1350px; }
   #stage.portrait .eye { top: 320px; width: 470px; height: 470px; margin-left: -235px; }
-  #stage.portrait .word { top: 900px; }
+  #stage.portrait .word { top: 892px; }
 
   .url {
     position: absolute;
@@ -118,6 +118,21 @@
       if (s > 2.2) i.style.boxShadow = '0 0 6px ' + c;
       stars.appendChild(i);
     }
+
+    // Fit the wordmark so it's exactly 10/9 of the frame width (1200px on a
+    // 1080 frame): with a monospace font this bleeds half of the first "s"
+    // off the left edge and half of the last "o" off the right — symmetric.
+    function fitWord() {
+      const w = document.querySelector('.word');
+      const target = (1080 * 10) / 9;
+      const cur = w.getBoundingClientRect().width;
+      if (cur > 0) {
+        const fs = parseFloat(getComputedStyle(w).fontSize);
+        w.style.fontSize = (fs * target) / cur + 'px';
+      }
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWord);
+    else fitWord();
   </script>
 </body>
 </html>
