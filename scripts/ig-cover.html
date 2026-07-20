@@ -52,30 +52,30 @@
 
   .word {
     position: absolute;
-    top: 726px; left: 0; right: 0;
+    top: 706px; left: 0; right: 0;
     text-align: center;
-    font-size: 122px;
-    letter-spacing: 0.14em;
+    white-space: nowrap;      /* overflow the edges: first S / last O get clipped */
+    font-size: 150px;
+    letter-spacing: 0;
     text-transform: lowercase;
     color: #ece9f7;
     text-shadow:
       -4px 0 rgba(103,232,249,0.9),
       4px 0 rgba(240,171,252,0.85),
-      0 0 40px rgba(103,232,249,0.4);
+      0 0 46px rgba(103,232,249,0.4);
   }
 
   /* 4:5 portrait (1080x1350) */
   #stage.portrait { height: 1350px; }
   #stage.portrait .eye { top: 320px; width: 470px; height: 470px; margin-left: -235px; }
-  #stage.portrait .word { top: 920px; font-size: 130px; }
+  #stage.portrait .word { top: 900px; }
 
   .url {
     position: absolute;
-    top: 50%; right: 34px;
-    transform: translateY(-50%) rotate(180deg);
+    top: 54px; right: 30px;
     writing-mode: vertical-rl;
-    font-size: 22px;
-    letter-spacing: 0.4em;
+    font-size: 15px;
+    letter-spacing: 0.34em;
     text-transform: lowercase;
     color: rgba(103,232,249,0.55);
   }
