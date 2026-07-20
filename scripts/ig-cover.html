@@ -1,6 +1,7 @@
 <!doctype html>
-<!-- supervuoto instagram cover (1080x1080). Rendered to social/supervuoto-ig-cover.png.
-     Starfield + nebulae + eye + glitch wordmark + vertical supervuoto.org. -->
+<!-- supervuoto instagram cover. Rendered to social/supervuoto-ig-cover*.png.
+     Starfield + nebulae + eye + glitch wordmark + vertical supervuoto.org.
+     ?r=45 → 4:5 portrait (1080x1350); default → 1:1 square (1080x1080). -->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -63,6 +64,11 @@
       0 0 40px rgba(103,232,249,0.4);
   }
 
+  /* 4:5 portrait (1080x1350) */
+  #stage.portrait { height: 1350px; }
+  #stage.portrait .eye { top: 320px; width: 470px; height: 470px; margin-left: -235px; }
+  #stage.portrait .word { top: 920px; font-size: 130px; }
+
   .url {
     position: absolute;
     top: 50%; right: 34px;
@@ -94,14 +100,18 @@
   </div>
 
   <script>
+    const portrait = new URLSearchParams(location.search).get('r') === '45';
+    const H = portrait ? 1350 : 1080;
+    if (portrait) document.getElementById('stage').classList.add('portrait');
     const stars = document.getElementById('stars');
     const cols = ['#ece9f7', '#ece9f7', '#ece9f7', '#67e8f9', '#a78bfa', '#f0abfc'];
-    for (let n = 0; n < 120; n++) {
+    const count = Math.round(120 * (H / 1080));
+    for (let n = 0; n < count; n++) {
       const i = document.createElement('i');
       const s = Math.random() < 0.85 ? (1 + Math.random() * 1.6) : (2.4 + Math.random() * 1.8);
       i.style.width = i.style.height = s.toFixed(1) + 'px';
       i.style.left = (Math.random() * 1080).toFixed(0) + 'px';
-      i.style.top = (Math.random() * 1080).toFixed(0) + 'px';
+      i.style.top = (Math.random() * H).toFixed(0) + 'px';
       const c = cols[(Math.random() * cols.length) | 0];
       i.style.background = c;
       i.style.opacity = (0.35 + Math.random() * 0.6).toFixed(2);
