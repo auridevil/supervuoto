@@ -1,4 +1,9 @@
-import { InstagramIcon } from './Icons.jsx';
+import {
+  InstagramIcon,
+  YoutubeIcon,
+  SoundcloudIcon,
+  WandererIcon,
+} from './Icons.jsx';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -27,6 +32,27 @@ export default function Footer() {
           rel="noreferrer"
         >
           <InstagramIcon /> instagram ∴ @supervuoto_
+        </a>
+        <a
+          href="https://soundcloud.com/supervuoto"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <SoundcloudIcon /> soundcloud ∴ supervuoto
+        </a>
+        <a
+          href="https://www.youtube.com/channel/UCeWf7llQ8kPV4C9NKAPsCSA"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <YoutubeIcon /> youtube ∴ supervuoto
+        </a>
+        <a
+          href="https://auridevil.github.io/supervuoto-wanderer/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <WandererIcon /> wanderer ∴ walk the void
         </a>
       </div>
       <p className="footer-credit">
