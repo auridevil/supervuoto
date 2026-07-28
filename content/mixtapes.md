@@ -5,6 +5,39 @@ Fields: date (required), category, artist, artist-instagram, artist-soundcloud,
 youtube / soundcloud / mixcloud (at least one), cover, cover-credit,
 cover-credit-url, tags — then free description paragraphs.
 
+## Supervuoto Episode 05 BIT - One Frequency
+
+- date: 2026-07-24
+- category: supervuoto
+- artist: elmozzo
+- artist: raja
+- artist-instagram: https://www.instagram.com/giacomocagnotto/
+- artist-soundcloud: https://soundcloud.com/giacomo-cagnotto
+- wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/u6f0m66k21dcdpho4lhf9/SupervuotoEp05-elmozzoVSraja-192kbps.mp3?rlkey=kvh217ug6f9yrswlt73utlmvs&st=jdtztnef&dl=0
+- soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep05-one
+- cover: /covers/ep05-one-frequency.jpg
+- cover-credit: elmozzo
+- cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
+- tags: psytrance, pray, goatrance, trance
+
+### elmozzo
+
+- Adama - Lower Ground
+- Elmozzo Supervuoto - metamorphosis
+- Pettra - Savta
+- Astrix - Sahara
+- Elmozzo Supervuoto - rootbound
+- Ace Ventura - Biological Computer
+- Ghost Rider - Shamanic
+- Tropical Bleyage - Mala
+
+### raja
+
+- Dayalix - Move Your Body
+- Whiptongue - Favela Analogica
+- Raja - Untitled
+- Ukauka vs Daksinamurti - India
+
 ## Supervuoto Episode 04 BIT - Mutazioni parte uno
 
 - date: 2026-07-10
