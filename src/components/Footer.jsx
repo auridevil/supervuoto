@@ -31,28 +31,28 @@ export default function Footer() {
           target="_blank"
           rel="noreferrer"
         >
-          <InstagramIcon /> instagram ∴ @supervuoto_
+          <InstagramIcon /> instagram
         </a>
         <a
           href="https://soundcloud.com/supervuoto"
           target="_blank"
           rel="noreferrer"
         >
-          <SoundcloudIcon /> soundcloud ∴ supervuoto
+          <SoundcloudIcon /> soundcloud
         </a>
         <a
           href="https://www.youtube.com/channel/UCeWf7llQ8kPV4C9NKAPsCSA"
           target="_blank"
           rel="noreferrer"
         >
-          <YoutubeIcon /> youtube ∴ supervuoto
+          <YoutubeIcon /> youtube
         </a>
         <a
           href="https://auridevil.github.io/supervuoto-wanderer/"
           target="_blank"
           rel="noreferrer"
         >
-          <WandererIcon /> wanderer ∴ walk the void
+          <WandererIcon /> wanderer
         </a>
       </div>
       <p className="footer-credit">
