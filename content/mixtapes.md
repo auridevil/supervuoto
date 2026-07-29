@@ -14,6 +14,7 @@ cover-credit-url, tags — then free description paragraphs.
 - artist-instagram: https://www.instagram.com/giacomocagnotto/
 - artist-soundcloud: https://soundcloud.com/giacomo-cagnotto
 - wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/u6f0m66k21dcdpho4lhf9/SupervuotoEp05-elmozzoVSraja-192kbps.mp3?rlkey=kvh217ug6f9yrswlt73utlmvs&st=jdtztnef&dl=0
+- youtube: https://www.youtube.com/watch?v=aYDAAa35Owk
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep05-one
 - cover: /covers/ep05-one-frequency.jpg
 - cover-credit: elmozzo
