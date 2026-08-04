@@ -48,6 +48,7 @@ cover-credit-url, tags — then free description paragraphs.
 - artist-instagram: https://www.instagram.com/seoni88/
 - artist-soundcloud: https://soundcloud.com/seoni-61844077
 - wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/0ypzo6o6t1tgzju3ezqxz/Supervuoto-Episodio-4-Elmozzo-VS-Luca-Seoni-1-192k.mp3?rlkey=5cbh1p8z5wl2ow9b9os78a53h&st=flhmlp6t&dl=0
+- youtube: https://www.youtube.com/watch?v=Y4sZgYtgX7U
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-04-mutazioni
 - cover: /covers/ep04-mutazioni.jpg
 - cover-credit: leonardo giacone
