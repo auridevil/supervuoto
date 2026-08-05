@@ -191,6 +191,7 @@ cover-credit-url, tags — then free description paragraphs.
 - artist-instagram: https://www.instagram.com/samuelebozzy/
 - artist-from: italy
 - wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/vdmopjr5skuvp6wgjvxkm/Supervuoto-ep1-192.mp3?rlkey=sa07ivkokwqfhrcxs6kvlu6zd&st=k67lfdhz&dl=0
+- youtube: https://www.youtube.com/watch?v=KJ5APFRCvas
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep01-legacy-of
 - cover-credit: aurelianoelmozzo
 - cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
