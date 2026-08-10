@@ -15,7 +15,12 @@ const currentHash = () =>
   typeof window === 'undefined' ? '' : window.location.hash.slice(1);
 
 const artistNames = (artists) =>
-  (artists || []).map((a) => a.name).join(' vs ');
+  (artists || []).map((a, i) => (
+    <span className="artist-token" key={a.name}>
+      {i > 0 && <span className="artists-vs">vs</span>}
+      {a.name}
+    </span>
+  ));
 
 function TransmissionRow({ entry }) {
   // Each mix is a hard link: opening a row puts #<id> in the URL, and

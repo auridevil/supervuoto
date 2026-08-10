@@ -96,6 +96,15 @@ export function ArtistCredits({ artists }) {
   );
 }
 
+// Tracks are authored as "Artist - Title"; split on the first hyphen/dash
+// delimiter so the artist can be emphasised and the title read as secondary.
+// Lines without a delimiter render as a single readable title.
+function splitTrack(track) {
+  const m = track.match(/^(.*?)\s+[-–—]\s+(.*)$/);
+  if (!m) return { title: track.trim() };
+  return { artist: m[1].trim(), title: m[2].trim() };
+}
+
 export function Tracklist({ tracklists }) {
   if (!tracklists || tracklists.length === 0) return null;
   return (
@@ -106,9 +115,20 @@ export function Tracklist({ tracklists }) {
           <div className="tracklist-side" key={side.label}>
             <h4 className="tracklist-label">⟢ {side.label}</h4>
             <ol>
-              {side.tracks.map((track, i) => (
-                <li key={i}>{track}</li>
-              ))}
+              {side.tracks.map((track, i) => {
+                const { artist, title } = splitTrack(track);
+                return (
+                  <li key={i}>
+                    {artist && (
+                      <>
+                        <span className="track-artist">{artist}</span>
+                        <span className="track-sep"> — </span>
+                      </>
+                    )}
+                    <span className="track-title">{title}</span>
+                  </li>
+                );
+              })}
             </ol>
           </div>
         ))}

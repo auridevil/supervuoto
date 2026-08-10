@@ -1,7 +1,12 @@
 import { Thumb } from './EntryBits.jsx';
 
 const artistNames = (artists) =>
-  (artists || []).map((a) => a.name).join(' vs ');
+  (artists || []).map((a, i) => (
+    <span className="artist-token" key={a.name}>
+      {i > 0 && <span className="artists-vs">vs</span>}
+      {a.name}
+    </span>
+  ));
 
 // A horizontally-scrollable wall of mix covers. Tapping a cover sets the hash,
 // which opens and scrolls to that mix in the transmissions list below.
