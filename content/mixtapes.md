@@ -5,6 +5,57 @@ Fields: date (required), category, artist, artist-instagram, artist-soundcloud,
 youtube / soundcloud / mixcloud (at least one), cover, cover-credit,
 cover-credit-url, tags — then free description paragraphs.
 
+## Supervuoto Episode 06 BIT - Agrumi
+
+- date: 2026-09-11
+- category: supervuoto
+- artist: elmozzo
+- artist: bozzystep
+- artist-instagram: https://www.instagram.com/samuelebozzy/
+- artist-from: italy
+- soundcloud: https://soundcloud.com/supervuoto/agrumi
+- cover: /covers/ep06-agrumi.jpg
+- cover-credit: aurelianoelmozzo
+- cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
+- tags: cumbia, dembow, dancehall, latin
+
+### bozzystep
+
+- Mala, Danitse - Cunumicita
+- Danit - Cuatro Vientos (Rey&Kjavik Remix)
+- Totó La Momposina - Yo Me Llamo Cumbia
+- G Sony - Veneno de Serpiente
+- Rodolfo Aicardi, La Típica RA7 - Tabaco y Ron
+
+### elmozzo
+
+- Martina Camargo - Me Robaste El Sueño (Tambora)
+- Los Hermanos Tuirán - Cumbia En La Cordillera
+- Conjunto Típico Vallenato - Cumbia Sampuesana
+- Quantic Presenta: Flowering Inferno - Cumbia Sobre El Mar
+- Lisandro Meza y Los Hijos de la Niña Luz - Las Tapas
+- Bad Bunny - NUEVAYoL
+
+### bozzystep
+
+- Dinamarca - Fine Day
+- Dinamarca - Juguete
+- Sam Binga, Addison Groove, Sirius Soundz - Sacude
+- Major Lazer, Safety Trance, Tokischa - Papi (Safety Trance Remix)
+- Safety Trance - Destrucción
+- SKVDRXX - Horizon
+- Surusinghe, Warrior Queen - Party Criminal
+- Safety Trance - Ratatata
+
+### elmozzo
+
+- Elmozzo Supervuoto - Moxalarma
+- Safety Trance - Caracas Bubbling Militia
+- Wallwork & Nan Kolè feat. Nico Lindsay - Fyah
+- Safety Trance, Lua de Santana - Puxa Saco
+- Elmozzo Supervuoto - ElTimeuarp
+- Arca - Rakata
+
 ## Supervuoto Episode 05 BIT - One Frequency
 
 - date: 2026-07-24
