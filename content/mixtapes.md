@@ -5,6 +5,49 @@ Fields: date (required), category, artist, artist-instagram, artist-soundcloud,
 youtube / soundcloud / mixcloud (at least one), cover, cover-credit,
 cover-credit-url, tags — then free description paragraphs.
 
+## Supervuoto Episode 07 BIT - Parental Advisory
+
+- date: 2026-10-06
+- category: supervuoto
+- artist: elmozzo
+- artist: celest
+- soundcloud: https://soundcloud.com/supervuoto/parentaladvisory
+- cover: /covers/ep07-parental-advisory.jpg
+- cover-credit: aurelianoelmozzo
+- cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
+- tags: hip hop, beats, boom bap, rap
+
+### elmozzo
+
+- Soul Khan - Jon Hamm
+- Madvillain - Accordion
+- J Dilla - Workinonit
+- 7evenThirty & Gensu Dean - Hook Heavy (feat. Sean Price)
+- Blend Crafters (DJ Nu-Mark & Pomo) - Unwind
+- MF DOOM - That's That
+- Frank Ocean - Pink Matter
+- Tsuruda - Pillz
+- Gift of Gab - Abominable
+- Nosaj Thing & Jacques Greene - RB3
+- Flume & Eprom - Spring
+- Shigeto - Ready. Set. Flex.
+- Flying Lotus - Never Catch Me (feat. Kendrick Lamar)
+- Tyler, The Creator - MASSA
+
+### celest
+
+- Frank Ocean - Thinkin Bout You
+- J. Cole - '03 Adolescence
+- Kanye West, Rick Ross - Devil In A New Dress
+- JAY-Z - 4:44
+- MF DOOM - Doomsday
+- Kanye West - White Dress
+- J. Cole - Is She Gon Pop
+- Lupe Fiasco - Samurai
+- King Geedorah - Next Levels
+- Kanye West, JAY-Z - Diamonds From Sierra Leone (Remix)
+- Frank Ocean - Nights
+
 ## Supervuoto Episode 06 BIT - Agrumi
 
 - date: 2026-09-11
