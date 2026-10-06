@@ -47,6 +47,14 @@ export const PARTICIPANTS = [
     from: null,
   },
   {
+    name: 'celest',
+    kind: 'dj',
+    instagram: null,
+    soundcloud: null,
+    mixcloud: null,
+    from: null,
+  },
+  {
     name: 'ilmagofrensis',
     kind: 'lens',
     role: 'supervuoto artwork',
