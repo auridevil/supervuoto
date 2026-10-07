@@ -23,7 +23,7 @@ export const PARTICIPANTS = [
     from: null,
   },
   {
-    name: 'lothse',
+    name: 'lhotse',
     kind: 'dj',
     instagram: 'https://www.instagram.com/puck1e/',
     soundcloud: 'https://soundcloud.com/s4dp0ny',

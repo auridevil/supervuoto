@@ -244,7 +244,7 @@ Mutation as a method. Ambient and dub textures corroding into techno, field reco
 - date: 2026-06-22
 - category: supervuoto
 - artist: elmozzo
-- artist: lothse
+- artist: lhotse
 - artist-instagram: https://www.instagram.com/puck1e/
 - artist-soundcloud: https://soundcloud.com/s4dp0ny
 - artist-mixcloud: https://www.mixcloud.com/lhotsehts/
@@ -274,7 +274,7 @@ Post-punk, cold wave and dark electronics for the hours nobody is awake for. Dru
 - Carpathian Forest - A forest
 - Aisha Devi - Immortelle
 
-### lothse
+### lhotse
 
 - Oxbow - She's a Find
 - Kavinsky - Nightcall
