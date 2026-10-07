@@ -102,23 +102,6 @@ location.replace(${JSON.stringify(target)});
    than replacing it: navigation is still the SPA's hash routes.
    ------------------------------------------------------------------ */
 
-const slugify = (s) =>
-  String(s)
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
-// "Supervuoto Episode 07 BIT - Parental Advisory" -> "parental-advisory"
-function shortSlug(title) {
-  const stripped = String(title).replace(
-    /^\s*supervuoto\s+episode\s+\d+\s*(bit)?\s*[-–—]\s*/i,
-    ''
-  );
-  return slugify(stripped) || slugify(title);
-}
-
 // "Artist - Title" -> { artist, title }
 function splitTrack(track) {
   const s = String(track);
@@ -332,17 +315,13 @@ for (const entry of mixtapes) {
   generated += 1;
 
   // 2. the crawlable detail page at /mix/<line>/<title>/
-  const line = slugify(entry.category || 'supervuoto');
-  let leaf = shortSlug(entry.title);
-  let relPath = `mix/${line}/${leaf}`;
-  if (takenPaths.has(relPath)) {
-    leaf = entry.id; // collision: fall back to the full slug
-    relPath = `mix/${line}/${leaf}`;
-    console.warn(`[mix-pages] WARN: slug collision, "${entry.title}" falls back to /${relPath}/`);
-  }
+  //    entry.path comes from parse-mixtapes.mjs, so the app's share button and
+  //    this generator can never disagree about the URL.
+  const relPath = `mix/${entry.path}`;
   takenPaths.add(relPath);
 
   // A line slug must never shadow an episode stub at /mix/<id>/.
+  const line = entry.path.split('/')[0];
   if (mixtapes.some((m) => m.id === line)) {
     console.warn(`[mix-pages] WARN: line "${line}" collides with an episode id — check /mix/${line}/`);
   }

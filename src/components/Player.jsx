@@ -5,7 +5,7 @@ import {
   availablePlatforms,
 } from '../lib/embeds.js';
 import { PLATFORM_ICONS } from './Icons.jsx';
-import { mixShareUrl } from '../lib/site.js';
+import { mixShareUrl, mixPageUrl } from '../lib/site.js';
 
 // squareArt: render soundcloud as a square visual player (full uncropped
 // artwork) — used for the featured entry. Elsewhere soundcloud uses the
@@ -13,15 +13,16 @@ import { mixShareUrl } from '../lib/site.js';
 export default function Player({ entry, minHeight = 0, squareArt = false }) {
   const platforms = availablePlatforms(entry);
   const [selected, setSelected] = useState(null);
-  const [copied, setCopied] = useState(false);
+  // which button last reported success: 'player' | 'page' | null
+  const [copied, setCopied] = useState(null);
   if (platforms.length === 0) return null;
 
-  const share = () => {
+  const copy = (url, which) => () => {
     navigator.clipboard
-      .writeText(mixShareUrl(entry.id))
+      .writeText(url)
       .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+        setCopied(which);
+        setTimeout(() => setCopied(null), 2000);
       })
       .catch(() => {});
   };
@@ -75,9 +76,30 @@ export default function Player({ entry, minHeight = 0, squareArt = false }) {
           })()}
           open on {platform} ↗
         </a>
-        <button type="button" className="player-share" onClick={share}>
-          {copied ? '✓ link copied' : '⎘ share'}
+        <button
+          type="button"
+          className="player-share"
+          onClick={copy(mixShareUrl(entry.id), 'player')}
+          title="copy a link that opens this mix in the player"
+        >
+          {copied === 'player' ? '✓ link copied' : '⎘ share'}
         </button>
+        <button
+          type="button"
+          className="player-share"
+          onClick={copy(mixPageUrl(entry), 'page')}
+          title="copy a link to this mix's page — description, credits and full tracklist"
+        >
+          {copied === 'page' ? '✓ page copied' : '⎘ share page'}
+        </button>
+        <a
+          className="player-open"
+          href={`/mix/${entry.path}/`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          tracklist page ↗
+        </a>
       </div>
     </div>
   );

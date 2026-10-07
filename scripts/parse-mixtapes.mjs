@@ -81,6 +81,16 @@ function slugify(title) {
     .replace(/^-+|-+$/g, '');
 }
 
+// "Supervuoto Episode 07 BIT - Parental Advisory" -> "parental-advisory"
+// Used for the crawlable detail page at /mix/<line>/<title>/.
+function shortSlug(title) {
+  const stripped = String(title).replace(
+    /^\s*supervuoto\s+episode\s+\d+\s*(bit)?\s*[-–—]\s*/i,
+    ''
+  );
+  return slugify(stripped) || slugify(title);
+}
+
 function isUrl(value) {
   return /^https?:\/\//.test(value || '');
 }
@@ -264,6 +274,23 @@ function parse(markdown) {
 
   // Newest first.
   mixtapes.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+
+  // Detail-page path, "<line>/<title>" — the single source of truth shared by
+  // the app's share button and scripts/generate-mix-pages.mjs.
+  const taken = new Set();
+  for (const mix of mixtapes) {
+    const line = slugify(mix.category || 'supervuoto');
+    let leaf = shortSlug(mix.title);
+    if (taken.has(`${line}/${leaf}`)) {
+      console.warn(
+        `[parse-mixtapes] WARN: "${mix.title}" — detail slug "${line}/${leaf}" already taken, using the full id`
+      );
+      leaf = mix.id;
+    }
+    taken.add(`${line}/${leaf}`);
+    mix.path = `${line}/${leaf}`;
+  }
+
   return mixtapes;
 }
 
