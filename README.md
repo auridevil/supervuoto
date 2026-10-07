@@ -68,6 +68,34 @@ to `/#<id>`. **Share the `https://supervuoto.org/mix/<id>/` URLs on socials**
 `https://supervuoto.org/collective/` is a hardlink that opens the "collective"
 participants modal (it redirects to `/#collective`, which the app detects).
 
+## Detail pages (search engines)
+
+The `/mix/<id>/` stubs above redirect instantly, so a search engine follows the
+redirect and indexes nothing — fine for social crawlers (they read the Open
+Graph tags without running the redirect), useless for search. The build also
+writes a **real, crawlable page per episode** at
+
+```
+https://supervuoto.org/mix/<line>/<title>/
+e.g.  /mix/supervuoto/parental-advisory/
+```
+
+`<line>` is the slugified `category` (the supervuoto line), `<title>` the
+episode title with any `Supervuoto Episode NN BIT -` prefix stripped. These
+carry the description, credits, platform links and the **full tracklist as
+HTML**, plus `MusicPlaylist` JSON-LD — that tracklist text is the archive's
+best long-tail search surface. They sit *beside* the app: navigation is still
+the SPA's hash routes, and every existing `/mix/<id>/` link keeps working
+unchanged. Only the detail pages go into `sitemap.xml`.
+
+`public/robots.txt` allows everything and points at
+`https://supervuoto.org/sitemap.xml`, which the build regenerates.
+
+> **One manual step, once:** submit the sitemap in
+> [Google Search Console](https://search.google.com/search-console) (verify the
+> domain, then Sitemaps → add `sitemap.xml`). Nothing gets indexed until a
+> search engine is told the site exists.
+
 The site-wide card is `public/social-card.png`, generated from
 `scripts/social-card.html` (regeneration instructions inside). The canonical
 domain lives in `package.json` → `homepage` and `src/lib/site.js`.
