@@ -55,6 +55,14 @@ export const PARTICIPANTS = [
     from: null,
   },
   {
+    name: 'raja',
+    kind: 'dj',
+    instagram: 'https://www.instagram.com/giacomocagnotto/',
+    soundcloud: 'https://soundcloud.com/giacomo-cagnotto',
+    mixcloud: null,
+    from: null,
+  },
+  {
     name: 'ilmagofrensis',
     kind: 'lens',
     role: 'supervuoto artwork',
