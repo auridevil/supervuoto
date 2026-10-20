@@ -63,6 +63,14 @@ export const PARTICIPANTS = [
     from: null,
   },
   {
+    name: 'manu',
+    kind: 'dj',
+    instagram: 'https://www.instagram.com/manubergese/',
+    soundcloud: 'https://soundcloud.com/odorerumanu',
+    mixcloud: 'https://www.mixcloud.com/odoreru_manu/',
+    from: null,
+  },
+  {
     name: 'ilmagofrensis',
     kind: 'lens',
     role: 'supervuoto artwork',

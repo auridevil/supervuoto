@@ -5,6 +5,52 @@ Fields: date (required), category, artist, artist-instagram, artist-soundcloud,
 youtube / soundcloud / mixcloud (at least one), cover, cover-credit,
 cover-credit-url, tags — then free description paragraphs.
 
+## Supervuoto Episode 08 BIT - Symphony for a Cloud
+
+- date: 2026-10-09
+- category: supervuoto
+- artist: elmozzo
+- artist: manu
+- artist-instagram: https://www.instagram.com/manubergese/
+- artist-soundcloud: https://soundcloud.com/odorerumanu
+- artist-mixcloud: https://www.mixcloud.com/odoreru_manu/
+- soundcloud: https://soundcloud.com/supervuoto/symphonyforacloud
+- cover: /covers/ep08-symphony-for-a-cloud.jpg
+- cover-credit: aurelianoelmozzo
+- cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
+- tags: downtempo, organic house, melodic house, dub, trip hop
+
+An hour that never quite lands. Voices in five languages carried over dust and delay, downtempo and organic house warming slowly until the pulse hardens into something melodic and four to the floor — then the ground gives way and the rest drifts down through dub, trip hop and late jazz. Weather, not a set.
+
+### elmozzo
+
+- Liberato - Guagliò (Modeselektor Remix)
+- Jun Miyake - Lilies Of The Valley
+- Nightmares On Wax - Bang Bien (feat. Yasiin Bey)
+- Mayra Andrade - Poc li dent é tcheu
+- Sahalé - Magharibi
+- Ezéchiel Pailhès - Éternel été
+- Clap! Clap! - Southern Dub (feat. Domenico Candellori)
+- GatoMato - Sugo del plin // sugo del brasato (feat. Ciarpameboy)
+- Morphine & Unders - The Other Side (Unders Remix)
+- Erly Tepshi - Mesmerize
+- Kotelett & Zadak - Tony Trader (Original Mix)
+- Nathan Fake - The Sky Was Pink (Holden Remix)
+- Sarafine - Malati di Gioia
+
+### manu
+
+- Agoria - La Onzième Marche
+- Gila - Slipper
+- Awich - Interlude 2 (Good Man)
+- FKA twigs & Koreless - Drums of Death
+- yanokami - See You Tomorrow
+- Aim - Ain't Got Time To Waste
+- Paolo Baldini DubFiles - All a Dem a Do
+- Shawn Lee's Ping Pong Orchestra - San Diego (Tour Werks After Hours Mix)
+- Guts - Já Não Há Mais Paz
+- Khruangbin & Leon Bridges - B-Side
+
 ## Supervuoto Episode 07 BIT - Parental Advisory
 
 - date: 2026-10-06
