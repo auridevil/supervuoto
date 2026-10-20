@@ -68,7 +68,7 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/manubergese/',
     soundcloud: 'https://soundcloud.com/odorerumanu',
     mixcloud: 'https://www.mixcloud.com/odoreru_manu/',
-    from: null,
+    from: 'japan',
   },
   {
     name: 'ilmagofrensis',

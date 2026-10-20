@@ -14,6 +14,7 @@ cover-credit-url, tags — then free description paragraphs.
 - artist-instagram: https://www.instagram.com/manubergese/
 - artist-soundcloud: https://soundcloud.com/odorerumanu
 - artist-mixcloud: https://www.mixcloud.com/odoreru_manu/
+- artist-from: japan
 - soundcloud: https://soundcloud.com/supervuoto/symphonyforacloud
 - cover: /covers/ep08-symphony-for-a-cloud.jpg
 - cover-credit: aurelianoelmozzo
