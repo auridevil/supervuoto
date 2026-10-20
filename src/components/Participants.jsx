@@ -21,8 +21,19 @@ function episodesFor(name) {
     .map((e) => {
       const num = (e.title.match(/episode\s+(\d+)/i) || [])[1];
       const name = (e.title.split(/BIT\s*-\s*/i)[1] || e.title).trim();
-      return { id: e.id, label: num ? `ep${num} · ${name}` : name };
+      return { id: e.id, date: e.date, label: num ? `ep${num} · ${name}` : name };
     });
+}
+
+// Residents first, then by most recent episode (newest first); anyone with no
+// episode goes last. Ties keep the order of PARTICIPANTS.
+function lastMixDate(p) {
+  if (p.resident) return '9999';
+  return episodesFor(p.name).reduce((max, ep) => (ep.date > max ? ep.date : max), '');
+}
+
+function byLastMix(a, b) {
+  return lastMixDate(b).localeCompare(lastMixDate(a));
 }
 
 function Participant({ p, onNavigate }) {
@@ -106,7 +117,9 @@ function Modal({ onClose, onNavigate }) {
           new signals welcome.
         </p>
         {GROUPS.map((group) => {
-          const members = PARTICIPANTS.filter((p) => p.kind === group.kind);
+          const members = PARTICIPANTS.filter((p) => p.kind === group.kind).sort(
+            byLastMix
+          );
           if (members.length === 0) return null;
           return (
             <div className="participant-group" key={group.kind}>
