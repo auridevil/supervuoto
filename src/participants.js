@@ -12,7 +12,7 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/supervuoto_/',
     soundcloud: 'https://soundcloud.com/supervuoto',
     mixcloud: null,
-    from: null,
+    from: 'italy',
   },
   {
     name: 'ophra',
@@ -20,7 +20,7 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/fra_h.ope.s/',
     soundcloud: 'https://soundcloud.com/djophra',
     mixcloud: null,
-    from: null,
+    from: 'belgium',
   },
   {
     name: 'lhotse',
@@ -28,7 +28,7 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/puck1e/',
     soundcloud: 'https://soundcloud.com/s4dp0ny',
     mixcloud: 'https://www.mixcloud.com/lhotsehts/',
-    from: null,
+    from: 'italy',
   },
   {
     name: 'bozzystep',
@@ -44,7 +44,7 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/seoni88/',
     soundcloud: 'https://soundcloud.com/seoni-61844077',
     mixcloud: null,
-    from: null,
+    from: 'italy',
   },
   {
     name: 'celest',
@@ -52,7 +52,7 @@ export const PARTICIPANTS = [
     instagram: null,
     soundcloud: null,
     mixcloud: null,
-    from: null,
+    from: 'italy',
   },
   {
     name: 'raja',
@@ -60,7 +60,7 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/giacomocagnotto/',
     soundcloud: 'https://soundcloud.com/giacomo-cagnotto',
     mixcloud: null,
-    from: null,
+    from: 'italy',
   },
   {
     name: 'manu',
@@ -77,7 +77,7 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/ilmagofrensis/',
     soundcloud: null,
     mixcloud: null,
-    from: null,
+    from: 'italy',
   },
   {
     name: 'nntnntnnt_',
@@ -85,7 +85,7 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/nntnntnnt_/',
     soundcloud: null,
     mixcloud: null,
-    from: null,
+    from: 'italy',
   },
   {
     name: 'leonardo giacone',
@@ -93,6 +93,6 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/leonardo.giac.one/',
     soundcloud: null,
     mixcloud: null,
-    from: null,
+    from: 'italy',
   },
 ];

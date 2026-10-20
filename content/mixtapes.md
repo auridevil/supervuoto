@@ -58,6 +58,7 @@ An hour that never quite lands. Voices in five languages carried over dust and d
 - category: supervuoto
 - artist: elmozzo
 - artist: celest
+- artist-from: italy
 - soundcloud: https://soundcloud.com/supervuoto/parentaladvisory
 - cover: /covers/ep07-parental-advisory.jpg
 - cover-credit: aurelianoelmozzo
@@ -158,6 +159,7 @@ Citrus season. An hour of cumbia dug out of old Colombian vinyl and dragged into
 - artist: raja
 - artist-instagram: https://www.instagram.com/giacomocagnotto/
 - artist-soundcloud: https://soundcloud.com/giacomo-cagnotto
+- artist-from: italy
 - wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/u6f0m66k21dcdpho4lhf9/SupervuotoEp05-elmozzoVSraja-192kbps.mp3?rlkey=kvh217ug6f9yrswlt73utlmvs&st=jdtztnef&dl=0
 - youtube: https://www.youtube.com/watch?v=aYDAAa35Owk
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep05-one
@@ -194,6 +196,7 @@ A long ascent. Psytrance and goa built like a prayer — repetitive, upward, the
 - artist: luca seoni
 - artist-instagram: https://www.instagram.com/seoni88/
 - artist-soundcloud: https://soundcloud.com/seoni-61844077
+- artist-from: italy
 - wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/0ypzo6o6t1tgzju3ezqxz/Supervuoto-Episodio-4-Elmozzo-VS-Luca-Seoni-1-192k.mp3?rlkey=5cbh1p8z5wl2ow9b9os78a53h&st=flhmlp6t&dl=0
 - youtube: https://www.youtube.com/watch?v=Y4sZgYtgX7U
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-04-mutazioni
@@ -240,6 +243,7 @@ Mutation as a method. Ambient and dub textures corroding into techno, field reco
 - artist: ophra
 - artist-instagram: https://www.instagram.com/fra_h.ope.s/
 - artist-soundcloud: https://soundcloud.com/djophra
+- artist-from: belgium
 - wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/ev0ddkp4ypn7mj21b0qy5/Supervuoto-Episodio-3-Elmozzo-VS-Ophra-192k.mp3?rlkey=5jal4episqz5f1omcvsbv7oir&st=6xw568xw&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep03-elmozzo-vs
 - mixcloud: https://www.mixcloud.com/supervuoto/supervuoto-bit-03-teenage-bass-elmozzo-vs-ophra/
@@ -296,6 +300,7 @@ Mutation as a method. Ambient and dub textures corroding into techno, field reco
 - artist-instagram: https://www.instagram.com/puck1e/
 - artist-soundcloud: https://soundcloud.com/s4dp0ny
 - artist-mixcloud: https://www.mixcloud.com/lhotsehts/
+- artist-from: italy
 - wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/zs50qsge108j05ripdbsc/Supervuoto-Episodio-2-Elmozzo-VS-Lhotse.mp3?rlkey=l6n0gbv8pqf33bf0tdildkxkw&st=1925qne0&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/supervuoto-bit-ep-2-friend-of
 - mixcloud: https://www.mixcloud.com/supervuoto/supervuoto-bit-02-friend-of-the-night-elmozzo-vs-lothse/
