@@ -2,14 +2,22 @@ import { useEffect, useState } from 'react';
 import mixtapes from '../data/mixtapes.json';
 import { PARTICIPANTS } from '../participants.js';
 import { InstagramIcon, SoundcloudIcon, MixcloudIcon } from './Icons.jsx';
-import { GROUPS, episodesFor, groupMembers } from '../lib/collective.js';
+import { GROUPS, badgeFor, episodesFor, groupMembers } from '../lib/collective.js';
 
 function Participant({ p, onNavigate }) {
   const episodes = p.resident ? [] : episodesFor(p.name, mixtapes);
+  const badge = badgeFor(p);
   return (
     <li className="participant">
       <div className="participant-head">
-        <span className="participant-name">{p.name}</span>
+        <span className="participant-name">
+          {p.name}
+          {badge && (
+            <span className={`participant-badge is-${badge.label}`} title={badge.label} aria-label={badge.label}>
+              {badge.symbol}
+            </span>
+          )}
+        </span>
         {p.from && <span className="participant-from">from {p.from}</span>}
       </div>
       {p.role && <p className="participant-role">{p.role}</p>}

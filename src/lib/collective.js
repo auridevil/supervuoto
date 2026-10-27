@@ -8,6 +8,13 @@ export const GROUPS = [
   { kind: 'lens', label: 'lens' },
 ];
 
+// Symbol shown beside the name of the core crew: resident, then host.
+export function badgeFor(p) {
+  if (p.resident) return { symbol: '∴', label: 'resident' };
+  if (p.host) return { symbol: '✦', label: 'host' };
+  return null;
+}
+
 // Episodes a participant appears in — as a DJ (artist) or as the cover
 // photographer (cover credit). Derived from the mix data, newest first.
 export function episodesFor(name, mixtapes) {

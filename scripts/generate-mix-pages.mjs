@@ -348,7 +348,7 @@ for (const entry of mixtapes) {
    itself is still reachable at /#collective.
    ------------------------------------------------------------------ */
 const { PARTICIPANTS } = await import('../src/participants.js');
-const { GROUPS, episodesFor, groupMembers } = await import('../src/lib/collective.js');
+const { GROUPS, badgeFor, episodesFor, groupMembers } = await import('../src/lib/collective.js');
 
 function collectiveHtml({ pageUrl }) {
   const title = 'the collective — supervuoto';
@@ -383,9 +383,13 @@ function collectiveHtml({ pageUrl }) {
         const epsHtml = eps
           .map((ep) => `<a class="ep" href="/mix/${escapeHtml(ep.path)}/">${escapeHtml(ep.label)}</a>`)
           .join('');
+        const badge = badgeFor(p);
+        const badgeHtml = badge
+          ? ` <span class="badge is-${badge.label}" title="${badge.label}" aria-label="${badge.label}">${badge.symbol}</span>`
+          : '';
         return `
       <li class="p">
-        <h3>${escapeHtml(p.name)}${p.from ? ` <span class="from">from ${escapeHtml(p.from)}</span>` : ''}</h3>
+        <h3>${escapeHtml(p.name)}${badgeHtml}${p.from ? ` <span class="from">from ${escapeHtml(p.from)}</span>` : ''}</h3>
         ${p.role ? `<p class="role">${escapeHtml(p.role)}</p>` : ''}
         ${socials ? `<p class="socials">${socials}</p>` : ''}
         ${epsHtml ? `<p class="eps">${epsHtml}</p>` : ''}
@@ -446,6 +450,8 @@ ul{list-style:none;margin:0;padding:0}
 .p{padding:18px 0;border-bottom:1px solid var(--hairline)}
 .p:last-child{border-bottom:0}
 .p h3{margin:0;font-size:1.3rem;font-weight:700}
+.badge{font-weight:400;color:var(--purple);text-shadow:0 0 12px rgba(167,139,250,.5)}
+.badge.is-resident{font-size:1.15em}.badge.is-host{font-size:.7em;vertical-align:.15em}
 .from{font-family:'Major Mono Display',monospace;font-size:.65rem;font-weight:400;
 letter-spacing:.12em;color:rgba(167,139,250,.6);margin-left:.6em}
 .role{font-family:'Major Mono Display',monospace;font-size:.7rem;letter-spacing:.1em;
