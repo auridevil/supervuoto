@@ -1,6 +1,22 @@
 // Small shared pieces of an entry: category badge, artist line, cover figure.
 
 import { InstagramIcon, SoundcloudIcon, MixcloudIcon } from './Icons.jsx';
+import { sigilMarkup } from '../lib/lines.js';
+
+// The line's sigil (same glyphs as the "le linee" document).
+export function LineSigil({ category, className = 'line-sigil' }) {
+  const inner = sigilMarkup(category);
+  if (!inner) return null;
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 100 100"
+      fill="none"
+      aria-hidden="true"
+      dangerouslySetInnerHTML={{ __html: inner }}
+    />
+  );
+}
 
 // Square preview image for an entry (archive rows, cards). Falls back to a
 // category-tinted sigil when no artwork/cover could be resolved.
@@ -19,7 +35,11 @@ export function Thumb({ entry, className = '' }) {
       data-category={entry.category}
       aria-hidden="true"
     >
-      <span className="thumb-sigil">⊘</span>
+      {sigilMarkup(entry.category) ? (
+        <LineSigil category={entry.category} className="thumb-line-sigil" />
+      ) : (
+        <span className="thumb-sigil">⊘</span>
+      )}
     </span>
   );
 }
@@ -28,6 +48,7 @@ export function CategoryBadge({ category }) {
   if (!category) return null;
   return (
     <span className="category-badge" data-category={category}>
+      <LineSigil category={category} />
       {category}
     </span>
   );

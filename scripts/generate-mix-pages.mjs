@@ -15,6 +15,8 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { sigilSvg } from '../src/lib/lines.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const DATA = join(ROOT, 'src', 'data', 'mixtapes.json');
@@ -225,6 +227,7 @@ line-height:1.25;margin:28px 0 6px;font-weight:400}
 .byline{font-size:1.05rem;color:var(--purple);margin:0 0 4px}
 .meta{font-family:'Major Mono Display',monospace;font-size:.78rem;color:var(--dim);
 letter-spacing:.06em;margin:0 0 24px}
+.line-sigil{vertical-align:-3px;margin-right:.45em}
 .cover{width:100%;max-width:420px;height:auto;border:1px solid var(--hairline);
 border-radius:2px;display:block;margin:0 0 20px}
 .lede{font-size:1.08rem;margin:0 0 24px}
@@ -255,7 +258,7 @@ footer{margin-top:48px;font-size:.82rem;color:var(--dim)}
 
   <h1>${escapeHtml(entry.title)}</h1>
   ${byline ? `<p class="byline">${escapeHtml(byline)}</p>` : ''}
-  <p class="meta">${escapeHtml(entry.date)} // ${escapeHtml(entry.category)}</p>
+  <p class="meta">${escapeHtml(entry.date)} // ${sigilSvg(entry.category, { size: 15 })}${escapeHtml(entry.category)}</p>
 
   ${
     entry.cover && entry.cover.src

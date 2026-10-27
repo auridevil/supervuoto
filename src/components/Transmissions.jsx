@@ -3,6 +3,7 @@ import { formatVoidDate } from '../lib/embeds.js';
 import Player from './Player.jsx';
 import {
   CategoryBadge,
+  LineSigil,
   ArtistLine,
   ArtistCredits,
   Cover,
@@ -141,6 +142,7 @@ export default function Transmissions({ entries }) {
               data-category={cat}
               onClick={() => setFilter(cat)}
             >
+              {cat !== 'all' && <LineSigil category={cat} />}
               {cat === 'all' ? 'all frequencies' : cat}
             </button>
           ))}

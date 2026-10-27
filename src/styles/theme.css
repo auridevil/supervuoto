@@ -684,9 +684,20 @@ img, iframe {
   text-transform: lowercase;
 }
 
-/* category badge — color-coded per frequency */
+/* a line's sigil (src/lib/lines.js) — sits before the line name */
+.line-sigil {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+}
+
+/* category badge — color-coded per line, as in the "le linee" document:
+   bit + lab cyan, background radiations + monography violet, alte energie
+   magenta */
 .category-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
   padding: 0.12rem 0.7rem;
   font-family: var(--font-display);
   font-size: 0.6rem;
@@ -698,11 +709,12 @@ img, iframe {
   background: rgba(167, 139, 250, 0.07);
   white-space: nowrap;
 }
-.category-badge[data-category='dark matter'] {
+.category-badge[data-category='alte energie'] {
   border-color: rgba(240, 171, 252, 0.5);
   color: var(--ember-magenta);
   background: rgba(240, 171, 252, 0.07);
 }
+.category-badge[data-category='supervuoto'],
 .category-badge[data-category='lab'] {
   border-color: rgba(103, 232, 249, 0.5);
   color: var(--signal-cyan);
@@ -998,11 +1010,10 @@ div.cover-credit {
   font-size: 1.4rem;
   color: rgba(167, 139, 250, 0.5);
 }
-.thumb--empty[data-category='dark matter'] .thumb-sigil {
-  color: rgba(240, 171, 252, 0.55);
-}
-.thumb--empty[data-category='lab'] .thumb-sigil {
-  color: rgba(103, 232, 249, 0.55);
+.thumb-line-sigil {
+  width: 56%;
+  height: 56%;
+  opacity: 0.75;
 }
 
 .row-thumb {
@@ -1178,6 +1189,9 @@ div.cover-credit {
 }
 
 .filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
   padding: 0.32rem 1.1rem;
   font-family: var(--font-display);
   font-size: 0.66rem;
@@ -1202,11 +1216,12 @@ div.cover-credit {
     0 0 14px rgba(167, 139, 250, 0.25),
     inset 0 0 10px rgba(167, 139, 250, 0.08);
 }
-.filter-chip.is-active[data-category='dark matter'] {
+.filter-chip.is-active[data-category='alte energie'] {
   border-color: var(--ember-magenta);
   background: rgba(240, 171, 252, 0.1);
   box-shadow: 0 0 14px rgba(240, 171, 252, 0.25);
 }
+.filter-chip.is-active[data-category='supervuoto'],
 .filter-chip.is-active[data-category='lab'] {
   border-color: var(--signal-cyan);
   background: rgba(103, 232, 249, 0.1);

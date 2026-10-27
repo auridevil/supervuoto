@@ -9,7 +9,7 @@
  *
  *   ## Mixtape Title
  *   - date: 2026-01-13
- *   - category: dark matter            (optional; default "supervuoto")
+ *   - category: background radiations  (optional; default "supervuoto")
  *   - artist: Artist Name              (optional)
  *   - artist-instagram: https://...    (optional)
  *   - artist-soundcloud: https://...   (optional)

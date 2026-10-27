@@ -12,7 +12,7 @@ Append an entry to `content/mixtapes.md`. One `## ` heading per entry:
 ## Mixtape Title
 
 - date: 2026-01-13
-- category: dark matter
+- category: background radiations
 - artist: Artist Name
 - artist-instagram: https://www.instagram.com/artist/
 - artist-soundcloud: https://soundcloud.com/artist
@@ -33,9 +33,11 @@ Rules:
 - `youtube` / `soundcloud` / `mixcloud` — public page URLs; at least one is
   required, all three may be present. Embeds are derived automatically and the
   player shows a tab per platform.
-- `category` — optional, defaults to `supervuoto`. Current frequencies:
-  `supervuoto`, `dark matter`, `lab` — any new value just works and shows up
-  in the archive filter automatically.
+- `category` — optional, defaults to `supervuoto`. The lines, each with its
+  sigil from the "le linee" document (`src/lib/lines.js`): `supervuoto` (bit,
+  the mother line), `background radiations` (formerly `dark matter`, still
+  accepted), `lab`, `alte energie`, `monography`. Any other value still works
+  and shows up in the archive filter, just without a sigil.
 - `artist`, `artist-instagram`, `artist-soundcloud`, `artist-from` — optional
   artist credit. `artist:` is repeatable for b2b/vs episodes: declare an
   artist, then its social/origin lines, then the next `artist:`. The byline
