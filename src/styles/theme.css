@@ -1658,6 +1658,13 @@ div.cover-credit {
   margin: 0 auto;
   padding: 0 1.5rem clamp(2rem, 5vw, 3.5rem);
   border-top: 1px solid var(--hairline-soft);
+  text-align: center;
+}
+/* centred like the about + join blocks either side of it */
+.collective .section-head {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .collective-button {
@@ -1706,6 +1713,7 @@ div.cover-credit {
   max-width: 34rem;
   max-height: 85vh;
   overflow-y: auto;
+  text-align: left; /* rendered inside the centred .collective section */
   padding: clamp(1.8rem, 4vw, 2.8rem);
   background: linear-gradient(160deg, rgba(17, 10, 38, 0.96), rgba(5, 2, 8, 0.98));
   border: 1px solid var(--hairline);
@@ -1874,7 +1882,8 @@ div.cover-credit {
   }
   .featured,
   .archive,
-  .statement {
+  .statement,
+  .collective {
     padding-left: 1rem;
     padding-right: 1rem;
   }
