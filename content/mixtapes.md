@@ -13,13 +13,14 @@ cover-credit-url, tags — then free description paragraphs.
 - artist: alemcd
 - artist-instagram: https://www.instagram.com/mcd_ale/
 - artist-soundcloud: https://soundcloud.com/mcd
+- artist-from: italy
 - soundcloud: https://soundcloud.com/supervuoto/cumino
 - cover: /covers/ep09-cumino.jpg
 - cover-credit: aurelianoelmozzo
 - cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
-- tags: arabic electronic, acid, electro, techno, ambient
+- tags: arabic electronic, acid, electro, techno
 
-Heat, sand and spice. The hour opens on dusty Arab-electronic grooves — hand drums, long drones, voices calling across the dunes — then the air dries out and it slides into acid lines, cold electro and hypnotic techno, sinking at the end somewhere between deep water and a broken ambient dream. A pinch of cumin in everything.
+Heat, sand and spice. Dusty Arab-electronic grooves drift into acid, cold electro and hypnotic techno. A pinch of cumin in everything.
 
 ### elmozzo
 

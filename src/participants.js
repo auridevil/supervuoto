@@ -79,6 +79,7 @@ export const PARTICIPANTS = [
     instagram: 'https://www.instagram.com/mcd_ale/',
     soundcloud: 'https://soundcloud.com/mcd',
     mixcloud: null,
+    from: 'italy',
   },
   {
     name: 'ilmagofrensis',
