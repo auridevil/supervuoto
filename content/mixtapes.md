@@ -5,6 +5,54 @@ Fields: date (required), category, artist, artist-instagram, artist-soundcloud,
 youtube / soundcloud / mixcloud (at least one), cover, cover-credit,
 cover-credit-url, tags — then free description paragraphs.
 
+## Supervuoto Episode 09 BIT - Cumino
+
+- date: 2026-10-23
+- category: supervuoto
+- artist: elmozzo
+- artist: alemcd
+- artist-instagram: https://www.instagram.com/mcd_ale/
+- artist-soundcloud: https://soundcloud.com/mcd
+- soundcloud: https://soundcloud.com/supervuoto/cumino
+- cover: /covers/ep09-cumino.jpg
+- cover-credit: aurelianoelmozzo
+- cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
+- tags: arabic electronic, acid, electro, techno, ambient
+
+Heat, sand and spice. The hour opens on dusty Arab-electronic grooves — hand drums, long drones, voices calling across the dunes — then the air dries out and it slides into acid lines, cold electro and hypnotic techno, sinking at the end somewhere between deep water and a broken ambient dream. A pinch of cumin in everything.
+
+### elmozzo
+
+- Muslimgauze - Lapis Lazuli
+- Kabylie Minogue - Pyjama Bazaar
+- James Organ - Muuden (Sama' Abdulhadi Remix)
+- Acid Arab - Ya Mahla (feat. Wael Alkak)
+- Merkaba - Divine Mother Tree
+- Muslimgauze - Masawi Wife & Child
+- Sumiruna vs Methodius - Jeopardy
+- Taxi Kebab - Wana
+- Polygonia - Vespula Pensylvanica
+- Kabylie Minogue - Progressive France
+- Sama' Abdulhadi & Walaa Sbait - Well Fee
+- PTU - Remote Flow Dynamics
+- Skrillex & Nai Barghouti - XENA
+
+### alemcd
+
+- Masomenos - G 3rd Eye
+- Nicolas Jaar - Mi Mujer
+- Ricardo Villalobos - Fizheuer Zieheuer
+- The Higher Intelligence Agency - Ketamine Entity
+- Acid Arab - Theme
+- Forest Drive West - Dualism
+- Drexciya - Wavejumper
+- Matthias - Mugalak
+- Moonee - Zona Norte
+- Etienne Jaumet - The Cheikh Arrives
+- S.O.N.S - Crystal Rhythms
+- Persian - Space Within Art (Picasso Abstract Groove Remix)
+- Aphex Twin - T16.5 MADMA with nastya
+
 ## Supervuoto Episode 08 BIT - Symphony for a Cloud
 
 - date: 2026-10-09
