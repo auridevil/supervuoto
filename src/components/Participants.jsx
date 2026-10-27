@@ -25,10 +25,11 @@ function episodesFor(name) {
     });
 }
 
-// Residents first, then by most recent episode (newest first); anyone with no
-// episode goes last. Ties keep the order of PARTICIPANTS.
+// Residents first, then hosts, then by most recent episode (newest first);
+// anyone with no episode goes last. Ties keep the order of PARTICIPANTS.
 function lastMixDate(p) {
   if (p.resident) return '9999';
+  if (p.host) return '9998';
   return episodesFor(p.name).reduce((max, ep) => (ep.date > max ? ep.date : max), '');
 }
 

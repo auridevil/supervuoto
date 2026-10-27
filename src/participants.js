@@ -1,7 +1,8 @@
 // The voices behind supervuoto. Add a participant here and they appear in the
 // "collective" modal. `kind` groups them: 'dj' (transmitters) then 'lens'
 // (photographers). `resident: true` marks someone on every episode (no per-
-// episode links shown). Episode links are derived from the mix data by name.
+// episode links shown). `host: true` pins someone right after the residents,
+// keeping their episode links. Episode links are derived from the mix data by name.
 // Any field except `name` and `kind` is optional.
 export const PARTICIPANTS = [
   {
@@ -11,6 +12,16 @@ export const PARTICIPANTS = [
     role: 'founder · resident transmitter',
     instagram: 'https://www.instagram.com/supervuoto_/',
     soundcloud: 'https://soundcloud.com/supervuoto',
+    mixcloud: null,
+    from: 'italy',
+  },
+  {
+    name: 'raja',
+    kind: 'dj',
+    host: true,
+    role: 'supervuoto parties host',
+    instagram: 'https://www.instagram.com/giacomocagnotto/',
+    soundcloud: 'https://soundcloud.com/giacomo-cagnotto',
     mixcloud: null,
     from: 'italy',
   },
@@ -55,20 +66,19 @@ export const PARTICIPANTS = [
     from: 'italy',
   },
   {
-    name: 'raja',
-    kind: 'dj',
-    instagram: 'https://www.instagram.com/giacomocagnotto/',
-    soundcloud: 'https://soundcloud.com/giacomo-cagnotto',
-    mixcloud: null,
-    from: 'italy',
-  },
-  {
     name: 'manu',
     kind: 'dj',
     instagram: 'https://www.instagram.com/manubergese/',
     soundcloud: 'https://soundcloud.com/odorerumanu',
     mixcloud: 'https://www.mixcloud.com/odoreru_manu/',
     from: 'japan',
+  },
+  {
+    name: 'alemcd',
+    kind: 'dj',
+    instagram: 'https://www.instagram.com/mcd_ale/',
+    soundcloud: 'https://soundcloud.com/mcd',
+    mixcloud: null,
   },
   {
     name: 'ilmagofrensis',
