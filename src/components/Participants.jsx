@@ -2,43 +2,10 @@ import { useEffect, useState } from 'react';
 import mixtapes from '../data/mixtapes.json';
 import { PARTICIPANTS } from '../participants.js';
 import { InstagramIcon, SoundcloudIcon, MixcloudIcon } from './Icons.jsx';
-
-const GROUPS = [
-  { kind: 'dj', label: 'transmitters' },
-  { kind: 'lens', label: 'lens' },
-];
-
-// Episodes a participant appears in — as a DJ (artist) or as the cover
-// photographer (cover credit). Derived from the mix data, newest first.
-function episodesFor(name) {
-  const key = name.toLowerCase();
-  return mixtapes
-    .filter(
-      (e) =>
-        (e.artists || []).some((a) => a.name.toLowerCase() === key) ||
-        (e.cover?.credit || '').toLowerCase() === key
-    )
-    .map((e) => {
-      const num = (e.title.match(/episode\s+(\d+)/i) || [])[1];
-      const name = (e.title.split(/BIT\s*-\s*/i)[1] || e.title).trim();
-      return { id: e.id, date: e.date, label: num ? `ep${num} · ${name}` : name };
-    });
-}
-
-// Residents first, then hosts, then by most recent episode (newest first);
-// anyone with no episode goes last. Ties keep the order of PARTICIPANTS.
-function lastMixDate(p) {
-  if (p.resident) return '9999';
-  if (p.host) return '9998';
-  return episodesFor(p.name).reduce((max, ep) => (ep.date > max ? ep.date : max), '');
-}
-
-function byLastMix(a, b) {
-  return lastMixDate(b).localeCompare(lastMixDate(a));
-}
+import { GROUPS, episodesFor, groupMembers } from '../lib/collective.js';
 
 function Participant({ p, onNavigate }) {
-  const episodes = p.resident ? [] : episodesFor(p.name);
+  const episodes = p.resident ? [] : episodesFor(p.name, mixtapes);
   return (
     <li className="participant">
       <div className="participant-head">
@@ -118,9 +85,7 @@ function Modal({ onClose, onNavigate }) {
           new signals welcome.
         </p>
         {GROUPS.map((group) => {
-          const members = PARTICIPANTS.filter((p) => p.kind === group.kind).sort(
-            byLastMix
-          );
+          const members = groupMembers(PARTICIPANTS, group.kind, mixtapes);
           if (members.length === 0) return null;
           return (
             <div className="participant-group" key={group.kind}>

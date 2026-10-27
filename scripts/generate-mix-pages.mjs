@@ -341,28 +341,173 @@ for (const entry of mixtapes) {
   );
 }
 
-// /collective/ — hardlink that opens the collective modal (#collective).
-writeRedirectPage({
-  dir: 'collective',
-  title: 'the collective — supervuoto',
-  description:
-    'The voices behind supervuoto — resident and guest transmitters, and the lens.',
-  pageUrl: `${SITE_URL}/collective/`,
-  image: DEFAULT_IMAGE,
-  target: '/#collective',
-  linkText: 'entering the collective',
-});
-console.log('[mix-pages] generated /collective/ hardlink');
+/* ------------------------------------------------------------------
+   /collective/ — crawlable page listing everyone in the collective, with
+   their socials and links to the episode detail pages. Same people and
+   order as the app's modal (both use src/lib/collective.js); the modal
+   itself is still reachable at /#collective.
+   ------------------------------------------------------------------ */
+const { PARTICIPANTS } = await import('../src/participants.js');
+const { GROUPS, episodesFor, groupMembers } = await import('../src/lib/collective.js');
+
+function collectiveHtml({ pageUrl }) {
+  const title = 'the collective — supervuoto';
+  const description =
+    'The voices behind supervuoto — resident, host and guest transmitters, and the lens.';
+
+  const SOCIALS = ['instagram', 'soundcloud', 'mixcloud'];
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'RadioSeries',
+    name: 'supervuoto',
+    url: `${SITE_URL}/`,
+    actor: PARTICIPANTS.map((p) => ({
+      '@type': 'Person',
+      name: p.name,
+      ...(p.role ? { jobTitle: p.role } : {}),
+      sameAs: SOCIALS.map((k) => p[k]).filter(Boolean),
+    })),
+  };
+
+  const groupsHtml = GROUPS.map((group) => {
+    const members = groupMembers(PARTICIPANTS, group.kind, mixtapes);
+    if (members.length === 0) return '';
+    const items = members
+      .map((p) => {
+        const socials = SOCIALS.filter((k) => p[k])
+          .map((k) => `<a href="${escapeHtml(p[k])}" rel="noopener">${k}</a>`)
+          .join('');
+        const eps = p.resident
+          ? []
+          : episodesFor(p.name, mixtapes).filter((ep) => ep.path);
+        const epsHtml = eps
+          .map((ep) => `<a class="ep" href="/mix/${escapeHtml(ep.path)}/">${escapeHtml(ep.label)}</a>`)
+          .join('');
+        return `
+      <li class="p">
+        <h3>${escapeHtml(p.name)}${p.from ? ` <span class="from">from ${escapeHtml(p.from)}</span>` : ''}</h3>
+        ${p.role ? `<p class="role">${escapeHtml(p.role)}</p>` : ''}
+        ${socials ? `<p class="socials">${socials}</p>` : ''}
+        ${epsHtml ? `<p class="eps">${epsHtml}</p>` : ''}
+      </li>`;
+      })
+      .join('');
+    return `
+    <section>
+      <h2>⟢ ${escapeHtml(group.label)}</h2>
+      <ul>${items}
+      </ul>
+    </section>`;
+  }).join('\n');
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>${escapeHtml(title)}</title>
+<meta name="description" content="${escapeHtml(description)}" />
+<link rel="canonical" href="${escapeHtml(pageUrl)}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="supervuoto" />
+<meta property="og:title" content="${escapeHtml(title)}" />
+<meta property="og:description" content="${escapeHtml(description)}" />
+<meta property="og:url" content="${escapeHtml(pageUrl)}" />
+<meta property="og:image" content="${escapeHtml(DEFAULT_IMAGE)}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="${escapeHtml(title)}" />
+<meta name="twitter:description" content="${escapeHtml(description)}" />
+<meta name="twitter:image" content="${escapeHtml(DEFAULT_IMAGE)}" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+<style>
+:root{--void:#050208;--purple:#a78bfa;--cyan:#67e8f9;--white:#ece9f7;
+--hairline:rgba(167,139,250,.18);--dim:rgba(236,233,247,.55)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--white);
+font-family:'Space Grotesk',sans-serif;line-height:1.6;
+background-image:radial-gradient(circle at 20% 10%,rgba(167,139,250,.08),transparent 45%),
+radial-gradient(circle at 85% 75%,rgba(103,232,249,.06),transparent 40%)}
+.wrap{max-width:820px;margin:0 auto;padding:40px 20px 80px}
+a{color:var(--cyan)}
+.home{font-family:'Major Mono Display',monospace;font-size:.85rem;color:var(--purple);
+text-decoration:none;letter-spacing:.05em}
+h1{font-family:'Major Mono Display',monospace;font-size:clamp(1.5rem,5vw,2.4rem);
+line-height:1.25;margin:28px 0 6px;font-weight:400}
+.lede{font-size:1.05rem;color:var(--dim);margin:0 0 12px}
+.open{display:inline-block;margin:0 0 8px;font-size:.92rem}
+section h2{font-family:'Major Mono Display',monospace;font-weight:400;font-size:.9rem;
+color:var(--purple);letter-spacing:.18em;margin:40px 0 8px}
+ul{list-style:none;margin:0;padding:0}
+.p{padding:18px 0;border-bottom:1px solid var(--hairline)}
+.p:last-child{border-bottom:0}
+.p h3{margin:0;font-size:1.3rem;font-weight:700}
+.from{font-family:'Major Mono Display',monospace;font-size:.65rem;font-weight:400;
+letter-spacing:.12em;color:rgba(167,139,250,.6);margin-left:.6em}
+.role{font-family:'Major Mono Display',monospace;font-size:.7rem;letter-spacing:.1em;
+color:rgba(103,232,249,.75);margin:4px 0 0}
+.socials{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 0;
+font-family:'Major Mono Display',monospace;font-size:.72rem;letter-spacing:.1em}
+.eps{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.ep{font-family:'Major Mono Display',monospace;font-size:.62rem;letter-spacing:.08em;
+text-decoration:none;color:rgba(103,232,249,.85);border:1px solid rgba(103,232,249,.35);
+border-radius:999px;padding:3px 10px}
+.ep:hover{border-color:var(--cyan)}
+footer{margin-top:48px;font-size:.82rem;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="home" href="/">∴ supervuoto</a>
+
+  <h1>the collective</h1>
+  <p class="lede">Voices that have passed through the super-void — resident, host and
+  guest transmitters, and the lens behind the covers. The array is open — new signals welcome.</p>
+  <a class="open" href="/#collective">▶ open in the archive</a>
+${groupsHtml}
+
+  <footer>
+    Broadcast on <a href="https://backintown.it/radio-player/" rel="noopener">back in town radio</a>
+    — friday 18–19 + saturday 21–22 (Italy).
+    <br />
+    <a href="/">← back to the archive</a>
+  </footer>
+</div>
+<script>
+try {
+  fetch(${JSON.stringify(GOATCOUNTER)} + '?p=' + encodeURIComponent(location.pathname),
+        { mode: 'no-cors', keepalive: true });
+} catch (e) {}
+</script>
+</body>
+</html>
+`;
+}
+
+const collectiveUrl = `${SITE_URL}/collective/`;
+mkdirSync(join(DIST, 'collective'), { recursive: true });
+writeFileSync(
+  join(DIST, 'collective', 'index.html'),
+  collectiveHtml({ pageUrl: collectiveUrl }),
+  'utf8'
+);
+console.log('[mix-pages] generated /collective/ page');
 
 console.log(`[mix-pages] generated ${generated} share page(s) under dist/mix/`);
 
 // sitemap.xml — every indexable URL, so search engines can find the episodes
 // without crawling the hash routes (which they never see).
-// Only the detail pages go in: /mix/<id>/ and /collective/ are redirects, which
-// a crawler follows rather than indexes.
+// Only real pages go in: the /mix/<id>/ stubs are redirects, which a crawler
+// follows rather than indexes.
 const today = new Date().toISOString().slice(0, 10);
+const latestMix = mixtapes.reduce((max, m) => (m.date > max ? m.date : max), '');
 const urls = [
   { loc: `${SITE_URL}/`, lastmod: today, priority: '1.0' },
+  { loc: collectiveUrl, lastmod: latestMix, priority: '0.6' },
   ...detailUrls,
 ];
 
