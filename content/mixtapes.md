@@ -20,9 +20,9 @@ cover-credit-url, tags — then free description paragraphs.
 - cover: /covers/br01-observers-of-the-stars.jpg
 - cover-credit: nntnntnnt_
 - cover-credit-url: https://www.instagram.com/nntnntnnt_/
-- tags: ambient, drone, experimental
+- tags: ambient, black metal, experimental
 
-The first transmission of background radiation. Slow, cold and wide open: drones, ambient and distant signals for watching the sky with the lights off.
+The first transmission of background radiation. Bienoise opens with a dedication to Janne Wirman, keyboardist of Children of Bodom. Then Inedia (elmozzo + bozzystep) answer with a mix of black metal intros: the slow, cold minutes before the storm.
 
 ## Supervuoto Episode 09 BIT - Cumino
 
