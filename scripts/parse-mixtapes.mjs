@@ -82,10 +82,11 @@ function slugify(title) {
 }
 
 // "Supervuoto Episode 07 BIT - Parental Advisory" -> "parental-advisory"
+// "Background Radiation 01 - Observers of the Stars" -> "observers-of-the-stars"
 // Used for the crawlable detail page at /mix/<line>/<title>/.
 function shortSlug(title) {
   const stripped = String(title).replace(
-    /^\s*supervuoto\s+episode\s+\d+\s*(bit)?\s*[-–—]\s*/i,
+    /^\s*(supervuoto\s+episode\s+\d+\s*(bit)?|background\s+radiation\s+\d+)\s*[-–—]\s*/i,
     ''
   );
   return slugify(stripped) || slugify(title);

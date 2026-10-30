@@ -82,6 +82,14 @@ export const PARTICIPANTS = [
     from: 'italy',
   },
   {
+    name: 'bienoise',
+    kind: 'dj',
+    instagram: null,
+    soundcloud: 'https://soundcloud.com/bienoise',
+    mixcloud: null,
+    from: 'italy',
+  },
+  {
     name: 'ilmagofrensis',
     kind: 'lens',
     role: 'supervuoto artwork',

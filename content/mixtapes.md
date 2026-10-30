@@ -5,6 +5,25 @@ Fields: date (required), category, artist, artist-instagram, artist-soundcloud,
 youtube / soundcloud / mixcloud (at least one), cover, cover-credit,
 cover-credit-url, tags — then free description paragraphs.
 
+## Background Radiation 01 - Observers of the Stars
+
+- date: 2026-10-30
+- category: background radiation
+- artist: bienoise
+- artist-soundcloud: https://soundcloud.com/bienoise
+- artist-from: italy
+- artist: elmozzo
+- artist: bozzystep
+- artist-instagram: https://www.instagram.com/samuelebozzy/
+- artist-from: italy
+- soundcloud: https://soundcloud.com/supervuoto/supervuoto-background
+- cover: /covers/br01-observers-of-the-stars.jpg
+- cover-credit: nntnntnnt_
+- cover-credit-url: https://www.instagram.com/nntnntnnt_/
+- tags: ambient, drone, experimental
+
+The first transmission of background radiation. Slow, cold and wide open: drones, ambient and distant signals for watching the sky with the lights off.
+
 ## Supervuoto Episode 09 BIT - Cumino
 
 - date: 2026-10-23

@@ -27,12 +27,13 @@ export function episodesFor(name, mixtapes) {
     )
     .map((e) => {
       const num = (e.title.match(/episode\s+(\d+)/i) || [])[1];
-      const name = (e.title.split(/BIT\s*-\s*/i)[1] || e.title).trim();
+      const br = (e.title.match(/^background\s+radiation\s+(\d+)\s*-\s*(.+)$/i) || []);
+      const name = (e.title.split(/BIT\s*-\s*/i)[1] || br[2] || e.title).trim();
       return {
         id: e.id,
         path: e.path,
         date: e.date,
-        label: num ? `ep${num} · ${name}` : name,
+        label: num ? `ep${num} · ${name}` : br[1] ? `br${br[1]} · ${name}` : name,
       };
     });
 }
