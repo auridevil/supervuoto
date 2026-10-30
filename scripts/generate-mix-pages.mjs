@@ -358,7 +358,7 @@ function collectiveHtml({ pageUrl }) {
   const description =
     'The voices behind supervuoto — resident, host and guest transmitters, and the lens.';
 
-  const SOCIALS = ['instagram', 'soundcloud', 'mixcloud'];
+  const SOCIALS = ['instagram', 'soundcloud', 'mixcloud', 'bandcamp', 'website'];
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'RadioSeries',

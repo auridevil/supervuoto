@@ -38,7 +38,8 @@ Rules:
   the mother line), `background radiation` (formerly `dark matter`, still
   accepted), `lab`, `alte energie`, `monography`. Any other value still works
   and shows up in the archive filter, just without a sigil.
-- `artist`, `artist-instagram`, `artist-soundcloud`, `artist-from` — optional
+- `artist`, `artist-instagram`, `artist-soundcloud`, `artist-mixcloud`,
+  `artist-bandcamp`, `artist-website`, `artist-from` — optional
   artist credit. `artist:` is repeatable for b2b/vs episodes: declare an
   artist, then its social/origin lines, then the next `artist:`. The byline
   shows only the names ("elmozzo vs bozzystep"); socials and origin render as

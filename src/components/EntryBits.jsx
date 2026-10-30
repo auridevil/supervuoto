@@ -72,7 +72,7 @@ export function ArtistLine({ artists }) {
 // Footer of an entry's detail: per-artist credit lines (socials, origin).
 export function ArtistCredits({ artists }) {
   const credited = (artists || []).filter(
-    (a) => a.instagram || a.soundcloud || a.from
+    (a) => a.instagram || a.soundcloud || a.mixcloud || a.bandcamp || a.website || a.from
   );
   if (credited.length === 0) return null;
   return (
@@ -108,6 +108,26 @@ export function ArtistCredits({ artists }) {
               rel="noreferrer"
             >
               <MixcloudIcon /> mixcloud ↗
+            </a>
+          )}
+          {artist.bandcamp && (
+            <a
+              className="artist-link"
+              href={artist.bandcamp}
+              target="_blank"
+              rel="noreferrer"
+            >
+              bandcamp ↗
+            </a>
+          )}
+          {artist.website && (
+            <a
+              className="artist-link"
+              href={artist.website}
+              target="_blank"
+              rel="noreferrer"
+            >
+              website ↗
             </a>
           )}
           {artist.from && <span className="credit-from">from {artist.from}</span>}

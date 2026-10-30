@@ -84,9 +84,11 @@ export const PARTICIPANTS = [
   {
     name: 'bienoise',
     kind: 'dj',
-    instagram: null,
+    instagram: 'https://www.instagram.com/bienoise/',
     soundcloud: 'https://soundcloud.com/bienoise',
     mixcloud: null,
+    bandcamp: 'https://bienoise.bandcamp.com/',
+    website: 'https://www.bienoise.com/',
     from: 'italy',
   },
   {

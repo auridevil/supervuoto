@@ -12,7 +12,8 @@
  *   - category: background radiation   (optional; default "supervuoto")
  *   - artist: Artist Name              (optional)
  *   - artist-instagram: https://...    (optional)
- *   - artist-soundcloud: https://...   (optional)
+ *   - artist-soundcloud: https://...   (optional; also artist-mixcloud,
+ *                                       artist-bandcamp, artist-website)
  *   - youtube: https://www.youtube.com/watch?v=xxxx     (one or more
  *   - soundcloud: https://soundcloud.com/...             platform links;
  *   - mixcloud: https://www.mixcloud.com/...             at least one required)
@@ -58,6 +59,8 @@ const FIELD_NAMES = [
   'artist-instagram',
   'artist-soundcloud',
   'artist-mixcloud',
+  'artist-bandcamp',
+  'artist-website',
   'artist-from',
   'wanderer',
   'youtube',
@@ -147,6 +150,8 @@ function parse(markdown) {
             instagram: null,
             soundcloud: null,
             mixcloud: null,
+            bandcamp: null,
+            website: null,
             from: null,
           });
         continue;
@@ -155,6 +160,8 @@ function parse(markdown) {
         name === 'artist-instagram' ||
         name === 'artist-soundcloud' ||
         name === 'artist-mixcloud' ||
+        name === 'artist-bandcamp' ||
+        name === 'artist-website' ||
         name === 'artist-from'
       ) {
         const last = current.artists[current.artists.length - 1];
@@ -167,7 +174,7 @@ function parse(markdown) {
         if (name === 'artist-from') {
           if (value) last.from = value;
         } else if (isUrl(value)) {
-          const key = name.slice('artist-'.length); // instagram | soundcloud | mixcloud
+          const key = name.slice('artist-'.length); // instagram | soundcloud | mixcloud | bandcamp | website
           last[key] = value;
         }
         continue;

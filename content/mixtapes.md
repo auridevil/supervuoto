@@ -10,7 +10,10 @@ cover-credit-url, tags — then free description paragraphs.
 - date: 2026-10-30
 - category: background radiation
 - artist: bienoise
+- artist-instagram: https://www.instagram.com/bienoise/
 - artist-soundcloud: https://soundcloud.com/bienoise
+- artist-bandcamp: https://bienoise.bandcamp.com/
+- artist-website: https://www.bienoise.com/
 - artist-from: italy
 - artist: elmozzo
 - artist: bozzystep

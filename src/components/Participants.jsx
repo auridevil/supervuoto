@@ -37,6 +37,16 @@ function Participant({ p, onNavigate }) {
             <MixcloudIcon /> mixcloud ↗
           </a>
         )}
+        {p.bandcamp && (
+          <a href={p.bandcamp} target="_blank" rel="noreferrer">
+            bandcamp ↗
+          </a>
+        )}
+        {p.website && (
+          <a href={p.website} target="_blank" rel="noreferrer">
+            website ↗
+          </a>
+        )}
       </div>
       {episodes.length > 0 && (
         <div className="participant-eps">
