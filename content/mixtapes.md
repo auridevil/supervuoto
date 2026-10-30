@@ -36,6 +36,7 @@ The first transmission of background radiation. Bienoise opens with a dedication
 - artist-instagram: https://www.instagram.com/mcd_ale/
 - artist-soundcloud: https://soundcloud.com/mcd
 - artist-from: italy
+- wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/ti3ne63ltl0cn2y7bokv2/Supervuoto-Episodio-9-Elmozzo-VS-AleMCD-Cumino-192.mp3?rlkey=s8e3vq85b4gujcjeyuq2f7tjz&st=2aw2d8kz&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/cumino
 - cover: /covers/ep09-cumino.jpg
 - cover-credit: aurelianoelmozzo
@@ -86,6 +87,7 @@ Heat, sand and spice. Dusty Arab-electronic grooves drift into acid, cold electr
 - artist-soundcloud: https://soundcloud.com/odorerumanu
 - artist-mixcloud: https://www.mixcloud.com/odoreru_manu/
 - artist-from: japan
+- wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/oa88jdbfro9xvreipfy22/Supervuoto-Episodio-8-Elmozzo-VS-Manu-Symphony-for-a-Cloud-192.mp3?rlkey=ylcz95l3bisqyajl2nvro44lx&st=37z3wbnu&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/symphonyforacloud
 - cover: /covers/ep08-symphony-for-a-cloud.jpg
 - cover-credit: aurelianoelmozzo
@@ -130,6 +132,7 @@ An hour that never quite lands. Voices in five languages carried over dust and d
 - artist: elmozzo
 - artist: celest
 - artist-from: italy
+- wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/8ci94js8c9l9i68zedo4h/Supervuoto-Episodio-7-Elmozzo-VS-Celest-Parental-Advisory-192.mp3?rlkey=l88z8yikl0jgx4j6bjweqv19i&st=d920kqey&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/parentaladvisory
 - cover: /covers/ep07-parental-advisory.jpg
 - cover-credit: aurelianoelmozzo
@@ -177,6 +180,7 @@ Sixty minutes that stay low to the ground. Worn soul loops and drums dragging ju
 - artist: bozzystep
 - artist-instagram: https://www.instagram.com/samuelebozzy/
 - artist-from: italy
+- wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/ps03qu03qmkkzj8m44l2o/Supervuoto-Episodio-6-Elmozzo-VS-Bozzystep-Agrumi-192.mp3?rlkey=7zguwf8vjhqseh0b5yyggmvor&st=65622jgy&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/agrumi
 - cover: /covers/ep06-agrumi.jpg
 - cover-credit: aurelianoelmozzo
