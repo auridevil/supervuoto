@@ -692,7 +692,7 @@ img, iframe {
 }
 
 /* category badge — color-coded per line, as in the "le linee" document:
-   bit + lab cyan, background radiations + monography violet, alte energie
+   bit + lab cyan, background radiation + monography violet, alte energie
    magenta */
 .category-badge {
   display: inline-flex;

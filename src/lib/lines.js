@@ -3,13 +3,14 @@
 // the build scripts (detail pages) draw exactly the same marks.
 //
 // `category` in content/mixtapes.md picks the line. `supervuoto` is the
-// mother line, bit; `dark matter` is the old name of background radiations.
+// mother line, bit; `dark matter` is the old name of background radiation
+// (and `background radiations`, plural, a short-lived misspelling).
 
 const SIGILS = {
   bit: `<circle cx="50" cy="50" r="38" stroke="#ece9f7" stroke-width="3.5"/>
 <line x1="6" y1="50" x2="94" y2="50" stroke="#67e8f9" stroke-width="3.5" stroke-linecap="round"/>
 <circle cx="50" cy="50" r="5" fill="#67e8f9"/>`,
-  'background radiations': `<circle cx="50" cy="50" r="38" stroke="#a78bfa" stroke-width="3" opacity="0.55"/>
+  'background radiation': `<circle cx="50" cy="50" r="38" stroke="#a78bfa" stroke-width="3" opacity="0.55"/>
 <circle cx="50" cy="50" r="26" fill="#0b0618" stroke="#a78bfa" stroke-width="3.5"/>`,
   lab: `<circle cx="50" cy="50" r="38" stroke="#ece9f7" stroke-width="3.5"/>
 <ellipse cx="50" cy="50" rx="44" ry="17" stroke="#67e8f9" stroke-width="2.5" transform="rotate(-30 50 50)" opacity="0.85"/>
@@ -22,7 +23,8 @@ const SIGILS = {
 
 const ALIASES = {
   supervuoto: 'bit',
-  'dark matter': 'background radiations',
+  'dark matter': 'background radiation',
+  'background radiations': 'background radiation',
 };
 
 // category -> line key, or null if it isn't one of the five lines
