@@ -779,7 +779,9 @@ img, iframe {
 .artist-credit {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  /* center, not baseline: an icon link's baseline is its svg's bottom edge,
+     which lifted icon links above the plain-text ones */
+  align-items: center;
   gap: 0.3rem 1rem;
 }
 .credit-name {
