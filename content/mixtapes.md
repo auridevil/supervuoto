@@ -134,6 +134,7 @@ An hour that never quite lands. Voices in five languages carried over dust and d
 - artist-from: italy
 - wanderer: https://auridevil.github.io/supervuoto-wanderer/?track=https://www.dropbox.com/scl/fi/8ci94js8c9l9i68zedo4h/Supervuoto-Episodio-7-Elmozzo-VS-Celest-Parental-Advisory-192.mp3?rlkey=l88z8yikl0jgx4j6bjweqv19i&st=d920kqey&dl=0
 - soundcloud: https://soundcloud.com/supervuoto/parentaladvisory
+- mixcloud: https://www.mixcloud.com/supervuoto/supervuoto-bit-07-parental-advisory-elmozzo-vs-celest/
 - cover: /covers/ep07-parental-advisory.jpg
 - cover-credit: aurelianoelmozzo
 - cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
