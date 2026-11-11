@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<title>SUPERVUOTO — primo set · story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --void-black: #050208;
+    --deep-space: #0b0618;
+    --nebula-purple: #a78bfa;
+    --signal-cyan: #67e8f9;
+    --ember-magenta: #f0abfc;
+    --star-white: #ece9f7;
+    --font-display: 'Major Mono Display', monospace;
+    --font-body: 'Space Grotesk', sans-serif;
+    --hairline: rgba(167, 139, 250, 0.26);
+    --dim: rgba(236, 233, 247, 0.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* IG story 9:16 */
+  .story {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    /* top/bottom padding keeps content clear of the IG story UI overlays */
+    padding: 206px 84px 226px;
+    background: var(--void-black);
+    color: var(--star-white);
+    font-family: var(--font-body);
+    overflow: hidden;
+    isolation: isolate;   /* contain the blend modes to this canvas */
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* the cymatic plate — sand on a vibrating membrane */
+  #plate {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* vignette + fades so the type sits on quiet ground */
+  .veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, var(--void-black) 0%, rgba(5,2,8,0.75) 9%, transparent 19%),
+      linear-gradient(to top, var(--void-black) 0%, rgba(5,2,8,0.8) 8%, transparent 21%),
+      radial-gradient(78% 48% at 50% 44%, transparent 55%, rgba(5,2,8,0.72) 100%);
+  }
+
+  /* film grain, over everything */
+  .grain {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    opacity: 0.2;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  }
+
+  /* Content sits above the veil (z 1). The names carry their own z-index rather
+     than taking it from .lineup, which would make .lineup a stacking context and
+     kill their blend against the plate. */
+  .story > .head,
+  .story > .meta,
+  .story > .foot { position: relative; z-index: 2; }
+  .story > .spacer,
+  .story > .lineup { position: relative; }
+
+  /* ---------- HEADER ---------- */
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .head-sigil { width: 40px; height: 40px; flex: none; opacity: 0.9; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 34px;
+    letter-spacing: 0.38em;
+    text-transform: lowercase;
+    margin: 0;
+  }
+
+  /* ---------- WHEN ---------- */
+  .meta {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    font-family: var(--font-display);
+    font-size: 25px;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+  }
+  .meta .when { color: var(--star-white); }
+  .meta .when .d { color: var(--nebula-purple); }
+  .meta .hours { color: var(--signal-cyan); }
+
+  /* the plate breathes here */
+  .spacer { flex: 1; min-height: 0; }
+
+  /* ---------- LINEUP — overprinted on the plate ---------- */
+  .lineup {
+    margin-bottom: 42px;
+  }
+  .act {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 72px;
+    line-height: 1.26;
+    letter-spacing: 0.01em;
+    text-transform: lowercase;
+    margin: 0;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+    mix-blend-mode: difference;   /* the names eat into the sand */
+  }
+  .act:nth-of-type(1) { color: var(--star-white); }
+  .act:nth-of-type(2) { color: var(--signal-cyan);  padding-left: 58px; }
+  .act:nth-of-type(3) { color: var(--star-white);   padding-left: 116px; }
+  .act:nth-of-type(4) { color: var(--ember-magenta); padding-left: 174px; }
+
+  /* ---------- FOOTER ---------- */
+  .foot {
+    padding-top: 26px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .foot-place {
+    font-family: var(--font-display);
+    font-size: 46px;
+    letter-spacing: 0.07em;
+    text-transform: lowercase;
+    margin: 0 0 8px;
+  }
+  .foot-kind {
+    font-size: 21px;
+    font-weight: 300;
+    letter-spacing: 0.09em;
+    color: var(--dim);
+    margin: 0;
+  }
+  .foot-meta {
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    text-transform: lowercase;
+    line-height: 2.2;
+  }
+  .foot-meta .motto { color: var(--ember-magenta); display: block; }
+  .foot-meta .handle { color: rgba(236, 233, 247, 0.4); display: block; }
+</style>
+</head>
+<body>
+
+<section class="story">
+
+  <canvas id="plate" width="1080" height="1920"></canvas>
+  <div class="veil"></div>
+  <div class="grain"></div>
+
+  <!-- HEADER -->
+  <div class="head">
+    <svg class="head-sigil" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="40" stroke="#ece9f7" stroke-width="4"/>
+      <line x1="16" y1="84" x2="84" y2="16" stroke="#a78bfa" stroke-width="4"/>
+    </svg>
+    <h1 class="wordmark">supervuoto</h1>
+  </div>
+
+  <!-- WHEN -->
+  <div class="meta">
+    <span class="when">lun <span class="d">26</span> ottobre</span>
+    <span class="hours">20.00 — 23.00</span>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- LINEUP -->
+  <div class="lineup">
+    <h2 class="act">luca seoni</h2>
+    <h2 class="act">bozzystep</h2>
+    <h2 class="act">elmozzo</h2>
+    <h2 class="act">raja</h2>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <div>
+      <p class="foot-place">fossano</p>
+      <p class="foot-kind">private party</p>
+    </div>
+    <div class="foot-meta">
+      <span class="motto">contro la perfezione</span>
+      <span class="motto">contro la definizione</span>
+      <span class="handle">supervuoto.org</span>
+    </div>
+  </div>
+
+</section>
+
+<script>
+(function () {
+  const cv = document.getElementById('plate');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+
+  // deterministic noise, so every render of this flyer is the same image
+  let seed = 20261026;
+  function rnd() {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  }
+
+  // the plate: one circle, four standing-wave modes — one per name on the bill
+  const CX = 540, CY = 905, R = 486;
+
+  // Chladni nodal figure of a square plate, sampled inside the circle
+  function chladni(u, v, n, m) {
+    return Math.sin(n * Math.PI * u) * Math.sin(m * Math.PI * v)
+         + Math.sin(m * Math.PI * u) * Math.sin(n * Math.PI * v);
+  }
+
+  const MODES = [
+    { n: 3,  m: 7,  color: [103, 232, 249], target: 15000, sigma: 0.055 }, // cyan
+    { n: 5,  m: 9,  color: [167, 139, 250], target: 15000, sigma: 0.05  }, // purple
+    { n: 2,  m: 11, color: [240, 171, 252], target: 11000, sigma: 0.045 }, // magenta
+    { n: 8,  m: 13, color: [236, 233, 247], target: 13000, sigma: 0.04  }, // white
+  ];
+
+  ctx.fillStyle = '#050208';
+  ctx.fillRect(0, 0, W, H);
+  ctx.globalCompositeOperation = 'lighter';
+
+  for (const mode of MODES) {
+    let placed = 0, tries = 0;
+    const maxTries = mode.target * 90;
+    while (placed < mode.target && tries < maxTries) {
+      tries++;
+      // sample inside the disc
+      const a = rnd() * Math.PI * 2;
+      const rr = Math.sqrt(rnd()) * R;
+      const x = CX + Math.cos(a) * rr;
+      const y = CY + Math.sin(a) * rr;
+
+      const u = (x - (CX - R)) / (2 * R);
+      const v = (y - (CY - R)) / (2 * R);
+      const f = chladni(u, v, mode.n, mode.m);
+
+      // sand collects on the nodal lines, where the plate stands still
+      if (rnd() > Math.exp(-(f * f) / (mode.sigma * mode.sigma))) continue;
+
+      // dissolve towards the rim instead of cutting a hard edge
+      const t = rr / R;
+      const fade = t < 0.72 ? 1 : Math.max(0, 1 - (t - 0.72) / 0.28);
+      if (rnd() > fade * fade) continue;
+
+      const [cr, cg, cb] = mode.color;
+      const grain = 0.3 + rnd() * 0.5;
+      ctx.fillStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' + (0.58 * grain).toFixed(3) + ')';
+      const s = rnd() < 0.06 ? 2.2 : 1.1;
+      ctx.fillRect(x + (rnd() - 0.5), y + (rnd() - 0.5), s, s);
+      placed++;
+    }
+  }
+
+  ctx.globalCompositeOperation = 'source-over';
+
+  // the sigil's circle and slash, blown up to poster scale
+  ctx.strokeStyle = 'rgba(167, 139, 250, 0.3)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.arc(CX, CY, R, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(167, 139, 250, 0.18)';
+  ctx.beginPath();
+  ctx.moveTo(CX - R * 0.707, CY + R * 0.707);
+  ctx.lineTo(CX + R * 0.707, CY - R * 0.707);
+  ctx.stroke();
+
+  // three horizontal slices, knocked out of register — the signal dropping frames
+  const slices = [
+    { y: CY - 322, h: 16, dx: 30 },
+    { y: CY + 74,  h: 10, dx: -44 },
+    { y: CY + 331, h: 22, dx: 22 },
+  ];
+  for (const sl of slices) {
+    const band = ctx.getImageData(0, sl.y, W, sl.h);
+    ctx.fillStyle = '#050208';
+    ctx.fillRect(0, sl.y, W, sl.h);
+    ctx.putImageData(band, sl.dx, sl.y);
+  }
+})();
+</script>
+
+</body>
+</html>

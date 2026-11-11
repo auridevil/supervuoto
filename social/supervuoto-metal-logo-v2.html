@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- supervuoto, black/death metal logo. The circle (⊘) stays the main mark:
+     a thorned ring with the slash as a blade, the wordmark in blackletter
+     across it, thorns growing out of the letters (mirrored, like the genre's
+     symmetric logos). Deterministic.
+     v2: smaller circle, denser and longer thorns, deeper branching, more
+     roots and horns: more black metal.
+     Render with headless Chrome at 2048x2048:
+     #white (white ink, transparent) · #black (black ink, transparent) · #preview (white on black) -->
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: transparent; }
+  canvas { display: block; width: 2048px; height: 2048px; }
+</style>
+</head>
+<body>
+<canvas id="c" width="2048" height="2048"></canvas>
+<script>
+(async function () {
+  const v = location.hash.slice(1) || 'preview';
+  const INK = v === 'black' ? '#000000' : '#ece9f7';
+  if (v === 'preview') document.body.style.background = '#050208';
+
+  await document.fonts.load('400 300px "UnifrakturMaguntia"');
+
+  const S = 2048, CX = S / 2, CY = S / 2;
+  const cv = document.getElementById('c');
+  const ctx = cv.getContext('2d');
+
+  let seed = 66613;
+  const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  const between = (a, b) => a + rnd() * (b - a);
+
+  // a tapered, slightly bent thorn from (x,y) along angle a
+  function thorn(x, y, a, len, w, bend = between(-0.35, 0.35), branches = 1) {
+    const tx = x + Math.cos(a) * len, ty = y + Math.sin(a) * len;
+    const nx = -Math.sin(a), ny = Math.cos(a);
+    const mx = x + Math.cos(a) * len * 0.5 + nx * len * bend * 0.3;
+    const my = y + Math.sin(a) * len * 0.5 + ny * len * bend * 0.3;
+    ctx.beginPath();
+    ctx.moveTo(x + nx * w / 2, y + ny * w / 2);
+    ctx.quadraticCurveTo(mx + nx * w * 0.18, my + ny * w * 0.18, tx, ty);
+    ctx.quadraticCurveTo(mx - nx * w * 0.18, my - ny * w * 0.18, x - nx * w / 2, y - ny * w / 2);
+    ctx.closePath();
+    ctx.fill();
+    // side thorns off the main one
+    if (branches > 0 && len > 60) {
+      const n = rnd() < 0.4 ? 1 : 2;
+      for (let i = 0; i < n; i++) {
+        const t = between(0.3, 0.6);
+        const bx = x + (tx - x) * t + nx * len * bend * 0.12;
+        const by = y + (ty - y) * t + ny * len * bend * 0.12;
+        const side = rnd() < 0.5 ? -1 : 1;
+        thorn(bx, by, a + side * between(0.5, 0.9), len * between(0.25, 0.45), w * 0.45, bend, branches - 1);
+      }
+    }
+  }
+
+  ctx.fillStyle = INK;
+  ctx.strokeStyle = INK;
+
+  // ---- the ring: the main mark ----
+  const R = 430, RW = 40;
+  ctx.lineWidth = RW;
+  ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.stroke();
+  // a thin inner ring, like an engraved seal
+  ctx.lineWidth = 8;
+  ctx.beginPath(); ctx.arc(CX, CY, R - 56, 0, Math.PI * 2); ctx.stroke();
+
+  // thorns around the ring, mirrored left/right
+  const N = 64;
+  for (let i = 0; i < N; i++) {
+    const a = -Math.PI / 2 + (i / N) * Math.PI; // right half, top to bottom
+    const out = rnd() < 0.85;
+    const len = out ? between(60, 300) * (1 + 0.8 * Math.pow(Math.abs(Math.sin(a)), 4)) : between(25, 70);
+    const w = between(12, 24);
+    const bend = between(-0.4, 0.4);
+    const r0 = out ? R + RW / 2 - 4 : R - RW / 2 + 4;
+    const dir = out ? 0 : Math.PI;
+    const s0 = seed;
+    for (const m of [1, -1]) {
+      seed = s0; // same randomness on both sides -> exact mirror
+      const aa = m === 1 ? a : Math.PI - a;
+      thorn(CX + Math.cos(aa) * r0, CY + Math.sin(aa) * r0, aa + dir, len, w, m * bend, out ? 2 : 0);
+    }
+  }
+
+  // ---- the slash: a blade through the ring ----
+  const L = 380;
+  const ax = CX - L, ay = CY + L, bx = CX + L, by = CY - L;
+  const da = Math.atan2(by - ay, bx - ax), pn = da + Math.PI / 2;
+  ctx.beginPath();
+  ctx.moveTo(ax - Math.cos(da) * 60, ay - Math.sin(da) * 60);
+  ctx.lineTo(CX + Math.cos(pn) * 26, CY + Math.sin(pn) * 26);
+  ctx.lineTo(bx + Math.cos(da) * 120, by + Math.sin(da) * 120);
+  ctx.lineTo(CX - Math.cos(pn) * 26, CY - Math.sin(pn) * 26);
+  ctx.closePath();
+  ctx.fill();
+  // a crossguard near the low end
+  const gx = ax + Math.cos(da) * 150, gy = ay + Math.sin(da) * 150;
+  thorn(gx, gy, pn, 90, 22, 0.2, 0);
+  thorn(gx, gy, pn + Math.PI, 90, 22, -0.2, 0);
+
+  // ---- the wordmark, knocked out of the ring, then filled ----
+  const WORD = 'supervuoto';
+  let size = 360;
+  ctx.font = `400 ${size}px "UnifrakturMaguntia"`;
+  const target = 1640;
+  size = size * target / ctx.measureText(WORD).width;
+  ctx.font = `400 ${size}px "UnifrakturMaguntia"`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+  const TY = CY + size * 0.28;
+
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = 34;
+  ctx.strokeText(WORD, CX, TY);
+  ctx.restore();
+  ctx.fillText(WORD, CX, TY);
+
+  // thorns out of the letters: read the text mask, find its top and bottom
+  // edges per column, grow thorns there (mirrored about the centre)
+  const off = document.createElement('canvas');
+  off.width = S; off.height = S;
+  const o = off.getContext('2d');
+  o.font = ctx.font; o.textAlign = 'center'; o.textBaseline = 'alphabetic';
+  o.fillStyle = '#fff';
+  o.fillText(WORD, CX, TY);
+  const px = o.getImageData(0, 0, S, S).data;
+  const solid = (x, y) => px[(y * S + x) * 4 + 3] > 128;
+  function edges(x) {
+    let top = -1, bot = -1;
+    for (let y = 0; y < S; y++) if (solid(x, y)) { top = y; break; }
+    for (let y = S - 1; y >= 0; y--) if (solid(x, y)) { bot = y; break; }
+    return [top, bot];
+  }
+
+  for (let x = CX - 820; x <= CX; x += Math.round(between(16, 34))) {
+    const xr = 2 * CX - x;
+    const [tl, bl] = edges(x), [tr, br] = edges(xr);
+    if (tl < 0 || tr < 0) continue;
+    const s0 = seed;
+    // upward thorns from the top of the letters
+    if (rnd() < 0.8) {
+      const len = between(70, 300), w = between(9, 18), lean = between(-0.45, 0.45), bend = between(-0.5, 0.5);
+      for (const [xx, yy, m] of [[x, tl, 1], [xr, tr, -1]]) {
+        seed = s0 + 7;
+        thorn(xx, yy + 6, -Math.PI / 2 - m * lean, len, w, m * bend, 2);
+      }
+    }
+    seed = s0 + 13;
+    // downward roots from the bottom: long, dripping
+    if (rnd() < 0.6) {
+      const len = between(90, 380), w = between(9, 16), lean = between(-0.35, 0.35), bend = between(-0.6, 0.6);
+      for (const [xx, yy, m] of [[x, bl, 1], [xr, br, -1]]) {
+        seed = s0 + 29;
+        thorn(xx, yy - 6, Math.PI / 2 + m * lean, len, w, m * bend, 2);
+      }
+    }
+    seed = s0 + 101;
+  }
+
+  // two long horns off the first and last letters, the classic frame
+  for (const m of [1, -1]) {
+    seed = 4242;
+    const x = CX - m * 800, [t, b] = edges(x);
+    // leaning in enough to stay inside the canvas
+    if (t > 0) thorn(x, t + 10, -Math.PI / 2 - m * 0.38, 440, 32, m * 0.5, 3);
+    if (b > 0) thorn(x, b - 10, Math.PI / 2 + m * 0.42, 320, 26, -m * 0.5, 2);
+  }
+
+  document.title = 'ready';
+})();
+</script>
+</body>
+</html>

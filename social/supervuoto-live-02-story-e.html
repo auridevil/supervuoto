@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<title>SUPERVUOTO — secondo set · story · e</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --void-black: #050208;
+    --deep-space: #0b0618;
+    --nebula-purple: #a78bfa;
+    --signal-cyan: #67e8f9;
+    --ember-magenta: #f0abfc;
+    --star-white: #ece9f7;
+    --font-display: 'Major Mono Display', monospace;
+    --font-body: 'Space Grotesk', sans-serif;
+    --hairline: rgba(167, 139, 250, 0.26);
+    --dim: rgba(236, 233, 247, 0.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* IG story 9:16 */
+  .story {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    /* top/bottom padding keeps content clear of the IG story UI overlays */
+    padding: 206px 84px 226px;
+    background: var(--void-black);
+    color: var(--star-white);
+    font-family: var(--font-body);
+    overflow: hidden;
+    isolation: isolate;   /* contain the blend modes to this canvas */
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* the cymatic plate — sand on a vibrating membrane */
+  #plate {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* vignette + fades so the type sits on quiet ground */
+  .veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, var(--void-black) 0%, rgba(5,2,8,0.75) 9%, transparent 19%),
+      linear-gradient(to top, var(--void-black) 0%, rgba(5,2,8,0.8) 8%, transparent 21%),
+      radial-gradient(60% 24% at 28% 70%, rgba(5,2,8,0.85) 0%, transparent 100%),
+      radial-gradient(78% 48% at 50% 44%, transparent 55%, rgba(5,2,8,0.72) 100%);
+  }
+
+  /* film grain, over everything */
+  .grain {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    opacity: 0.2;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  }
+
+  /* Content sits above the veil (z 1). The names carry their own z-index rather
+     than taking it from .lineup, which would make .lineup a stacking context and
+     kill their blend against the plate. */
+  .story > .head,
+  .story > .meta,
+  .story > .foot { position: relative; z-index: 2; }
+  .story > .spacer,
+  .story > .lineup { position: relative; }
+
+  /* ---------- HEADER ---------- */
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .head-sigil { width: 40px; height: 40px; flex: none; opacity: 0.9; }
+  .nth {
+    margin-left: auto;
+    font-family: var(--font-display);
+    font-size: 64px;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ember-magenta);
+    letter-spacing: 0.1em;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 34px;
+    letter-spacing: 0.38em;
+    text-transform: lowercase;
+    margin: 0;
+  }
+
+  /* ---------- WHEN ---------- */
+  .meta {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    font-family: var(--font-display);
+    font-size: 25px;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+  }
+  .meta .when { color: var(--star-white); }
+  .meta .when .d { color: var(--nebula-purple); }
+  .meta .hours { color: var(--signal-cyan); }
+
+  /* the plate breathes here */
+  .spacer { flex: 1; min-height: 0; }
+
+  /* ---------- LINEUP — overprinted on the plate ---------- */
+  .lineup {
+    margin-bottom: 42px;
+  }
+  .act {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 72px;
+    line-height: 1.26;
+    letter-spacing: 0.01em;
+    text-transform: lowercase;
+    margin: 0;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+    mix-blend-mode: difference;   /* the names eat into the sand */
+  }
+  .act:nth-of-type(1) { color: var(--star-white); }
+  .act:nth-of-type(2) { color: var(--signal-cyan);  padding-left: 58px; }
+  .act:nth-of-type(3) { color: var(--star-white);   padding-left: 116px; }
+  .act:nth-of-type(4) { color: var(--ember-magenta); padding-left: 174px; }
+  .act:nth-of-type(5) { color: var(--nebula-purple); padding-left: 232px; }
+
+  /* ---------- NOTE — a field annotation on the lens ---------- */
+  .note {
+    position: absolute;
+    z-index: 2;
+    right: 84px;
+    top: 1360px;
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.14em;
+    text-transform: lowercase;
+    line-height: 1.7;
+    color: var(--signal-cyan);
+    opacity: 0.85;
+  }
+  .note span { display: block; }
+  .note sub { font-size: 15px; }
+  .note .dim { color: rgba(236, 233, 247, 0.75); }
+
+  /* ---------- FOOTER ---------- */
+  .foot {
+    padding-top: 26px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .foot-place {
+    font-family: var(--font-display);
+    font-size: 46px;
+    letter-spacing: 0.07em;
+    text-transform: lowercase;
+    margin: 0 0 8px;
+  }
+  .foot-kind {
+    font-size: 21px;
+    font-weight: 300;
+    letter-spacing: 0.09em;
+    color: var(--dim);
+    margin: 0;
+  }
+  .foot-meta {
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    text-transform: lowercase;
+    line-height: 2.2;
+  }
+  .foot-meta .motto { color: var(--ember-magenta); display: block; }
+  .foot-meta .handle { color: rgba(236, 233, 247, 0.4); display: block; }
+</style>
+</head>
+<body>
+
+<section class="story">
+
+  <canvas id="plate" width="1080" height="1920"></canvas>
+  <div class="veil"></div>
+  <div class="grain"></div>
+
+  <!-- HEADER -->
+  <div class="head">
+    <svg class="head-sigil" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="40" stroke="#ece9f7" stroke-width="4"/>
+      <line x1="16" y1="84" x2="84" y2="16" stroke="#a78bfa" stroke-width="4"/>
+    </svg>
+    <h1 class="wordmark">supervuoto</h1>
+    <span class="nth">ii</span>
+  </div>
+
+  <!-- WHEN -->
+  <div class="meta">
+    <span class="when">gio <span class="d">26</span> novembre</span>
+    <span class="hours">19.45 — 23.00</span>
+  </div>
+
+  <div class="note">
+    <span>la luce esiste solo</span>
+    <span>dove incontra</span>
+    <span class="dim">qualcosa ⊘</span>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- LINEUP -->
+  <div class="lineup">
+    <h2 class="act">lhotse</h2>
+    <h2 class="act">cana</h2>
+    <h2 class="act">elmozzo</h2>
+    <h2 class="act">alemcd</h2>
+    <h2 class="act">raja</h2>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <div>
+      <p class="foot-place">fossano</p>
+      <p class="foot-kind">private party</p>
+    </div>
+    <div class="foot-meta">
+      <span class="motto">contro la perfezione</span>
+      <span class="motto">contro la definizione</span>
+      <span class="handle">supervuoto.org</span>
+    </div>
+  </div>
+
+</section>
+
+<script>
+// E — the light only exists where it meets something. A beam from a small
+// window, high-key, crossing a dark room; the image it carries (both nights'
+// modes) is only visible in the dust it lights up. No screen is drawn.
+(function () {
+
+  let seed = 20261126;
+  const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  function chladni(u, v, n, m) {
+    return Math.sin(n * Math.PI * u) * Math.sin(m * Math.PI * v)
+         + Math.sin(m * Math.PI * u) * Math.sin(n * Math.PI * v);
+  }
+  const cv = document.getElementById('plate');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+
+  ctx.fillStyle = '#050208';
+  ctx.fillRect(0, 0, W, H);
+
+  // the booth: high at the back, throwing down. The beam dies into the lineup —
+  // the names are the only surface the light ever meets.
+  const OX = 960, OY = 470;
+  const TX = 330, TY = 1300;
+  const D0 = Math.hypot(TX - OX, TY - OY);
+  const ax = (TX - OX) / D0, ay = (TY - OY) / D0;
+  const LEN = D0 * 0.92;
+  const nx = -ay, ny = ax;                   // across the beam
+  const HA = Math.tan(0.17);
+
+  // haze inside the cone
+  ctx.globalCompositeOperation = 'lighter';
+  const hz = ctx.createLinearGradient(OX, OY, OX + ax * LEN, OY + ay * LEN);
+  hz.addColorStop(0, 'rgba(236,233,247,0.16)');
+  hz.addColorStop(0.35, 'rgba(167,139,250,0.06)');
+  hz.addColorStop(1, 'rgba(167,139,250,0)');
+  ctx.fillStyle = hz;
+  ctx.beginPath();
+  ctx.moveTo(OX, OY);
+  ctx.lineTo(OX + ax * LEN + nx * LEN * HA, OY + ay * LEN + ny * LEN * HA);
+  ctx.lineTo(OX + ax * LEN - nx * LEN * HA, OY + ay * LEN - ny * LEN * HA);
+  ctx.closePath();
+  ctx.fill();
+
+  // motes: a random point in the 3D cone, (across, depth) = image coordinates
+  const MODES = [
+    { n: 3, m: 7,  v0: 0.31, c: [103, 232, 249], s: 0.07,  target: 8000 },
+    { n: 5, m: 9,  v0: 0.57, c: [167, 139, 250], s: 0.07,  target: 8000 },
+    { n: 2, m: 11, v0: 0.23, c: [240, 171, 252], s: 0.065, target: 6000 },
+    { n: 8, m: 13, v0: 0.71, c: [236, 233, 247], s: 0.06,  target: 7000 },
+    { n: 1, m: 4,  v0: 0.44, c: [103, 232, 249], s: 0.07,  target: 4500 },
+  ];
+  for (const md of MODES) {
+    let placed = 0, tries = 0;
+    while (placed < md.target && tries < md.target * 60) {
+      tries++;
+      const s = 14 + Math.pow(rnd(), 0.8) * LEN;
+      const a = rnd() * 2 - 1, z = rnd() * 2 - 1;
+      // rectangular gate (1.85:1): uniform across, so the cone has hard edges
+      // a slice through the plate: the across-beam coordinate carries the
+      // nodal lines, so they open into rays as the cone widens
+      const f = chladni((a + 1) / 2, md.v0, md.n, md.m);
+      if (rnd() > Math.exp(-(f * f) / (md.s * md.s))) continue;
+      const x = OX + ax * s + nx * a * s * HA;
+      const y = OY + ay * s + ny * a * s * HA;
+      const fall = Math.pow(1 - s / LEN, 0.7);
+      // flicker: a few frames brighter than the rest, caught as bands in the dust
+      const q = s / LEN;
+      let band = 0;
+      for (const c of [0.24, 0.41, 0.6, 0.77]) band += Math.exp(-Math.pow((q - c) / 0.022, 2));
+      if (rnd() > Math.min(1, (fall + 0.05) * (0.6 + 0.9 * band))) continue;
+      const g = (0.35 + rnd() * 0.6) * (0.4 + 0.6 * fall);
+      ctx.fillStyle = 'rgba(' + md.c[0] + ',' + md.c[1] + ',' + md.c[2] + ',' + (0.7 * g).toFixed(3) + ')';
+      const sz = rnd() < 0.05 ? 2 : 1.1;
+      ctx.fillRect(x, y, sz, sz);
+      placed++;
+    }
+  }
+
+  // a few big out-of-focus specks drifting through
+  for (let i = 0; i < 70; i++) {
+    const s = 60 + rnd() * LEN * 0.8, a = rnd() * 2 - 1;
+    const x = OX + ax * s + nx * a * s * HA, y = OY + ay * s + ny * a * s * HA;
+    const r = 2 + rnd() * 6;
+    const gr = ctx.createRadialGradient(x, y, 0, x, y, r);
+    gr.addColorStop(0, 'rgba(236,233,247,' + (0.12 + rnd() * 0.15).toFixed(3) + ')');
+    gr.addColorStop(1, 'rgba(236,233,247,0)');
+    ctx.fillStyle = gr;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // the booth window: a dark patch in the wall, a small lens, one ghost reflection
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = '#0b0712';
+  ctx.fillRect(OX - 30, OY - 22, 60, 44);
+  ctx.strokeStyle = 'rgba(167,139,250,0.18)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(OX - 29.5, OY - 21.5, 59, 43);
+  ctx.globalCompositeOperation = 'lighter';
+  const lens = ctx.createRadialGradient(OX, OY, 0, OX, OY, 22);
+  lens.addColorStop(0, 'rgba(255,252,255,1)');
+  lens.addColorStop(0.3, 'rgba(236,233,247,0.85)');
+  lens.addColorStop(1, 'rgba(167,139,250,0)');
+  ctx.fillStyle = lens;
+  ctx.beginPath(); ctx.arc(OX, OY, 22, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = 'rgba(255,252,255,1)';
+  ctx.beginPath(); ctx.arc(OX, OY, 7, 0, Math.PI * 2); ctx.fill();
+  const gx = OX + ax * 96, gy = OY + ay * 96;
+  const gh = ctx.createRadialGradient(gx, gy, 0, gx, gy, 9);
+  gh.addColorStop(0, 'rgba(103,232,249,0.22)');
+  gh.addColorStop(1, 'rgba(103,232,249,0)');
+  ctx.fillStyle = gh;
+  ctx.beginPath(); ctx.arc(gx, gy, 9, 0, Math.PI * 2); ctx.fill();
+  ctx.globalCompositeOperation = 'source-over';
+})();
+</script>
+
+</body>
+</html>

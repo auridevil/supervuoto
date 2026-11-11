@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SUPERVUOTO — background radiation · story v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --void-black: #050208;
+    --deep-space: #0b0618;
+    --nebula-purple: #a78bfa;
+    --signal-cyan: #67e8f9;
+    --ember-magenta: #f0abfc;
+    --star-white: #ece9f7;
+    --font-display: 'Major Mono Display', monospace;
+    --font-body: 'Space Grotesk', sans-serif;
+    --hairline: rgba(167, 139, 250, 0.22);
+    --dim: rgba(236, 233, 247, 0.58);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #000; }
+
+  /* IG story 9:16 — v2: quiet, centred, line-drawn, in the "le linee" register */
+  .story {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    padding: 206px 96px 226px;
+    color: var(--star-white);
+    font-family: var(--font-body);
+    overflow: hidden;
+    background:
+      radial-gradient(60% 40% at 50% 46%, rgba(167, 139, 250, 0.10), transparent 70%),
+      linear-gradient(180deg, #07030f 0%, var(--void-black) 55%, #0a0514 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* the radiation field: rings leaving the sigil, and the hiss around them */
+  #field {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    opacity: 0.16;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  }
+
+  .story > .top, .story > .bottom, .story > .sigil { position: relative; z-index: 2; }
+
+  /* ---------- TOP ---------- */
+  .top { width: 100%; }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.38em;
+    text-transform: lowercase;
+    margin: 0;
+  }
+  .brand svg { width: 34px; height: 34px; }
+  .kicker {
+    margin: 30px 0 0;
+    font-family: var(--font-display);
+    font-size: 21px;
+    letter-spacing: 0.32em;
+    text-transform: lowercase;
+    color: var(--nebula-purple);
+  }
+
+  /* ---------- SIGIL ---------- */
+  .sigil {
+    margin: auto 0;
+    width: 330px;
+    height: 330px;
+    filter: drop-shadow(0 0 34px rgba(167, 139, 250, 0.35));
+  }
+
+  /* ---------- BOTTOM ---------- */
+  .bottom { width: 100%; }
+  .title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 1.08;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    color: var(--star-white);
+  }
+  .title .accent { color: var(--nebula-purple); }
+  .essence {
+    margin: 22px 0 0;
+    font-family: var(--font-body);
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--nebula-purple);
+  }
+  .hook {
+    margin: 64px auto 0;
+    max-width: 700px;
+    font-size: 31px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--dim);
+  }
+  .rule {
+    width: 120px;
+    height: 1px;
+    margin: 64px auto 26px;
+    background: var(--hairline);
+  }
+  .meta {
+    font-family: var(--font-display);
+    font-size: 17px;
+    letter-spacing: 0.24em;
+    text-transform: lowercase;
+    color: rgba(236, 233, 247, 0.42);
+  }
+  .meta .soon { color: var(--signal-cyan); }
+</style>
+</head>
+<body>
+
+<section class="story">
+
+  <svg id="field" width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div class="grain"></div>
+
+  <div class="top">
+    <p class="brand">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="40" stroke="#ece9f7" stroke-width="3"/>
+        <line x1="16" y1="84" x2="84" y2="16" stroke="#a78bfa" stroke-width="3"/>
+      </svg>
+      supervuoto
+    </p>
+    <p class="kicker">a new line</p>
+  </div>
+
+  <!-- the line's sigil, exactly as in "le linee" -->
+  <svg class="sigil" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="38" stroke="#a78bfa" stroke-width="3" opacity="0.55"/>
+    <circle cx="50" cy="50" r="26" fill="#0b0618" stroke="#a78bfa" stroke-width="3.5"/>
+  </svg>
+
+  <div class="bottom">
+    <h1 class="title">background<br /><span class="accent">radiation</span></h1>
+    <p class="essence">the oldest light, still on</p>
+    <p class="hook">The hiss between two stations is, in part, light left over from the beginning of everything.</p>
+    <div class="rule"></div>
+    <div class="meta"><span class="soon">first transmission soon</span> &nbsp;·&nbsp; supervuoto.org</div>
+  </div>
+
+</section>
+
+<script>
+(function () {
+  const svg = document.getElementById('field');
+  const NS = 'http://www.w3.org/2000/svg';
+
+  // deterministic, so every render is the same image
+  let seed = 20261028;
+  function rnd() {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  }
+  function el(name, attrs) {
+    const n = document.createElementNS(NS, name);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    svg.appendChild(n);
+    return n;
+  }
+
+  // centre of the sigil (measured from the layout)
+  const box = document.querySelector('.sigil').getBoundingClientRect();
+  const story = document.querySelector('.story').getBoundingClientRect();
+  const CX = box.left - story.left + box.width / 2;
+  const CY = box.top - story.top + box.height / 2;
+
+  // rings leaving the sigil: spacing widens and they fade and break up with
+  // distance, like a signal thinning into noise
+  const R0 = 200;
+  let r = R0;
+  for (let i = 0; i < 26; i++) {
+    const t = i / 25;
+    const opacity = (0.5 * Math.pow(1 - t, 1.6) + 0.04).toFixed(3);
+    const dash = i < 3 ? 'none' : `${(2 + rnd() * 10 * (1 - t) + 1).toFixed(1)} ${(3 + t * 26 + rnd() * 8).toFixed(1)}`;
+    el('circle', {
+      cx: CX, cy: CY, r: r.toFixed(1),
+      fill: 'none',
+      stroke: i % 5 === 4 ? '#67e8f9' : '#a78bfa',
+      'stroke-width': (1.6 - t * 0.9).toFixed(2),
+      'stroke-dasharray': dash,
+      'stroke-dashoffset': (rnd() * 40).toFixed(1),
+      opacity,
+    });
+    r += 18 + i * 3.2;
+  }
+
+  // the hiss: fine static, denser near the rings, everywhere at once
+  for (let i = 0; i < 2600; i++) {
+    const a = rnd() * Math.PI * 2;
+    const d = R0 * 0.9 + Math.pow(rnd(), 0.7) * 1100;
+    const x = CX + Math.cos(a) * d;
+    const y = CY + Math.sin(a) * d;
+    if (x < 0 || x > 1080 || y < 0 || y > 1920) continue;
+    const s = rnd() < 0.08 ? 2.2 : 1.2;
+    el('rect', {
+      x: x.toFixed(1), y: y.toFixed(1), width: s, height: s,
+      fill: rnd() < 0.8 ? '#a78bfa' : '#ece9f7',
+      opacity: (0.08 + rnd() * 0.3 * Math.max(0.2, 1 - d / 1100)).toFixed(3),
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

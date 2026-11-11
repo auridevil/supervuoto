@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- supervuoto, black metal logo v4: Darkthrone style. No font: the letters,
+     the ⊘ and the decoration are all the same hand-drawn wobbly line, so
+     lettering and ornament read as one drawing. SUPER / VUOTO on two rows,
+     the ⊘ on top like the emblem, branches spreading up and out like
+     antlers, drips hanging off every letter, roots running down and
+     converging to a point. Decoration is mirrored, letters are not.
+     Deterministic. Render with headless Chrome at 2048x2048:
+     #white (white ink, transparent) · #black (black ink, transparent) · #preview (white on black) -->
+<style>
+  html, body { margin: 0; padding: 0; background: transparent; }
+  canvas { display: block; width: 2048px; height: 2048px; }
+</style>
+</head>
+<body>
+<canvas id="c" width="2048" height="2048"></canvas>
+<script>
+(function () {
+  const v = location.hash.slice(1) || 'preview';
+  const INK = v === 'black' ? '#000000' : '#ece9f7';
+  if (v === 'preview') document.body.style.background = '#050208';
+
+  const S = 2048, CX = S / 2;
+  const ctx = document.getElementById('c').getContext('2d');
+  const layer = () => {
+    const c = document.createElement('canvas');
+    c.width = S; c.height = S;
+    const g = c.getContext('2d');
+    g.fillStyle = INK; g.strokeStyle = INK; g.lineCap = 'round'; g.lineJoin = 'round';
+    return [c, g];
+  };
+
+  let seed = 1994;
+  const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  const between = (a, b) => a + rnd() * (b - a);
+  const angTo = (a, b) => Math.atan2(Math.sin(b - a), Math.cos(b - a));
+
+  // the one line everything is drawn with: subdivided, wobbling sideways,
+  // width tapering from w0 to w1 with a little hand tremor
+  function line(g, pts, w0, w1, wob = 2.2) {
+    const P = [];
+    for (let i = 0; i < pts.length - 1; i++) {
+      const [x0, y0] = pts[i], [x1, y1] = pts[i + 1];
+      const n = Math.max(1, Math.ceil(Math.hypot(x1 - x0, y1 - y0) / 7));
+      for (let k = 0; k < n; k++) P.push([x0 + (x1 - x0) * k / n, y0 + (y1 - y0) * k / n]);
+    }
+    P.push(pts[pts.length - 1]);
+    let j = 0;
+    const Q = P.map(([x, y], i) => {
+      const [ax, ay] = P[Math.max(0, i - 1)], [bx, by] = P[Math.min(P.length - 1, i + 1)];
+      const d = Math.hypot(bx - ax, by - ay) || 1;
+      j = j * 0.75 + between(-1, 1) * wob;
+      return [x - (by - ay) / d * j, y + (bx - ax) / d * j];
+    });
+    for (let i = 0; i < Q.length - 1; i++) {
+      g.lineWidth = Math.max(1.2, (w0 + (w1 - w0) * i / (Q.length - 1)) * between(0.85, 1.15));
+      g.beginPath(); g.moveTo(Q[i][0], Q[i][1]); g.lineTo(Q[i + 1][0], Q[i + 1][1]); g.stroke();
+    }
+  }
+
+  // an organic branch: walks, bends towards `goal` (an angle or a point),
+  // tapers, and forks
+  function branch(g, x, y, a, len, w, depth, goal, pull = 0.05, wig = 0.16) {
+    const steps = Math.max(2, Math.round(len / 9));
+    const pts = [[x, y]];
+    for (let s = 1; s <= steps; s++) {
+      const target = typeof goal === 'number' ? goal : Math.atan2(goal[1] - y, goal[0] - x);
+      a += angTo(a, target) * pull + between(-wig, wig);
+      x += Math.cos(a) * 9; y += Math.sin(a) * 9;
+      pts.push([x, y]);
+      if (depth > 0 && s > 3 && s < steps - 3 && rnd() < 0.09) {
+        const rest = (steps - s) * 9;
+        branch(g, x, y, a + (rnd() < 0.5 ? -1 : 1) * between(0.4, 1.0), rest * between(0.3, 0.65),
+          w * (1 - s / steps) * 0.8 + 1.5, depth - 1, goal, pull, wig);
+      }
+    }
+    line(g, pts, w, 1.4, 1.2);
+  }
+
+  // a drip: hangs straight down, a bit wavy, sometimes a drop at the end
+  function drip(g, x, y, len, w) {
+    const pts = [[x, y]];
+    for (let s = 1; s <= 6; s++) pts.push([x + between(-3, 3), y + len * s / 6]);
+    line(g, pts, w, 2, 1.4);
+    if (rnd() < 0.35) { g.beginPath(); g.arc(pts[6][0], pts[6][1], between(3, 6), 0, Math.PI * 2); g.fill(); }
+  }
+
+  // ---- glyph skeletons, uppercase, angular, in a 1x1 box ----
+  const GLYPHS = {
+    S: [[[0.78, 0.12], [0.45, 0], [0.08, 0.08], [0.04, 0.32], [0.5, 0.5], [0.74, 0.7], [0.62, 0.95], [0.28, 1.02], [0, 0.86]]],
+    U: [[[0.02, -0.04], [0.06, 0.82], [0.36, 1.02], [0.68, 0.84], [0.72, -0.04]], [[0.72, 0.6], [0.8, 1.06]]],
+    P: [[[0.08, 1.12], [0.08, -0.04]], [[0.08, 0.02], [0.6, 0.04], [0.76, 0.24], [0.6, 0.48], [0.08, 0.5]]],
+    E: [[[0.76, 0.02], [0.08, 0], [0.06, 1], [0.8, 1.02]], [[0.08, 0.5], [0.6, 0.48]]],
+    R: [[[0.08, 1.06], [0.08, -0.04]], [[0.08, 0.02], [0.6, 0.04], [0.76, 0.24], [0.6, 0.48], [0.08, 0.5]], [[0.36, 0.5], [0.82, 1.08]]],
+    V: [[[-0.02, -0.04], [0.38, 1.04], [0.8, -0.04]]],
+    O: [[[0.38, 0], [0.72, 0.16], [0.78, 0.6], [0.6, 0.94], [0.36, 1.02], [0.08, 0.86], [0, 0.4], [0.12, 0.1], [0.38, 0]]],
+    T: [[[-0.06, 0.02], [0.92, 0]], [[0.42, 0.01], [0.4, 1.08]]],
+  };
+
+  function word(g, text, x0, top, h, gap, w) {
+    const lw = h * 0.74;
+    const total = text.length * lw + (text.length - 1) * gap;
+    let x = x0 - total / 2;
+    for (const ch of text) {
+      for (const stroke of GLYPHS[ch]) {
+        const pts = stroke.map(([u, t]) => [x + (u + between(-0.03, 0.03)) * lw, top + (t + between(-0.03, 0.03)) * h]);
+        line(g, pts, w * between(0.9, 1.1), w * between(0.8, 1.05));
+        // spiky serifs: every stroke end runs on into a tapering point
+        for (const [a, b] of [[pts[1], pts[0]], [pts[pts.length - 2], pts[pts.length - 1]]]) {
+          if (stroke[0] === stroke[stroke.length - 1] || rnd() < 0.3) continue;
+          const an = Math.atan2(b[1] - a[1], b[0] - a[0]) + between(-0.25, 0.25), l = between(18, 46);
+          line(g, [b, [b[0] + Math.cos(an) * l, b[1] + Math.sin(an) * l]], w * 0.8, 1.3, 0.8);
+        }
+      }
+      x += lw + gap;
+    }
+    return [x0 - total / 2, x0 + total / 2];
+  }
+
+  // ---- 1. the letters, two rows ----
+  const [lc, L] = layer();
+  const H1 = 210, T1 = 760, H2 = 230, T2 = 1040, W = 20;
+  const [r1a, r1b] = word(L, 'SUPER', CX, T1, H1, 26, W);
+  const [r2a, r2b] = word(L, 'VUOTO', CX, T2, H2, 34, W);
+
+  const px = L.getImageData(0, 0, S, S).data;
+  const solid = (x, y) => px[(y * S + x) * 4 + 3] > 100;
+  const bottom = (x, y0, y1) => { for (let y = y1; y >= y0; y--) if (solid(x, y)) return y; return -1; };
+  const top = (x, y0, y1) => { for (let y = y0; y <= y1; y++) if (solid(x, y)) return y; return -1; };
+
+  // drips off every letter: short under SUPER, long under VUOTO
+  seed = 31;
+  for (const [a, b, y0, y1, lmin, lmax] of [[r1a, r1b, T1 - 20, T1 + H1 + 30, 20, 120], [r2a, r2b, T2 - 20, T2 + H2 + 30, 30, 230]]) {
+    for (let x = Math.round(a); x <= b; x += Math.round(between(9, 22))) {
+      const y = bottom(x, y0, y1);
+      if (y > 0 && rnd() < 0.75) drip(L, x, y - 4, between(lmin, lmax) * (rnd() < 0.2 ? 1.6 : 1), between(5, 9));
+    }
+    // and short spikes up off the tops
+    for (let x = Math.round(a); x <= b; x += Math.round(between(14, 34))) {
+      const y = top(x, y0, y1);
+      if (y > 0 && rnd() < 0.5) line(L, [[x, y + 4], [x + between(-8, 8), y - between(14, 50)]], between(5, 8), 1.3, 1);
+    }
+  }
+
+  // ---- 2. the ⊘ on top, drawn in the same line ----
+  const OX = CX, OY = 500, R = 170;
+  const ring = (r, n) => Array.from({ length: n + 1 }, (_, i) => {
+    const t = (i / n) * Math.PI * 2 - Math.PI / 2;
+    return [OX + Math.cos(t) * r, OY + Math.sin(t) * r];
+  });
+  seed = 77;
+  line(L, ring(R, 72), 17, 17, 1.6);
+  line(L, ring(R - 30, 72), 7, 7, 1.2);
+  const k = R * 0.95;
+  line(L, [[OX - k, OY + k], [OX, OY], [OX + k, OY - k]], 15, 13, 1.6);
+  // drips off the ring, hanging towards the letters
+  for (let i = 0; i < 26; i++) {
+    const t = between(0.15, 0.85) * Math.PI;
+    const x = OX + Math.cos(t) * R, y = OY + Math.sin(t) * R;
+    drip(L, x, y, Math.min(between(20, 140), T1 - y - 10), between(4, 8));
+  }
+
+  // ---- 3. decoration, left half, mirrored to the right ----
+  const [dc, D] = layer();
+  seed = 2006;
+  // antlers: up and out from the top of SUPER and the sides of the ⊘
+  for (let i = 0; i < 5; i++) {
+    const x = r1a + i * 70 + between(-10, 10);
+    branch(D, x, T1 + 8, -Math.PI / 2 - between(0.35, 0.9), between(230, 400), 14, 3, -2.5, 0.04);
+  }
+  branch(D, OX - R + 4, OY + 20, Math.PI + 0.15, 480, 15, 3, -2.6, 0.03);
+  branch(D, OX - R * 0.7, OY - R * 0.7, -2.1, 300, 13, 2, -2.0, 0.05);
+  // claws: out of the row ends, sweeping out and then down
+  branch(D, r1a + 6, T1 + H1 * 0.4, Math.PI + 0.1, 560, 14, 3, Math.PI / 2, 0.035);
+  branch(D, r2a + 6, T2 + H2 * 0.5, Math.PI + 0.25, 520, 14, 3, Math.PI / 2, 0.04);
+  // roots: down from VUOTO, converging on a point below the centre
+  for (let i = 0; i < 6; i++) {
+    const x = r2a + 20 + i * ((CX - r2a) / 6);
+    branch(D, x, T2 + H2 - 10, Math.PI / 2 + between(-0.15, 0.15), between(520, 760) * (1 - i * 0.07), 14, 2, [CX + 40, 1990], 0.07, 0.07);
+  }
+
+  // ---- compose ----
+  ctx.drawImage(dc, 0, 0);
+  ctx.save(); ctx.translate(S, 0); ctx.scale(-1, 1); ctx.drawImage(dc, 0, 0); ctx.restore();
+  ctx.drawImage(lc, 0, 0);
+
+  document.title = 'ready';
+})();
+</script>
+</body>
+</html>

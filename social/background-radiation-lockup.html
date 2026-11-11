@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- background radiation lockup: sigil + name, horizontal.
+     Render with headless Chrome, transparent bg, 2400x600, then trim:
+     #violet (as in the PDF, dark disc) · #outline (no fill) · #white · #black -->
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: transparent; }
+  .lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 64px;
+    padding: 40px;
+  }
+  svg { display: block; width: 400px; height: 400px; flex: none; }
+  .name {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 120px;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    color: #ece9f7;
+  }
+  .name span { display: block; }
+  .name .accent { color: #a78bfa; }
+</style>
+</head>
+<body>
+<div class="lockup">
+  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle id="outer" cx="50" cy="50" r="38" stroke="#a78bfa" stroke-width="3" opacity="0.55"/>
+    <circle id="inner" cx="50" cy="50" r="26" fill="#0b0618" stroke="#a78bfa" stroke-width="3.5"/>
+  </svg>
+  <div class="name"><span>background</span><span class="accent">radiation</span></div>
+</div>
+<script>
+  const v = location.hash.slice(1) || 'violet';
+  const outer = document.getElementById('outer');
+  const inner = document.getElementById('inner');
+  const name = document.querySelector('.name');
+  if (v === 'outline') inner.setAttribute('fill', 'none');
+  if (v === 'white' || v === 'black') {
+    const ink = v === 'white' ? '#ece9f7' : '#000000';
+    inner.setAttribute('fill', 'none');
+    outer.setAttribute('stroke', ink);
+    inner.setAttribute('stroke', ink);
+    name.style.color = ink;
+    name.querySelector('.accent').style.color = ink;
+  }
+</script>
+</body>
+</html>

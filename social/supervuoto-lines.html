@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<title>SUPERVUOTO — Le Linee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --void-black: #050208;
+    --deep-space: #0b0618;
+    --nebula-purple: #a78bfa;
+    --signal-cyan: #67e8f9;
+    --ember-magenta: #f0abfc;
+    --star-white: #ece9f7;
+    --font-display: 'Major Mono Display', monospace;
+    --font-body: 'Space Grotesk', sans-serif;
+    --hairline: rgba(167, 139, 250, 0.22);
+    --hairline-soft: rgba(236, 233, 247, 0.12);
+    --dim: rgba(236, 233, 247, 0.64);
+  }
+
+  * { box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--void-black);
+    color: var(--star-white);
+    font-family: var(--font-body);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    position: relative;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm 20mm 18mm;
+    background:
+      radial-gradient(120% 80% at 15% 0%, rgba(103, 232, 249, 0.06), transparent 55%),
+      radial-gradient(120% 90% at 100% 100%, rgba(240, 171, 252, 0.07), transparent 55%),
+      radial-gradient(140% 120% at 50% 40%, rgba(11, 6, 24, 0.9), var(--void-black) 80%);
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* faint starfield dots */
+  .page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 12% 22%, rgba(236,233,247,0.5), transparent),
+      radial-gradient(1px 1px at 78% 14%, rgba(236,233,247,0.4), transparent),
+      radial-gradient(1px 1px at 33% 68%, rgba(236,233,247,0.35), transparent),
+      radial-gradient(1px 1px at 88% 74%, rgba(236,233,247,0.4), transparent),
+      radial-gradient(1px 1px at 55% 88%, rgba(236,233,247,0.3), transparent),
+      radial-gradient(1px 1px at 66% 40%, rgba(236,233,247,0.3), transparent);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .page > * { position: relative; z-index: 1; }
+
+  /* ---------- COVER ---------- */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 257mm;
+  }
+  .cover-sigil {
+    width: 74px;
+    height: 74px;
+    margin-bottom: 14mm;
+    opacity: 0.9;
+  }
+  .cover-kicker {
+    font-family: var(--font-display);
+    font-size: 11pt;
+    letter-spacing: 0.5em;
+    color: var(--signal-cyan);
+    margin: 0 0 10mm;
+    text-transform: lowercase;
+  }
+  .cover-title {
+    font-family: var(--font-display);
+    font-size: 46pt;
+    line-height: 1.02;
+    letter-spacing: 0.02em;
+    margin: 0;
+    text-transform: lowercase;
+  }
+  .cover-title .void { color: var(--nebula-purple); }
+  .cover-sub {
+    margin: 8mm 0 0;
+    max-width: 130mm;
+    font-size: 13pt;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--dim);
+  }
+  .cover-foot {
+    margin-top: 22mm;
+    font-family: var(--font-display);
+    font-size: 9pt;
+    letter-spacing: 0.28em;
+    color: var(--ember-magenta);
+    text-transform: lowercase;
+  }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section-head {
+    font-family: var(--font-display);
+    font-size: 9pt;
+    letter-spacing: 0.34em;
+    color: var(--nebula-purple);
+    text-transform: lowercase;
+    margin: 0 0 3mm;
+  }
+  .section-rule {
+    height: 1px;
+    background: var(--hairline);
+    margin: 0 0 10mm;
+  }
+
+  /* ---------- RITUAL ---------- */
+  .ritual-title {
+    font-family: var(--font-display);
+    font-size: 26pt;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    margin: 0 0 4mm;
+  }
+  .ritual-lede {
+    font-size: 12.5pt;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--dim);
+    max-width: 150mm;
+    margin: 0 0 12mm;
+  }
+  .ritual-item {
+    display: grid;
+    grid-template-columns: 16mm 1fr;
+    gap: 6mm;
+    padding: 7mm 0;
+    border-top: 1px solid var(--hairline-soft);
+  }
+  .ritual-item:last-child { border-bottom: 1px solid var(--hairline-soft); }
+  .ritual-num {
+    font-family: var(--font-display);
+    font-size: 20pt;
+    color: var(--signal-cyan);
+    line-height: 1;
+  }
+  .ritual-item h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14pt;
+    letter-spacing: 0.01em;
+    margin: 0 0 2.5mm;
+    color: var(--star-white);
+  }
+  .ritual-item p {
+    margin: 0;
+    font-size: 11.5pt;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--dim);
+  }
+
+  /* ---------- LINES ---------- */
+  .lines-page { display: flex; flex-direction: column; }
+  .line-card {
+    display: grid;
+    grid-template-columns: 30mm 1fr;
+    gap: 8mm;
+    padding: 5mm 0;
+    border-top: 1px solid var(--hairline-soft);
+    page-break-inside: avoid;
+  }
+  .line-card:last-child { border-bottom: 1px solid var(--hairline-soft); }
+  .line-glyph {
+    width: 30mm;
+    height: 30mm;
+  }
+  .line-glyph svg { width: 100%; height: 100%; display: block; }
+
+  .line-name {
+    font-family: var(--font-display);
+    font-size: 18pt;
+    letter-spacing: 0.03em;
+    text-transform: lowercase;
+    margin: 0;
+    line-height: 1.05;
+  }
+  .line-name .super { color: var(--dim); }
+  .line-essence {
+    font-family: var(--font-body);
+    font-size: 9.5pt;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 2mm 0 4mm;
+  }
+  .line-desc {
+    font-size: 11pt;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--dim);
+    margin: 0 0 4mm;
+    max-width: 135mm;
+  }
+  .line-ideas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2mm 3mm;
+  }
+  .line-ideas li {
+    font-family: var(--font-body);
+    font-size: 8.5pt;
+    letter-spacing: 0.04em;
+    color: rgba(236, 233, 247, 0.72);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 1.2mm 3mm;
+    white-space: nowrap;
+  }
+
+  /* accent tints per line */
+  .a-cyan .line-essence, .a-cyan .line-name .accent { color: var(--signal-cyan); }
+  .a-violet .line-essence, .a-violet .line-name .accent { color: var(--nebula-purple); }
+  .a-magenta .line-essence, .a-magenta .line-name .accent { color: var(--ember-magenta); }
+
+  .colophon {
+    margin-top: auto;
+    padding-top: 6mm;
+    font-family: var(--font-display);
+    font-size: 8pt;
+    letter-spacing: 0.24em;
+    color: rgba(236, 233, 247, 0.4);
+    text-transform: lowercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="page cover">
+  <svg class="cover-sigil" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="40" stroke="#ece9f7" stroke-width="3"/>
+    <line x1="16" y1="84" x2="84" y2="16" stroke="#a78bfa" stroke-width="3"/>
+  </svg>
+  <p class="cover-kicker">transmissions from the super-void</p>
+  <h1 class="cover-title">supervuoto<br /><span class="void">le linee</span></h1>
+  <p class="cover-sub">
+    Cinque frequenze aperte nello stesso vuoto profondo. Non generi, ma direzioni
+    d'ascolto: cinque modi diversi di puntare la stessa antenna verso il nulla —
+    e di aspettare che qualcosa risponda.
+  </p>
+  <p class="cover-foot">contro la perfezione · contro la definizione</p>
+</section>
+
+<!-- ============ RITUALE ============ -->
+<section class="page">
+  <p class="section-head">il rito</p>
+  <div class="section-rule"></div>
+  <h2 class="ritual-title">cambia la frequenza, non il rito</h2>
+  <p class="ritual-lede">
+    Qualunque sia la linea, ogni trasmissione del supervuoto obbedisce alle stesse
+    tre leggi. Sono ciò che tiene insieme il segnale quando tutto il resto —
+    generi, tempi, intensità — cambia.
+  </p>
+
+  <div class="ritual-item">
+    <div class="ritual-num">i</div>
+    <div>
+      <h3>La campana e la voce</h3>
+      <p>
+        Ogni mixtape si apre allo stesso modo: la campana del supervuoto e la voce
+        che chiama all'ascolto. È la soglia — il segnale che avverte chi ascolta di
+        essere entrato nel vuoto. Prima del suono, il rito; prima del rito, il silenzio.
+      </p>
+    </div>
+  </div>
+
+  <div class="ritual-item">
+    <div class="ritual-num">ii</div>
+    <div>
+      <h3>Ricerca, non evasione</h3>
+      <p>
+        Nessun set è un passatempo. Ogni trasmissione è il risultato di uno scavo —
+        un'ipotesi resa ascoltabile, non una fuga dal rumore. Se dietro non c'è una
+        domanda, non è supervuoto: è solo musica messa in fila.
+      </p>
+    </div>
+  </div>
+
+  <div class="ritual-item">
+    <div class="ritual-num">iii</div>
+    <div>
+      <h3>Mai da soli</h3>
+      <p>
+        Il supervuoto è una comunità prima di essere un suono. Si trasmette in due,
+        in collisione: segnali diversi che si incontrano nella stessa fascia e si
+        deformano a vicenda. Restare soli in un mix è l'eccezione — la regola è l'incontro.
+      </p>
+    </div>
+  </div>
+
+  <div class="colophon">supervuoto — le linee · 01</div>
+</section>
+
+<!-- ============ LINEE (1) ============ -->
+<section class="page lines-page">
+  <p class="section-head">le cinque linee</p>
+  <div class="section-rule"></div>
+
+  <!-- BIT -->
+  <div class="line-card a-cyan">
+    <div class="line-glyph">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="38" stroke="#ece9f7" stroke-width="3.5"/>
+        <line x1="6" y1="50" x2="94" y2="50" stroke="#67e8f9" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="5" fill="#67e8f9"/>
+      </svg>
+    </div>
+    <div>
+      <h2 class="line-name"><span class="super">supervuoto</span> · <span class="accent">bit</span></h2>
+      <p class="line-essence">la linea madre</p>
+      <p class="line-desc">
+        Il segnale d'origine, la frequenza da cui tutto si dirama. Ogni episodio si
+        stringe attorno a un solo tema e lo attraversa fino in fondo: due ospiti sulla
+        stessa fascia, ciascuno con il proprio set, senza mappa e senza generi. È qui
+        che il supervuoto respira la sua cadenza — la trasmissione principale, dalla
+        diretta all'archivio.
+      </p>
+      <ul class="line-ideas">
+        <li>un tema per episodio</li><li>due ospiti, un tema</li><li>cadenza settimanale</li><li>~ un'ora</li><li>senza generi</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- BACKGROUND RADIATION -->
+  <div class="line-card a-violet">
+    <div class="line-glyph">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="38" stroke="#a78bfa" stroke-width="3" opacity="0.55"/>
+        <circle cx="50" cy="50" r="26" fill="#0b0618" stroke="#a78bfa" stroke-width="3.5"/>
+      </svg>
+    </div>
+    <div>
+      <h2 class="line-name"><span class="super">supervuoto</span> · <span class="accent" style="white-space: nowrap">background radiation</span></h2>
+      <p class="line-essence">la luce più antica, ancora accesa</p>
+      <p class="line-desc">
+        Il fondo che resta quando tutto tace: un bagliore freddo e antichissimo,
+        in ogni direzione. Ambient, drone, metal, rumore, paesaggi in ombra. Non è
+        musica d'accompagnamento: chiede buio, tempo e di restare finché il
+        fruscio diventa un luogo.
+      </p>
+      <ul class="line-ideas">
+        <li>drone</li><li>dark ambient</li><li>metal</li><li>rumore</li><li>ascolto immersivo</li><li>non easy listening</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LAB -->
+  <div class="line-card a-cyan">
+    <div class="line-glyph">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="38" stroke="#ece9f7" stroke-width="3.5"/>
+        <ellipse cx="50" cy="50" rx="44" ry="17" stroke="#67e8f9" stroke-width="2.5" transform="rotate(-30 50 50)" opacity="0.85"/>
+        <circle cx="83" cy="32" r="5.5" fill="#67e8f9"/>
+      </svg>
+    </div>
+    <div>
+      <h2 class="line-name"><span class="super">supervuoto</span> · <span class="accent">lab</span></h2>
+      <p class="line-essence">il banco di prova del vuoto</p>
+      <p class="line-desc">
+        Dove finisce la certezza e comincia l'esperimento. La linea della curiosità:
+        field recording, sintesi, errori tenuti apposta, forme che non hanno ancora
+        un nome. Non si cerca il risultato ma la domanda giusta — e la si lascia
+        suonare finché non dice qualcosa.
+      </p>
+      <ul class="line-ideas">
+        <li>sperimentazione</li><li>ricerca sonora</li><li>field recording</li><li>modular / tape</li><li>work-in-progress</li><li>processi esposti</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LINEE (2) ============ -->
+<section class="page lines-page">
+  <p class="section-head">le cinque linee</p>
+  <div class="section-rule"></div>
+
+  <!-- ALTE ENERGIE -->
+  <div class="line-card a-magenta">
+    <div class="line-glyph">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="38" stroke="#ece9f7" stroke-width="3.5"/>
+        <path d="M58 14 L34 52 L50 52 L42 86 L70 44 L52 44 Z" fill="#f0abfc" stroke="#f0abfc" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <h2 class="line-name"><span class="super">supervuoto</span> · <span class="accent">alte energie</span></h2>
+      <p class="line-essence">quando la frequenza va in soglia</p>
+      <p class="line-desc">
+        L'urto. Veloce, ruvida, senza freni: la linea che spinge il segnale oltre il
+        limite e lo tiene lì. Batteria che non chiede permesso, tempi che non
+        concedono respiro — energia allo stato brutale, incanalata invece che
+        dispersa. Si ascolta a corpo intero.
+      </p>
+      <ul class="line-ideas">
+        <li>hardcore</li><li>breakcore</li><li>gabber</li><li>d'n'b estremo</li><li>industrial</li><li>alta intensità</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MONOGRAPHY -->
+  <div class="line-card a-violet">
+    <div class="line-glyph">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="38" stroke="#a78bfa" stroke-width="3.5"/>
+        <circle cx="50" cy="50" r="7" fill="#a78bfa"/>
+      </svg>
+    </div>
+    <div>
+      <h2 class="line-name"><span class="super">supervuoto</span> · <span class="accent">monography</span></h2>
+      <p class="line-essence">uno sguardo, messo a fuoco</p>
+      <p class="line-desc">
+        Una lente sola, tenuta ferma a lungo. Un'etichetta, un artista, un anno, una
+        scena: la linea che rinuncia all'ampiezza per la profondità e trasforma
+        l'ascolto in studio. Un ritratto sonoro — tutto ciò che serve per capire una
+        cosa da dentro, una fonte per volta.
+      </p>
+      <ul class="line-ideas">
+        <li>monografico</li><li>deep-dive</li><li>una label / un artista</li><li>un anno / una scena</li><li>taglio documentario</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="colophon">supervuoto — le linee · 02 · contro la perfezione, contro la definizione</div>
+</section>
+
+</body>
+</html>

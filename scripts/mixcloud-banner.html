@@ -1,0 +1,174 @@
+<!doctype html>
+<!-- Mixcloud profile banner source (1600x350, no text — Mixcloud crops the
+     sides on narrow screens, so everything that matters stays centred).
+     To regenerate social/mixcloud-banner.png:
+       npm run build && cp scripts/mixcloud-banner.html dist/ && npm run preview &
+       screenshot http://localhost:4173/mixcloud-banner.html at 1600x350
+     then remove dist/mixcloud-banner.html. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    width: 1600px;
+    height: 350px;
+    overflow: hidden;
+    position: relative;
+    background-color: #050208;
+    background-image:
+      radial-gradient(ellipse 60% 220% at 18% -40%, rgba(38, 18, 70, 0.75) 0%, transparent 62%),
+      radial-gradient(ellipse 55% 200% at 84% 140%, rgba(8, 34, 46, 0.6) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 160% at 50% 50%, rgba(60, 24, 86, 0.45) 0%, transparent 70%);
+  }
+
+  /* starfield — filled by the script below */
+  .stars { position: absolute; inset: 0; }
+  .stars i { position: absolute; border-radius: 50%; background: #ece9f7; }
+
+  /* horizon: the transmission band running the full width */
+  .band {
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 1px;
+    transform: translateY(-50%);
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(167,139,250,.15) 12%,
+      rgba(103,232,249,.45) 50%,
+      rgba(167,139,250,.15) 88%,
+      transparent 100%);
+  }
+  .band.b2 { top: calc(50% - 26px); opacity: .35; }
+  .band.b3 { top: calc(50% + 26px); opacity: .35; }
+
+  /* interference: faint vertical ticks, like a spectrum readout */
+  .ticks { position: absolute; inset: 0; }
+  .ticks i {
+    position: absolute;
+    top: 50%;
+    width: 1px;
+    transform: translateY(-50%);
+    background: linear-gradient(180deg, transparent, rgba(240,171,252,.5), transparent);
+  }
+
+  /* centre: the wordmark. The eye-moon lives in the profile picture, so the
+     banner carries the name instead. Kept narrow and centred — Mixcloud crops
+     the sides on small screens, so the word must survive the middle third. */
+  .core {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px; height: 350px;
+    display: grid;
+    place-items: center;
+  }
+  .halo {
+    position: absolute;
+    width: 1300px; height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse,
+      rgba(167,139,250,.13) 0%,
+      rgba(240,171,252,.06) 35%,
+      transparent 72%);
+    filter: blur(28px);
+  }
+  .wordmark {
+    position: relative;
+    font-family: 'Major Mono Display', monospace;
+    font-weight: 400;
+    font-size: 74px;
+    letter-spacing: 0.20em;
+    /* letter-spacing adds a trailing gap; pull it back so the word is centred */
+    text-indent: 0.20em;
+    color: #ece9f7;
+    white-space: nowrap;
+    text-shadow:
+      0 0 24px rgba(103, 232, 249, 0.45),
+      0 0 60px rgba(167, 139, 250, 0.35),
+      0 0 120px rgba(240, 171, 252, 0.20);
+  }
+
+  /* edge vignette so the sides crop cleanly on narrow screens */
+  .vignette {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg,
+      rgba(5,2,8,.92) 0%, rgba(5,2,8,0) 22%,
+      rgba(5,2,8,0) 78%, rgba(5,2,8,.92) 100%);
+  }
+  /* soften top and bottom edges too */
+  .vignette-y {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      rgba(5,2,8,.55) 0%, rgba(5,2,8,0) 30%,
+      rgba(5,2,8,0) 70%, rgba(5,2,8,.55) 100%);
+  }
+  /* very faint scanlines, for the "signal" texture */
+  .scan {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(180deg,
+      rgba(255,255,255,.018) 0px, rgba(255,255,255,.018) 1px,
+      transparent 1px, transparent 4px);
+  }
+</style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  <div class="ticks" id="ticks"></div>
+
+  <div class="band b2"></div>
+  <div class="band"></div>
+  <div class="band b3"></div>
+
+  <div class="core">
+    <div class="halo"></div>
+    <div class="wordmark">supervuoto</div>
+  </div>
+
+  <div class="scan"></div>
+  <div class="vignette-y"></div>
+  <div class="vignette"></div>
+
+<script>
+  // Seeded RNG so the banner is identical every regeneration.
+  let seed = 20261008;
+  const rnd = () => {
+    seed = (seed * 1664525 + 1013904223) % 4294967296;
+    return seed / 4294967296;
+  };
+
+  const W = 1600, H = 350;
+  const TINTS = ['#ece9f7', '#ece9f7', '#ece9f7', '#a78bfa', '#67e8f9', '#f0abfc'];
+  const stars = document.getElementById('stars');
+  for (let n = 0; n < 220; n++) {
+    const x = rnd() * W;
+    const y = rnd() * H;
+    // thin out stars near the centre so the wordmark stays clean
+    const dx = (x - W / 2) / 300, dy = (y - H / 2) / 150;
+    if (dx * dx + dy * dy < 1 && rnd() < 0.85) continue;
+    const s = rnd() < 0.12 ? 3 : rnd() < 0.5 ? 2 : 1;
+    const i = document.createElement('i');
+    i.style.cssText =
+      `left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;width:${s}px;height:${s}px;` +
+      `opacity:${(0.25 + rnd() * 0.7).toFixed(2)};background:${TINTS[(rnd() * TINTS.length) | 0]}`;
+    stars.appendChild(i);
+  }
+
+  // Spectrum ticks along the band, tallest toward the centre.
+  const ticks = document.getElementById('ticks');
+  for (let x = 40; x < W - 40; x += 11) {
+    const d = 1 - Math.abs(x - W / 2) / (W / 2);       // 0 at edges, 1 at centre
+    const falloff = Math.pow(d, 2.2);
+    if (Math.abs(x - W / 2) < 470) continue;            // keep the wordmark clear
+    const h = (6 + rnd() * 54 * falloff) * (0.5 + rnd());
+    const i = document.createElement('i');
+    i.style.cssText =
+      `left:${x}px;height:${h.toFixed(1)}px;opacity:${(0.12 + falloff * 0.5).toFixed(2)}`;
+    ticks.appendChild(i);
+  }
+</script>
+</body>
+</html>

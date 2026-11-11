@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Supervuoto Mixcloud Charts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --void-black: #050208;
+    --deep-space: #0b0618;
+    --nebula-purple: #a78bfa;
+    --signal-cyan: #67e8f9;
+    --ember-magenta: #f0abfc;
+    --star-white: #ece9f7;
+    --dim: rgba(236,233,247,.62);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--void-black); }
+  body { width: 1080px; height: 1350px; overflow: hidden; font-family: 'Space Grotesk', sans-serif; color: var(--star-white); }
+
+  .slide {
+    position: relative; width: 1080px; height: 1350px; padding: 64px 60px 52px;
+    background:
+      radial-gradient(ellipse 70% 40% at 85% 0%, rgba(167,139,250,.20), transparent 70%),
+      radial-gradient(ellipse 60% 35% at 0% 100%, rgba(103,232,249,.10), transparent 70%),
+      var(--void-black);
+    display: flex; flex-direction: column;
+  }
+  .slide::before { /* starfield */
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .55;
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, #fff, transparent),
+      radial-gradient(1px 1px at 72% 9%, #fff, transparent),
+      radial-gradient(1px 1px at 91% 33%, #fff, transparent),
+      radial-gradient(1px 1px at 38% 6%, #fff, transparent),
+      radial-gradient(1px 1px at 55% 97%, #fff, transparent),
+      radial-gradient(1px 1px at 6% 62%, #fff, transparent),
+      radial-gradient(1px 1px at 97% 78%, #fff, transparent);
+  }
+
+  .head { display: flex; align-items: center; gap: 26px; position: relative; }
+  .head-sigil { width: 84px; height: 84px; flex: none; }
+  .kicker { font-family: 'Major Mono Display', monospace; font-size: 22px; color: var(--signal-cyan); letter-spacing: .04em; }
+  .title { font-family: 'Major Mono Display', monospace; font-weight: 400; font-size: 62px; line-height: 1; letter-spacing: -.01em; }
+  .lede { position: relative; margin: 26px 0 30px; font-size: 25px; font-weight: 300; color: var(--dim); }
+  .lede b { color: var(--star-white); font-weight: 500; }
+
+  .grid { position: relative; flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 18px; }
+  .tile {
+    position: relative; border-radius: 18px; overflow: hidden;
+    border: 1px solid rgba(167,139,250,.28);
+    background-size: cover; background-position: center;
+  }
+  .tile::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(5,2,8,.82) 0%, rgba(5,2,8,.55) 22%, rgba(5,2,8,.12) 42%, rgba(5,2,8,.78) 72%, rgba(5,2,8,.94) 100%); }
+  .tile > * { position: relative; z-index: 1; }
+  .ep { position: absolute; top: 18px; left: 20px; right: 20px; z-index: 1; }
+  .ep-no { font-family: 'Major Mono Display', monospace; font-size: 17px; color: var(--signal-cyan); text-shadow: 0 1px 6px rgba(0,0,0,.8); }
+  .ep-title { font-size: 25px; font-weight: 700; line-height: 1.1; margin-top: 3px; text-shadow: 0 2px 10px rgba(0,0,0,.85); }
+  .ep-vs { font-size: 15px; font-weight: 400; color: var(--star-white); opacity: .85; margin-top: 3px; text-shadow: 0 1px 8px rgba(0,0,0,.9); }
+  .ranks { position: absolute; left: 20px; right: 20px; bottom: 16px; z-index: 1; display: flex; flex-direction: column; gap: 6px; }
+  .rank { display: flex; align-items: baseline; gap: 12px; }
+  .rank .n { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 38px; line-height: 1; min-width: 72px; letter-spacing: -.02em; }
+  .rank .n small { font-size: .55em; font-weight: 400; color: var(--dim); margin-right: 2px; }
+  .rank .c { font-size: 19px; font-weight: 400; color: var(--star-white); }
+  .rank.top .n { color: var(--ember-magenta); }
+
+  .foot { position: relative; margin-top: 30px; display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 19px; color: var(--dim); }
+  .foot .motto { font-family: 'Major Mono Display', monospace; font-size: 17px; color: var(--nebula-purple); }
+  .foot b { color: var(--star-white); font-weight: 500; }
+</style>
+</head>
+<body>
+<section class="slide">
+
+  <div class="head">
+    <svg class="head-sigil" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="40" stroke="#ece9f7" stroke-width="4"/>
+      <line x1="16" y1="84" x2="84" y2="16" stroke="#a78bfa" stroke-width="4"/>
+    </svg>
+    <div>
+      <p class="kicker">on the mixcloud charts</p>
+      <h1 class="title">supervuoto</h1>
+    </div>
+  </div>
+
+  <p class="lede"><b>13 chart placements</b> across the first six BIT episodes — thank you to every frequency that passed through.</p>
+
+  <div class="grid">
+    <div class="tile" style="background-image:url('mixcloud-charts-ep01-cover.jpg')">
+      <div class="ep"><p class="ep-no">bit 01</p><p class="ep-title">Legacy of Inedia</p><p class="ep-vs">elmozzo vs bozzystep</p></div>
+      <div class="ranks">
+        <div class="rank top"><span class="n"><small>#</small>6</span><span class="c">Future garage</span></div>
+        <div class="rank"><span class="n"><small>#</small>26</span><span class="c">Dubstep</span></div>
+      </div>
+    </div>
+    <div class="tile" style="background-image:url('../public/covers/ep02-friend-of-the-night.jpg'); background-position: center 30%">
+      <div class="ep"><p class="ep-no">bit 02</p><p class="ep-title">Friend of the Night</p><p class="ep-vs">elmozzo vs lhotse</p></div>
+      <div class="ranks">
+        <div class="rank top"><span class="n"><small>#</small>10</span><span class="c">Minimal wave</span></div>
+        <div class="rank"><span class="n"><small>#</small>13</span><span class="c">Dark wave</span></div>
+      </div>
+    </div>
+    <div class="tile" style="background-image:url('../public/covers/ep03-teenage-bass.jpg')">
+      <div class="ep"><p class="ep-no">bit 03</p><p class="ep-title">Teenage Bass</p><p class="ep-vs">elmozzo vs ophra</p></div>
+      <div class="ranks">
+        <div class="rank"><span class="n"><small>#</small>28</span><span class="c">Liquid drum and bass</span></div>
+        <div class="rank"><span class="n"><small>#</small>96</span><span class="c">Drum and bass</span></div>
+      </div>
+    </div>
+    <div class="tile" style="background-image:url('../public/covers/ep04-mutazioni.jpg')">
+      <div class="ep"><p class="ep-no">bit 04</p><p class="ep-title">Mutazioni parte uno</p><p class="ep-vs">elmozzo vs luca seoni</p></div>
+      <div class="ranks">
+        <div class="rank top"><span class="n"><small>#</small>5</span><span class="c">Psybient</span></div>
+        <div class="rank"><span class="n"><small>#</small>12</span><span class="c">Ambient techno</span></div>
+      </div>
+    </div>
+    <div class="tile" style="background-image:url('../public/covers/ep05-one-frequency.jpg')">
+      <div class="ep"><p class="ep-no">bit 05</p><p class="ep-title">One Frequency</p><p class="ep-vs">elmozzo vs raja</p></div>
+      <div class="ranks">
+        <div class="rank"><span class="n"><small>#</small>18</span><span class="c">Full-on</span></div>
+        <div class="rank"><span class="n"><small>#</small>24</span><span class="c">Progressive psytrance</span></div>
+        <div class="rank"><span class="n"><small>#</small>44</span><span class="c">Psytrance</span></div>
+      </div>
+    </div>
+    <div class="tile" style="background-image:url('../public/covers/ep06-agrumi.jpg')">
+      <div class="ep"><p class="ep-no">bit 06</p><p class="ep-title">Agrumi</p><p class="ep-vs">elmozzo vs bozzystep</p></div>
+      <div class="ranks">
+        <div class="rank top"><span class="n"><small>#</small>5</span><span class="c">Moombahton</span></div>
+        <div class="rank"><span class="n"><small>#</small>12</span><span class="c">Cumbia</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>listen on <b>mixcloud.com/supervuoto</b> · supervuoto.org</span>
+    <span class="motto">contro la perfezione</span>
+  </div>
+
+</section>
+</body>
+</html>

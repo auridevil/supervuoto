@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<title>SUPERVUOTO — Le Linee · slide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --void-black: #050208;
+    --deep-space: #0b0618;
+    --nebula-purple: #a78bfa;
+    --signal-cyan: #67e8f9;
+    --ember-magenta: #f0abfc;
+    --star-white: #ece9f7;
+    --font-display: 'Major Mono Display', monospace;
+    --font-body: 'Space Grotesk', sans-serif;
+    --hairline: rgba(167, 139, 250, 0.22);
+    --hairline-soft: rgba(236, 233, 247, 0.10);
+    --dim: rgba(236, 233, 247, 0.62);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* IG 4:5 portrait */
+  .slide {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    padding: 90px 88px 76px;
+    background:
+      radial-gradient(120% 60% at 12% 0%, rgba(103, 232, 249, 0.07), transparent 55%),
+      radial-gradient(120% 70% at 100% 100%, rgba(240, 171, 252, 0.08), transparent 55%),
+      radial-gradient(140% 120% at 50% 38%, rgba(11, 6, 24, 0.92), var(--void-black) 82%);
+    color: var(--star-white);
+    font-family: var(--font-body);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 16%, rgba(236,233,247,0.55), transparent),
+      radial-gradient(1.4px 1.4px at 82% 10%, rgba(236,233,247,0.45), transparent),
+      radial-gradient(1.2px 1.2px at 30% 52%, rgba(236,233,247,0.35), transparent),
+      radial-gradient(1.4px 1.4px at 90% 62%, rgba(236,233,247,0.4), transparent),
+      radial-gradient(1.2px 1.2px at 58% 90%, rgba(236,233,247,0.3), transparent),
+      radial-gradient(1.2px 1.2px at 68% 34%, rgba(236,233,247,0.3), transparent),
+      radial-gradient(1.2px 1.2px at 20% 82%, rgba(236,233,247,0.28), transparent);
+    opacity: 0.75;
+    pointer-events: none;
+  }
+  .slide > * { position: relative; z-index: 1; }
+
+  /* ---------- HEADER ---------- */
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 10px;
+  }
+  .head-sigil { width: 52px; height: 52px; flex: none; opacity: 0.92; }
+  .kicker {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.42em;
+    color: var(--signal-cyan);
+    text-transform: lowercase;
+    margin: 0 0 6px;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-size: 52px;
+    line-height: 0.98;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    margin: 0;
+  }
+  .title .void { color: var(--nebula-purple); }
+
+  .lede {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--dim);
+    margin: 30px 0 4px;
+    max-width: 860px;
+  }
+
+  .rule {
+    height: 1px;
+    background: var(--hairline);
+    margin: 30px 0 6px;
+  }
+
+  /* ---------- LINES LIST ---------- */
+  .lines {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+  }
+  .line {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 30px;
+    align-items: center;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--hairline-soft);
+  }
+  .line:last-child { border-bottom: none; }
+  .glyph { width: 68px; height: 68px; }
+  .glyph svg { width: 100%; height: 100%; display: block; }
+
+  .l-name {
+    font-family: var(--font-display);
+    font-size: 30px;
+    letter-spacing: 0.03em;
+    text-transform: lowercase;
+    margin: 0 0 5px;
+    line-height: 1;
+  }
+  .l-essence {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+  .l-hook {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.42;
+    color: var(--dim);
+    margin: 0;
+    max-width: 800px;
+  }
+
+  .a-cyan .l-essence, .a-cyan .l-name .accent { color: var(--signal-cyan); }
+  .a-violet .l-essence, .a-violet .l-name .accent { color: var(--nebula-purple); }
+  .a-magenta .l-essence, .a-magenta .l-name .accent { color: var(--ember-magenta); }
+
+  /* ---------- FOOTER ---------- */
+  .foot {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.22em;
+    text-transform: lowercase;
+  }
+  .foot .motto { color: var(--ember-magenta); }
+  .foot .handle { color: rgba(236, 233, 247, 0.42); }
+</style>
+</head>
+<body>
+
+<section class="slide">
+
+  <!-- HEADER -->
+  <div class="head">
+    <svg class="head-sigil" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="40" stroke="#ece9f7" stroke-width="4"/>
+      <line x1="16" y1="84" x2="84" y2="16" stroke="#a78bfa" stroke-width="4"/>
+    </svg>
+    <div>
+      <p class="kicker">le linee</p>
+      <h1 class="title">supervuoto</h1>
+    </div>
+  </div>
+
+  <p class="lede">
+    Cinque frequenze aperte nello stesso vuoto profondo. Non generi, ma direzioni
+    d'ascolto — cinque modi di puntare la stessa antenna verso il nulla.
+  </p>
+
+  <div class="rule"></div>
+
+  <!-- LINES -->
+  <div class="lines">
+
+    <!-- BIT -->
+    <div class="line a-cyan">
+      <div class="glyph">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="38" stroke="#ece9f7" stroke-width="3.5"/>
+          <line x1="6" y1="50" x2="94" y2="50" stroke="#67e8f9" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="5" fill="#67e8f9"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="l-name"><span class="accent">bit</span></h2>
+        <p class="l-essence">la linea madre</p>
+        <p class="l-hook">Il segnale d'origine. Un tema per episodio, due ospiti sulla stessa fascia, senza generi.</p>
+      </div>
+    </div>
+
+    <!-- BACKGROUND RADIATION -->
+    <div class="line a-violet">
+      <div class="glyph">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="38" stroke="#a78bfa" stroke-width="3" opacity="0.55"/>
+          <circle cx="50" cy="50" r="26" fill="#0b0618" stroke="#a78bfa" stroke-width="3.5"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="l-name"><span class="accent">background radiation</span></h2>
+        <p class="l-essence">la luce più antica, ancora accesa</p>
+        <p class="l-hook">Il fruscio tra le stazioni è la luce dell'inizio. Ambient, drone, metal, rumore: ciò che resta acceso.</p>
+      </div>
+    </div>
+
+    <!-- LAB -->
+    <div class="line a-cyan">
+      <div class="glyph">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="38" stroke="#ece9f7" stroke-width="3.5"/>
+          <ellipse cx="50" cy="50" rx="44" ry="17" stroke="#67e8f9" stroke-width="2.5" transform="rotate(-30 50 50)" opacity="0.85"/>
+          <circle cx="83" cy="32" r="5.5" fill="#67e8f9"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="l-name"><span class="accent">lab</span></h2>
+        <p class="l-essence">il banco di prova del vuoto</p>
+        <p class="l-hook">Dove finisce la certezza e comincia l'esperimento. Field recording, sintesi, forme senza nome.</p>
+      </div>
+    </div>
+
+    <!-- ALTE ENERGIE -->
+    <div class="line a-magenta">
+      <div class="glyph">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="38" stroke="#ece9f7" stroke-width="3.5"/>
+          <path d="M58 14 L34 52 L50 52 L42 86 L70 44 L52 44 Z" fill="#f0abfc" stroke="#f0abfc" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="l-name"><span class="accent">alte energie</span></h2>
+        <p class="l-essence">quando la frequenza va in soglia</p>
+        <p class="l-hook">L'urto. Veloce, ruvida, senza freni: energia allo stato brutale, incanalata invece che dispersa.</p>
+      </div>
+    </div>
+
+    <!-- MONOGRAPHY -->
+    <div class="line a-violet">
+      <div class="glyph">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="38" stroke="#a78bfa" stroke-width="3.5"/>
+          <circle cx="50" cy="50" r="7" fill="#a78bfa"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="l-name"><span class="accent">monography</span></h2>
+        <p class="l-essence">uno sguardo, messo a fuoco</p>
+        <p class="l-hook">Una lente sola, tenuta ferma a lungo. Un'etichetta, un artista, un anno: l'ascolto diventa studio.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <span class="motto">contro la perfezione · contro la definizione</span>
+    <span class="handle">supervuoto.org</span>
+  </div>
+
+</section>
+
+</body>
+</html>

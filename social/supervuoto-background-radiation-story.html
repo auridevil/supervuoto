@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SUPERVUOTO — background radiation · story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --void-black: #050208;
+    --deep-space: #0b0618;
+    --nebula-purple: #a78bfa;
+    --signal-cyan: #67e8f9;
+    --ember-magenta: #f0abfc;
+    --star-white: #ece9f7;
+    --font-display: 'Major Mono Display', monospace;
+    --font-body: 'Space Grotesk', sans-serif;
+    --hairline: rgba(167, 139, 250, 0.26);
+    --dim: rgba(236, 233, 247, 0.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+  }
+
+  /* IG story 9:16 */
+  .story {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    /* top/bottom padding keeps content clear of the IG story UI overlays */
+    padding: 206px 84px 226px;
+    background: var(--void-black);
+    color: var(--star-white);
+    font-family: var(--font-body);
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* the sky map — the oldest light, mottled */
+  #sky {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, var(--void-black) 0%, rgba(5,2,8,0.75) 9%, transparent 19%),
+      linear-gradient(to top, var(--void-black) 0%, rgba(5,2,8,0.85) 14%, transparent 30%);
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    opacity: 0.22;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  }
+
+  .story > * { position: relative; z-index: 2; }
+  .story > #sky, .story > .veil, .story > .grain { position: absolute; }
+
+  /* ---------- HEADER ---------- */
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .head-sigil { width: 40px; height: 40px; flex: none; opacity: 0.9; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 34px;
+    letter-spacing: 0.38em;
+    text-transform: lowercase;
+    margin: 0;
+  }
+
+  .meta {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    font-family: var(--font-display);
+    font-size: 25px;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+  }
+  .meta .new { color: var(--star-white); }
+  .meta .soon { color: var(--signal-cyan); }
+
+  .spacer { flex: 1; min-height: 0; }
+
+  /* the line's sigil, at poster scale, sitting in the middle of the sky map */
+  .big-sigil {
+    position: absolute;
+    left: 50%;
+    top: 820px;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    filter: drop-shadow(0 0 40px rgba(167, 139, 250, 0.35));
+  }
+
+  /* ---------- TITLE ---------- */
+  .title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 92px;
+    line-height: 1.12;
+    letter-spacing: 0.01em;
+    text-transform: lowercase;
+  }
+  .title .l1 { display: block; color: var(--star-white); }
+  .title .l2 { display: block; color: var(--nebula-purple); padding-left: 64px; }
+
+  .essence {
+    margin: 26px 0 46px;
+    font-size: 34px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: var(--dim);
+    font-style: italic;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .foot {
+    padding-top: 26px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .foot-hook {
+    margin: 0;
+    max-width: 520px;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--star-white);
+  }
+  .foot-meta {
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    text-transform: lowercase;
+    line-height: 2.2;
+    flex: none;
+  }
+  .foot-meta .motto { color: var(--ember-magenta); display: block; }
+  .foot-meta .handle { color: rgba(236, 233, 247, 0.4); display: block; }
+</style>
+</head>
+<body>
+
+<section class="story">
+
+  <canvas id="sky" width="1080" height="1920"></canvas>
+  <div class="veil"></div>
+  <div class="grain"></div>
+
+  <!-- HEADER -->
+  <div class="head">
+    <svg class="head-sigil" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="40" stroke="#ece9f7" stroke-width="3"/>
+      <line x1="16" y1="84" x2="84" y2="16" stroke="#a78bfa" stroke-width="3"/>
+    </svg>
+    <h1 class="wordmark">supervuoto</h1>
+  </div>
+
+  <div class="meta">
+    <span class="new">a new line</span>
+    <span class="soon">first transmission</span>
+  </div>
+
+  <!-- the line's sigil (same glyph as in "le linee") -->
+  <svg class="big-sigil" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="38" stroke="#a78bfa" stroke-width="3" opacity="0.55"/>
+    <circle cx="50" cy="50" r="26" fill="#0b0618" stroke="#a78bfa" stroke-width="3.5"/>
+  </svg>
+
+  <div class="spacer"></div>
+
+  <!-- TITLE -->
+  <h2 class="title">
+    <span class="l1">background</span>
+    <span class="l2">radiation</span>
+  </h2>
+  <p class="essence">the oldest light, still on</p>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <p class="foot-hook">the hiss between stations<br />is the light of the beginning.</p>
+    <div class="foot-meta">
+      <span class="motto">against perfection</span>
+      <span class="motto">against definition</span>
+      <span class="handle">supervuoto.org</span>
+    </div>
+  </div>
+
+</section>
+
+<script>
+(function () {
+  const cv = document.getElementById('sky');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+
+  // deterministic noise, so every render is the same image
+  let seed = 20261028;
+  function rnd() {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  }
+
+  // value noise on a seeded lattice, smoothed
+  function lattice(size) {
+    const g = new Float32Array(size * size);
+    for (let i = 0; i < g.length; i++) g[i] = rnd() * 2 - 1;
+    return { size, g };
+  }
+  const smooth = (t) => t * t * (3 - 2 * t);
+  function sample(L, x, y) {
+    const s = L.size;
+    const xi = Math.floor(x), yi = Math.floor(y);
+    const fx = smooth(x - xi), fy = smooth(y - yi);
+    const at = (i, j) => L.g[((j % s + s) % s) * s + ((i % s + s) % s)];
+    const a = at(xi, yi), b = at(xi + 1, yi), c = at(xi, yi + 1), d = at(xi + 1, yi + 1);
+    return a + (b - a) * fx + (c - a) * fy + (a - b - c + d) * fx * fy;
+  }
+  const OCT = [
+    { L: lattice(64), f: 7,  w: 1.0 },
+    { L: lattice(64), f: 15, w: 0.55 },
+    { L: lattice(64), f: 31, w: 0.3 },
+    { L: lattice(64), f: 62, w: 0.16 },
+  ];
+
+  // the all-sky map: an ellipse, like the CMB maps (Mollweide projection)
+  const CX = 540, CY = 820, RX = 500, RY = 250;
+
+  // palette: cold void -> violet -> magenta/cyan hot spots
+  const STOPS = [
+    [-1.0, [5, 2, 8]],
+    [-0.35, [24, 12, 58]],
+    [0.0, [70, 44, 140]],
+    [0.3, [167, 139, 250]],
+    [0.55, [240, 171, 252]],
+    [0.8, [255, 236, 252]],
+  ];
+  function color(v) {
+    if (v <= STOPS[0][0]) return STOPS[0][1];
+    for (let i = 1; i < STOPS.length; i++) {
+      if (v <= STOPS[i][0]) {
+        const [v0, c0] = STOPS[i - 1], [v1, c1] = STOPS[i];
+        const t = (v - v0) / (v1 - v0);
+        return [0, 1, 2].map((k) => c0[k] + (c1[k] - c0[k]) * t);
+      }
+    }
+    return STOPS[STOPS.length - 1][1];
+  }
+
+  ctx.fillStyle = '#050208';
+  ctx.fillRect(0, 0, W, H);
+
+  const img = ctx.getImageData(0, 0, W, H);
+  const px = img.data;
+  for (let y = CY - RY - 2; y <= CY + RY + 2; y++) {
+    for (let x = CX - RX - 2; x <= CX + RX + 2; x++) {
+      const ex = (x - CX) / RX, ey = (y - CY) / RY;
+      const r2 = ex * ex + ey * ey;
+      if (r2 > 1) continue;
+      const u = (x - (CX - RX)) / (2 * RX), v = (y - (CY - RY)) / (2 * RY);
+      let n = 0, norm = 0;
+      for (const o of OCT) {
+        n += sample(o.L, u * o.f, v * o.f * (RY / RX) * 2) * o.w;
+        norm += o.w;
+      }
+      n = (n / norm) * 1.9;
+      // the galactic band across the middle, faintly brighter
+      n += Math.exp(-(ey * ey) / 0.012) * 0.25;
+      const c = color(n);
+      // soft rim, dimmed so the map sits back behind the type
+      const edge = Math.min(1, (1 - Math.sqrt(r2)) / 0.035);
+      const k = 0.82 * edge;
+      const i = (y * W + x) * 4;
+      px[i]     = 5 + (c[0] - 5) * k;
+      px[i + 1] = 2 + (c[1] - 2) * k;
+      px[i + 2] = 8 + (c[2] - 8) * k;
+      px[i + 3] = 255;
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+
+  // the map's outline, hairline
+  ctx.strokeStyle = 'rgba(167, 139, 250, 0.45)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.ellipse(CX, CY, RX + 14, RY + 14, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // scattered static around the map — the hiss between stations
+  for (let i = 0; i < 9000; i++) {
+    const x = rnd() * W, y = 300 + rnd() * 1250;
+    const ex = (x - CX) / (RX + 20), ey = (y - CY) / (RY + 20);
+    if (ex * ex + ey * ey < 1) continue;
+    const a = 0.05 + rnd() * 0.22;
+    ctx.fillStyle = rnd() < 0.7
+      ? 'rgba(167,139,250,' + a.toFixed(3) + ')'
+      : 'rgba(236,233,247,' + (a * 0.8).toFixed(3) + ')';
+    ctx.fillRect(x, y, 1.2, 1.2);
+  }
+
+  // one horizontal slice out of register — the signal dropping a frame
+  const sl = { y: CY + 96, h: 12, dx: -38 };
+  const band = ctx.getImageData(0, sl.y, W, sl.h);
+  ctx.fillStyle = '#050208';
+  ctx.fillRect(0, sl.y, W, sl.h);
+  ctx.putImageData(band, sl.dx, sl.y);
+})();
+</script>
+
+</body>
+</html>

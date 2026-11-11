@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- supervuoto, black metal logo v3: the circle clean (plain ring, thin inner
+     ring, straight slash: the ⊘ as it is), the name dirty (blackletter
+     overgrown with thorns and roots from every edge, eroded with scratches).
+     Thorns are cut away around the rings so the circle stays clean.
+     Deterministic. Render with headless Chrome at 2048x2048:
+     #white (white ink, transparent) · #black (black ink, transparent) · #preview (white on black) -->
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: transparent; }
+  canvas { display: block; width: 2048px; height: 2048px; }
+</style>
+</head>
+<body>
+<canvas id="c" width="2048" height="2048"></canvas>
+<script>
+(async function () {
+  const v = location.hash.slice(1) || 'preview';
+  const INK = v === 'black' ? '#000000' : '#ece9f7';
+  if (v === 'preview') document.body.style.background = '#050208';
+
+  await document.fonts.load('400 300px "UnifrakturMaguntia"');
+
+  const S = 2048, CX = S / 2, CY = S / 2;
+  const ctx = document.getElementById('c').getContext('2d');
+
+  let seed = 66613;
+  const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  const between = (a, b) => a + rnd() * (b - a);
+
+  // a tapered, slightly bent thorn from (x,y) along angle a, with side thorns
+  function thorn(x, y, a, len, w, bend = between(-0.35, 0.35), branches = 1) {
+    const tx = x + Math.cos(a) * len, ty = y + Math.sin(a) * len;
+    const nx = -Math.sin(a), ny = Math.cos(a);
+    const mx = x + Math.cos(a) * len * 0.5 + nx * len * bend * 0.3;
+    const my = y + Math.sin(a) * len * 0.5 + ny * len * bend * 0.3;
+    ctx.beginPath();
+    ctx.moveTo(x + nx * w / 2, y + ny * w / 2);
+    ctx.quadraticCurveTo(mx + nx * w * 0.18, my + ny * w * 0.18, tx, ty);
+    ctx.quadraticCurveTo(mx - nx * w * 0.18, my - ny * w * 0.18, x - nx * w / 2, y - ny * w / 2);
+    ctx.closePath();
+    ctx.fill();
+    if (branches > 0 && len > 50) {
+      const n = rnd() < 0.4 ? 1 : 2;
+      for (let i = 0; i < n; i++) {
+        const t = between(0.3, 0.65);
+        const bx = x + (tx - x) * t + nx * len * bend * 0.12;
+        const by = y + (ty - y) * t + ny * len * bend * 0.12;
+        const side = rnd() < 0.5 ? -1 : 1;
+        thorn(bx, by, a + side * between(0.5, 0.95), len * between(0.25, 0.5), w * 0.45, bend, branches - 1);
+      }
+    }
+  }
+
+  ctx.fillStyle = INK;
+  ctx.strokeStyle = INK;
+
+  // ---- wordmark geometry + mask ----
+  const WORD = 'supervuoto';
+  let size = 360;
+  ctx.font = `400 ${size}px "UnifrakturMaguntia"`;
+  size = size * 1640 / ctx.measureText(WORD).width;
+  const FONT = `400 ${size}px "UnifrakturMaguntia"`;
+  const TY = CY + size * 0.28;
+
+  const off = document.createElement('canvas');
+  off.width = S; off.height = S;
+  const o = off.getContext('2d');
+  o.font = FONT; o.textAlign = 'center'; o.textBaseline = 'alphabetic';
+  o.fillStyle = '#fff';
+  o.fillText(WORD, CX, TY);
+  const px = o.getImageData(0, 0, S, S).data;
+  const solid = (x, y) => x >= 0 && y >= 0 && x < S && y < S && px[(y * S + x) * 4 + 3] > 128;
+  function edges(x) {
+    let top = -1, bot = -1;
+    for (let y = 0; y < S; y++) if (solid(x, y)) { top = y; break; }
+    for (let y = S - 1; y >= 0; y--) if (solid(x, y)) { bot = y; break; }
+    return [top, bot];
+  }
+
+  // ---- 1. the dirt: thorns and roots out of the letters ----
+  ctx.font = FONT; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+
+  // mirrored top thorns and bottom roots, the symmetric frame
+  for (let x = CX - 820; x <= CX; x += Math.round(between(12, 28))) {
+    const xr = 2 * CX - x;
+    const [tl, bl] = edges(x), [tr, br] = edges(xr);
+    if (tl < 0 || tr < 0) continue;
+    const s0 = seed;
+    if (rnd() < 0.85) {
+      const len = between(60, 330), w = between(9, 19), lean = between(-0.5, 0.5), bend = between(-0.5, 0.5);
+      for (const [xx, yy, m] of [[x, tl, 1], [xr, tr, -1]]) {
+        seed = s0 + 7;
+        thorn(xx, yy + 6, -Math.PI / 2 - m * lean, len, w, m * bend, 2);
+      }
+    }
+    seed = s0 + 13;
+    if (rnd() < 0.7) {
+      const len = between(80, 420), w = between(9, 17), lean = between(-0.4, 0.4), bend = between(-0.6, 0.6);
+      for (const [xx, yy, m] of [[x, bl, 1], [xr, br, -1]]) {
+        seed = s0 + 29;
+        thorn(xx, yy - 6, Math.PI / 2 + m * lean, len, w, m * bend, 2);
+      }
+    }
+    seed = s0 + 101;
+  }
+
+  // short barbs from any edge of the letters, pointing outward
+  let barbs = 0;
+  for (let tries = 0; tries < 200000 && barbs < 420; tries++) {
+    const x = Math.floor(between(CX - 840, CX + 840)), y = Math.floor(between(TY - size, TY + size * 0.4));
+    if (!solid(x, y)) continue;
+    // outward normal from the mask gradient
+    let gx = 0, gy = 0;
+    for (let dy = -6; dy <= 6; dy += 3) for (let dx = -6; dx <= 6; dx += 3) {
+      if (!solid(x + dx, y + dy)) { gx += dx; gy += dy; }
+    }
+    if (gx === 0 && gy === 0) continue; // interior
+    const a = Math.atan2(gy, gx) + between(-0.5, 0.5);
+    thorn(x, y, a, between(16, 80), between(5, 11), between(-0.5, 0.5), rnd() < 0.3 ? 1 : 0);
+    barbs++;
+  }
+
+  // two horns each side, top and bottom
+  for (const m of [1, -1]) {
+    seed = 4242;
+    const x = CX - m * 800, [t, b] = edges(x);
+    if (t > 0) thorn(x, t + 10, -Math.PI / 2 - m * 0.3, 400, 32, m * 0.5, 3);
+    if (b > 0) thorn(x, b - 10, Math.PI / 2 + m * 0.42, 330, 26, -m * 0.5, 2);
+  }
+
+  // ---- 2. keep the circle clean: cut the dirt away around the rings ----
+  const R = 430, RW = 40, RI = R - 58;
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.lineWidth = RW + 44;
+  ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.stroke();
+  ctx.lineWidth = 8 + 30;
+  ctx.beginPath(); ctx.arc(CX, CY, RI, 0, Math.PI * 2); ctx.stroke();
+  ctx.restore();
+
+  // ---- 3. the circle: plain ring, thin inner ring, straight slash ----
+  ctx.lineWidth = RW;
+  ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.stroke();
+  ctx.lineWidth = 8;
+  ctx.beginPath(); ctx.arc(CX, CY, RI, 0, Math.PI * 2); ctx.stroke();
+  const L = R * 0.85 * Math.SQRT1_2 * 1.42; // ends just past the ring, like the ⊘
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.lineWidth = RW + 30;
+  ctx.beginPath(); ctx.moveTo(CX - L, CY + L); ctx.lineTo(CX + L, CY - L); ctx.stroke();
+  ctx.restore();
+  ctx.lineWidth = RW * 0.8;
+  ctx.lineCap = 'butt';
+  ctx.beginPath(); ctx.moveTo(CX - L, CY + L); ctx.lineTo(CX + L, CY - L); ctx.stroke();
+
+  // ---- 4. the name on top, knocked out of everything under it ----
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = 30;
+  ctx.strokeText(WORD, CX, TY);
+  ctx.restore();
+  ctx.fillText(WORD, CX, TY);
+
+  // erosion: scratches and pits cut into the letters
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.lineCap = 'round';
+  for (let i = 0, made = 0; i < 40000 && made < 260; i++) {
+    const x = Math.floor(between(CX - 840, CX + 840)), y = Math.floor(between(TY - size, TY + size * 0.4));
+    if (!solid(x, y)) continue;
+    made++;
+    if (rnd() < 0.55) {
+      const a = between(-0.9, -0.5) + (rnd() < 0.5 ? 0 : Math.PI / 2), l = between(10, 46);
+      ctx.lineWidth = between(1.5, 4);
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); ctx.stroke();
+    } else {
+      ctx.beginPath(); ctx.arc(x, y, between(1.5, 5), 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  ctx.restore();
+
+  // a few drips running off the bottom of the letters
+  for (let i = 0; i < 18; i++) {
+    const x = Math.floor(between(CX - 780, CX + 780)), [, b] = edges(x);
+    if (b < 0) continue;
+    const l = between(40, 170), w = between(8, 15);
+    ctx.beginPath();
+    ctx.moveTo(x - w / 2, b - 4);
+    ctx.quadraticCurveTo(x - w * 0.3, b + l * 0.7, x, b + l);
+    ctx.quadraticCurveTo(x + w * 0.3, b + l * 0.7, x + w / 2, b - 4);
+    ctx.fill();
+    ctx.beginPath(); ctx.arc(x, b + l, w * 0.42, 0, Math.PI * 2); ctx.fill();
+  }
+
+  document.title = 'ready';
+})();
+</script>
+</body>
+</html>
