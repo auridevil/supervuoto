@@ -82,6 +82,14 @@ export const PARTICIPANTS = [
     from: 'italy',
   },
   {
+    name: 'cana',
+    kind: 'dj',
+    instagram: 'https://www.instagram.com/2sb.mp3/',
+    soundcloud: 'https://soundcloud.com/cana-beach',
+    mixcloud: null,
+    from: 'italy',
+  },
+  {
     name: 'bienoise',
     kind: 'dj',
     instagram: 'https://www.instagram.com/bienoise/',

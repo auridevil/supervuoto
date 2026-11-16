@@ -5,6 +5,56 @@ Fields: date (required), category, artist, artist-instagram, artist-soundcloud,
 youtube / soundcloud / mixcloud (at least one), cover, cover-credit,
 cover-credit-url, tags — then free description paragraphs.
 
+## Supervuoto Episode 10 BIT - Too Pop To Die
+
+- date: 2026-11-06
+- category: supervuoto
+- artist: elmozzo
+- artist: cana
+- artist-instagram: https://www.instagram.com/2sb.mp3/
+- artist-soundcloud: https://soundcloud.com/cana-beach
+- artist-from: italy
+- soundcloud: https://soundcloud.com/supervuoto/toopoptodie
+- cover: /covers/ep10-too-pop-to-die.jpg
+- cover-credit: aurelianoelmozzo
+- cover-credit-url: https://www.instagram.com/aurelianoelmozzo/
+- tags: dubstep, drum and bass, grime, hip hop, beats
+
+Neon on concrete. The first half hits hard and fast: dubstep wobble, grime, rave stabs and drum and bass. Then it slows into heavy-headed hip hop beats, instrumentals and bounce. Too loud to fade out.
+
+### elmozzo
+
+- Pendulum - Slam
+- Magnetic Man feat. Angela Hunte - I Need Air
+- Sukh Knight - Diesel Not Petrol
+- Swindle - Mischief
+- 16bit - In the Death Car
+- Skream - Filth
+- Billy Kenny & Abby Jane - I Operate
+- Johnny Osbourne - Jungle Buddy Bye (Hiroo Onoda Dub)
+- Mini Esco & Yen Towers - See No Evil, Hear No Evil
+- The Prodigy - Claustrophobic Sting
+- BAR9 - Piano Tune
+- Maddix & Bassjackers - Rave Therapy
+- Sleepnet, Lumen & Noisia - Finality
+- Tsuruda - Out of Pocket
+
+### cana
+
+- Battista - Battista
+- Wiley - Morgue (Instrumental)
+- ScHoolboy Q - The Purge / RapFix Cypher (20syl Remix)
+- Mc Protesto - Mundo Artificiale (Instrumental)
+- Mura Masa - Hustleblood
+- TroyBoi - Wonky
+- Purple Dolphin Bandits - Galapagos Hoes
+- JD. Reid - Toothpaste
+- TroyBoi - Dale
+- Noga Erez feat. Missy Elliott - Nails
+- Cookin' Soul - Bitterwest
+- Justin Timberlake - What Goes Around... Comes Around (Instrumental)
+- E-40 - The Art of Story Tellin'
+
 ## Background Radiation 01 - Observers of the Stars
 
 - date: 2026-10-30
